@@ -1,10 +1,10 @@
 <?php
 include('includes/config.php');
-include('includes/header.php');
-include('includes/sidebar.php');?>
+include('includes/admin_header.php');
+include('includes/admin_sidebar.php');?>
 		
 		
-s
+
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid pt-25">
@@ -18,8 +18,8 @@ s
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-light block counter"><span class="counter-anim">914,001</span></span>
-													<span class="weight-500 uppercase-font block font-13 txt-light">employees</span>
+													<span class="txt-light block counter"><span class="counter-anim">123</span></span>
+													<span class="weight-500 uppercase-font block font-13 txt-light">users</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-people  data-right-rep-icon txt-light"></i>
@@ -40,7 +40,7 @@ s
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
 													<span class="txt-light block counter"><span class="counter-anim">2100</span></span>
-													<span class="weight-500 uppercase-font block txt-light">messages</span>
+													<span class="weight-500 uppercase-font block txt-light">Trees Planted</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-envelope-letter data-right-rep-icon txt-light"></i>
@@ -60,8 +60,8 @@ s
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 txt-light data-wrap-left">
-													<span class="block counter"><span class="counter-anim">54,876</span></span>
-													<span class="weight-500 uppercase-font block">visitors</span>
+													<span class="block counter"><span class="counter-anim">10</span></span>
+													<span class="weight-500 uppercase-font block">  locations</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 txt-light data-wrap-right">
 													<i class=" icon-book-open data-right-rep-icon"></i>
@@ -81,8 +81,8 @@ s
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-light block counter"><span class="counter-anim">46.43</span>%</span>
-													<span class="weight-500 uppercase-font block txt-light">growth rate</span>
+													<span class="txt-light block counter"><span class="counter-anim">46</span>%</span>
+													<span class="weight-500 uppercase-font block txt-light">gardners</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 pt-25  data-wrap-right">
 													<div id="sparkline_4" class="sp-small-chart" ></div>
@@ -98,22 +98,25 @@ s
 				<!-- /Row -->
 				<!-- Row -->
 				<div class="row">
-					<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-						<div class="panel panel-default card-view">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                       <!--  <div class="panel panel-default card-view panel-refresh">
+							<div class="refresh-container">
+								<div class="la-anim-1"></div>
+							</div>
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Attendance Metrics</h6>
+									<h6 class="panel-title txt-dark">Gender Split</h6>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="pull-left inline-block full-screen mr-15">
-										<i class="zmdi zmdi-fullscreen"></i>
+									<a href="#" class="pull-left inline-block refresh mr-15">
+										<i class="zmdi zmdi-replay"></i>
 									</a>
 									<div class="pull-left inline-block dropdown">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" role="button"><i class="zmdi zmdi-more-vert"></i></a>
 										<ul class="dropdown-menu bullet dropdown-menu-right"  role="menu">
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-reply" aria-hidden="true"></i>Devices</a></li>
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-share" aria-hidden="true"></i>General</a></li>
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-trash" aria-hidden="true"></i>Referral</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-reply" aria-hidden="true"></i>option 1</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-share" aria-hidden="true"></i>option 2</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-trash" aria-hidden="true"></i>option 3</a></li>
 										</ul>
 									</div>
 								</div>
@@ -121,14 +124,32 @@ s
 							</div>
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<div id="e_chart_3" class="" style="height:330px;"></div>
+									<div id="e_chart_5" class="" style="height:260px;"></div>
+									<hr class="light-grey-hr row mt-10 mb-15"/>
+									<div class="label-chatrs">
+										<div class="">
+											<span class="clabels clabels-lg inline-block bg-blue mr-10 pull-left"></span>
+											<span class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span class="block font-16 weight-500 mb-5"><span class="counter-anim">30</span>%</span><span class="block txt-grey">Male</span></span>
+											<i class="big-rpsn-icon zmdi zmdi-male-alt pull-right txt-primary"></i>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<hr class="light-grey-hr row mt-10 mb-15"/>
+									<div class="label-chatrs">
+										<div class="">
+											<span class="clabels clabels-lg inline-block bg-pink mr-10 pull-left"></span>
+											<span class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span class="block font-16 weight-500 mb-5"><span class="counter-anim">70</span>%</span><span class="block txt-grey">Female</span></span>
+											<i class="big-rpsn-icon zmdi zmdi-female pull-right txt-info"></i>
+											<div class="clearfix"></div>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				
 					<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-						<div class="panel panel-default card-view panel-refresh">
+					<!-- 	<div class="panel panel-default card-view panel-refresh">
 							<div class="refresh-container">
 								<div class="la-anim-1"></div>
 							</div>
@@ -152,7 +173,7 @@ s
 								<div class="clearfix"></div>
 							</div>
 							
-							<div class="panel-wrapper collapse in">
+							<!-- <div class="panel-wrapper collapse in">
 								<div class="panel-body">
 									<div id="e_chart_1" class="" style="height:242px;"></div>
 									<div class="label-chatrs mt-15">
@@ -170,11 +191,11 @@ s
 										</div>										
 									</div>
 								</div>
-							</div>
-						</div>
+							</div> -->
+						</div> 
 					</div>
 					
-					<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 						<div class="panel panel-default card-view panel-refresh">
 							<div class="refresh-container">
 								<div class="la-anim-1"></div>
@@ -196,14 +217,14 @@ s
 								</div>	
 							</div>
 						</div>
-					</div>
+					</div> -->
 					
 				</div>
 				<!-- /Row -->
 				
 				<!-- Row -->
 				<div class="row">
-					<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					<!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
@@ -236,8 +257,8 @@ s
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+					</div> -->
+					<!-- <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 						<div class="panel panel-default card-view panel-refresh">
 							<div class="refresh-container">
 								<div class="la-anim-1"></div>
@@ -259,8 +280,8 @@ s
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					</div> -->
+				<!-- 	<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 							<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
@@ -351,10 +372,10 @@ s
 								</div>	
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<!-- /Row -->
 			</div>
 			
 <?php
-include('includes/footer.php');?>			
+include('includes/admin_footer.php');?>			

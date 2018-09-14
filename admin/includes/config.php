@@ -3,12 +3,7 @@
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
-<<<<<<< HEAD
-define('DB_NAME','library');
-
-=======
 define('DB_NAME','plantatree');
->>>>>>> f0eb1f935adc408f1edd010641a1fb85a5e68d20
 // Establish database connection.
 try
 {
