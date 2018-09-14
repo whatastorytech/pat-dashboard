@@ -1,14 +1,17 @@
-   <section class="footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                   &copy; 2017 Online Library Management System |<a href="https://phpgurukul.com/" target="_blank"  > Designed by : PHPGURUKUL</a> 
-                </div>
+  <!-- Footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-12">
+						<p>2018 &copy; Grandin. Pampered by  Plant a  trees</p>
+					</div>
+				</div>
+			</footer>
+			<!-- /Footer -->
+			
+		</div>
+        <!-- /Main Content -->
 
-            </div>
-        </div>
-    </section>
-
+    </div>
   	<!-- JavaScript -->
 	
     <!-- jQuery -->
@@ -50,7 +53,16 @@
 	
 	<!-- Switchery JavaScript -->
 	<script src="admin_assets/vendors/bower_components/switchery/dist/switchery.min.js"></script>
+	<!-- Vector Maps JavaScript -->
+    <script src="admin_assets/vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="admin_assets/vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="admin_assets/dist/js/vectormap-data.js"></script>
 	
 	<!-- Init JavaScript -->
 	<script src="admin_assets/dist/js/init.js"></script>
 	<script src="admin_assets/dist/js/dashboard-data.js"></script>
+
+
+	</body>
+
+</html>

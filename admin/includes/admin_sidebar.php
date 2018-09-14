@@ -4,7 +4,7 @@
 	<!-- <!-- Preloader -->
 	<div class="preloader-it">
 		<div class="la-anim-1"></div>
-	</div> -->
+	</div> 
 	<!-- /Preloader -->
     <div class="wrapper box-layout theme-6-active pimary-color-pink">
 		<!-- Top Menu Items -->
@@ -13,8 +13,8 @@
 				<div class="nav-header pull-left">
 					<div class="logo-wrap">
 						<a href="index.html">
-							<img class="brand-img" src="../img/logo.png" alt="brand"/>
-							<span class="brand-text">Grandin</span>
+							<img class="brand-img" src="admin_assets/img/logo@3x.png" alt="brand"/>
+							<span class="brand-text">PTA</span>
 						</a>
 					</div>
 				</div>	
@@ -279,7 +279,7 @@
 						</ul>
 					</li>
 					<li class="dropdown auth-drp">
-						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="../img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="admin_assets/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
 						<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
 							<li>
 								<a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
@@ -294,7 +294,7 @@
 								<a href="#"><i class="zmdi zmdi-settings"></i><span>Settings</span></a>
 							</li>
 							<li class="divider"></li>
-							<li class="sub-menu show-on-hover">
+							<!-- <li class="sub-menu show-on-hover">
 								<a href="#" class="dropdown-toggle pr-0 level-2-drp"><i class="zmdi zmdi-check text-success"></i> available</a>
 								<ul class="dropdown-menu open-left-side">
 									<li>
@@ -307,7 +307,7 @@
 										<a href="#"><i class="zmdi zmdi-minus-circle-outline text-danger"></i><span>offline</span></a>
 									</li>
 								</ul>	
-							</li>
+							</li> -->
 							<li class="divider"></li>
 							<li>
 								<a href="#"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
@@ -326,7 +326,7 @@
 					<!-- User Profile -->
 					<li>
 						<div class="user-profile text-center">
-							<img src="../img/user1.png" alt="user_auth" class="user-auth-img img-circle"/>
+							<img src="admin_assets/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/>
 							<div class="dropdown mt-5">
 							<a href="#" class="dropdown-toggle pr-0 bg-transparent" data-toggle="dropdown">ryan georgian <span class="caret"></span></a>
 							<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
@@ -371,397 +371,40 @@
 					<i class="zmdi zmdi-more"></i>
 				</li>
 				<li>
-					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Dashboard</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Users</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 						<li>
-							<a class="active-page" href="index.html">Analytical</a>
+							<a class="active-page" href="index.html">Paid Users</a>
 						</li>
 						<li>
-							<a href="index2.html">Demographic</a>
+							<a href="index2.html">Unpaid Users</a>
 						</li>
-						<li>
-							<a href="index3.html">Project</a>
-						</li>
-						<li>
-							<a href="index4.html">Hospital</a>
-						</li>
-						<li>
-							<a  href="index5.html">HRM</a>
-						</li>
-						<li>
-							<a href="index6.html">Real Estate</a>
-						</li>
-						<li>
-							<a href="profile.html">profile</a>
-						</li>
+	
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class="zmdi zmdi-shopping-basket mr-20"></i><span class="right-nav-text">E-Commerce</span></div><div class="pull-right"><span class="label label-success">7</span></div><div class="clearfix"></div></a>
-					<ul id="ecom_dr" class="collapse collapse-level-1">
+					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_plant"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Trees</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<ul id="dashboard_plant" class="collapse collapse-level-1">
 						<li>
-							<a href="e-commerce.html">Dashboard</a>
+							<a class="active-page" href="index.html">Planted</a>
 						</li>
 						<li>
-							<a href="product.html">Products</a>
+							<a href="index2.html">Unplanted</a>
 						</li>
-						<li>
-							<a href="product-detail.html">Product Detail</a>
-						</li>
-						<li>
-							<a href="add-products.html">Add Product</a>
-						</li>
-						<li>
-							<a href="product-orders.html">Orders</a>
-						</li>
-						<li>
-							<a href="product-cart.html">Cart</a>
-						</li>
-						<li>
-							<a href="product-checkout.html">Checkout</a>
-						</li>
+	
 					</ul>
 				</li>
+				
 				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><div class="pull-left"><i class="zmdi zmdi-apps mr-20"></i><span class="right-nav-text">Apps </span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="app_dr" class="collapse collapse-level-1">
-						<li>
-							<a href="chats.html">chats</a>
-						</li>
-						<li>
-							<a href="calendar.html">calendar</a>
-						</li>
-						<li>
-							<a href="weather.html">weather</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#email_dr">Email<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="email_dr" class="collapse collapse-level-2">
-								<li>
-									<a href="inbox.html">inbox</a>
-								</li>
-								<li>
-									<a href="inbox-detail.html">detail email</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#contact_dr">Contacts<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="contact_dr" class="collapse collapse-level-2">
-								<li>
-									<a href="contact-list.html">list</a>
-								</li>
-								<li>
-									<a href="contact-card.html">cards</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="file-manager.html">File Manager</a>
-						</li>
-						<li>
-							<a href="todo-tasklist.html">To Do/Tasklist</a>
-						</li>
-					</ul>
+					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Gardner's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
-					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">widgets</span></div><div class="pull-right"><span class="label label-warning">8</span></div><div class="clearfix"></div></a>
-				</li>
-				<li><hr class="light-grey-hr mb-10"/></li>
-				<li class="navigation-header">
-					<span>component</span> 
-					<i class="zmdi zmdi-more"></i>
+					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Location's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#ui_dr"><div class="pull-left"><i class="zmdi zmdi-smartphone-setup mr-20"></i><span class="right-nav-text">UI Elements</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="ui_dr" class="collapse collapse-level-1 two-col-list">
-						<li>
-							<a href="panels-wells.html">Panels & Wells</a>
-						</li>
-						<li>
-							<a href="modals.html">Modals</a>
-						</li>
-						<li>
-							<a href="sweetalert.html">Sweet Alerts</a>
-						</li>
-						<li>
-							<a href="notifications.html">notifications</a>
-						</li>
-						<li>
-							<a href="typography.html">Typography</a>
-						</li>
-						<li>
-							<a href="buttons.html">Buttons</a>
-						</li>
-						<li>
-							<a href="accordion-toggle.html">Accordion / Toggles</a>
-						</li>
-						<li>
-							<a href="tabs.html">Tabs</a>
-						</li>
-						<li>
-							<a href="progressbars.html">Progress bars</a>
-						</li>
-						<li>
-							<a href="skills-counter.html">Skills & Counters</a>
-						</li>
-						<li>
-							<a href="pricing.html">Pricing Tables</a>
-						</li>
-						<li>
-							<a href="nestable.html">Nestables</a>
-						</li>
-						<li>
-							<a href="dorpdown.html">Dropdowns</a>
-						</li>
-						<li>
-							<a href="bootstrap-treeview.html">Tree View</a>
-						</li>
-						<li>
-							<a href="carousel.html">Carousel</a>
-						</li>
-						<li>
-							<a href="range-slider.html">Range Slider</a>
-						</li>
-						<li>
-							<a href="grid-styles.html">Grid</a>
-						</li>
-						<li>
-							<a href="bootstrap-ui.html">Bootstrap UI</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#form_dr"><div class="pull-left"><i class="zmdi zmdi-edit mr-20"></i><span class="right-nav-text">Forms</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="form_dr" class="collapse collapse-level-1 two-col-list">
-						<li>
-							<a href="form-element.html">Basic Forms</a>
-						</li>
-						<li>
-							<a href="form-layout.html">form Layout</a>
-						</li>
-						<li>
-							<a href="form-advanced.html">Form Advanced</a>
-						</li>
-						<li>
-							<a href="form-mask.html">Form Mask</a>
-						</li>
-						<li>
-							<a href="form-picker.html">Form Picker</a>
-						</li>
-						<li>
-							<a href="form-validation.html">form Validation</a>
-						</li>
-						<li>
-							<a href="form-wizard.html">Form Wizard</a>
-						</li>
-						<li>
-							<a href="form-x-editable.html">X-Editable</a>
-						</li>
-						<li>
-							<a href="cropperjs.html">Cropperjs</a>
-						</li>
-						<li>
-							<a href="form-file-upload.html">File Upload</a>
-						</li>
-						<li>
-							<a href="dropzone.html">Dropzone</a>
-						</li>
-						<li>
-							<a href="bootstrap-wysihtml5.html">Bootstrap Wysihtml5</a>
-						</li>
-						<li>
-							<a href="tinymce-wysihtml5.html">Tinymce Wysihtml5</a>
-						</li>
-						<li>
-							<a href="summernote-wysihtml5.html">summernote</a>
-						</li>
-						<li>
-							<a href="typeahead-js.html">typeahead</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#chart_dr"><div class="pull-left"><i class="zmdi zmdi-chart-donut mr-20"></i><span class="right-nav-text">Charts </span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="chart_dr" class="collapse collapse-level-1 two-col-list">
-						<li>
-							<a href="flot-chart.html">Flot Chart</a>
-						</li>
-						<li>
-							<a href="echart.html">Echart Chart</a>
-						</li>
-						<li>
-							<a href="morris-chart.html">Morris Chart</a>
-						</li>
-						<li>
-							<a href="chart.js.html">chartjs</a>
-						</li>
-						<li>
-							<a href="chartist.html">chartist</a>
-						</li>
-						<li>
-							<a href="easy-pie-chart.html">Easy Pie Chart</a>
-						</li>
-						<li>
-							<a href="sparkline.html">Sparkline</a>
-						</li>
-						<li>
-							<a href="peity-chart.html">Peity Chart</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#table_dr"><div class="pull-left"><i class="zmdi zmdi-format-size mr-20"></i><span class="right-nav-text">Tables</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="table_dr" class="collapse collapse-level-1 two-col-list">
-						<li>
-							<a href="basic-table.html">Basic Table</a>
-						</li>
-						<li>
-							<a href="bootstrap-table.html">Bootstrap Table</a>
-						</li>
-						<li>
-							<a href="data-table.html">Data Table</a>
-						</li>
-						<li>
-							<a href="export-table.html">Export Table</a>
-						</li>
-						<li>
-							<a href="responsive-data-table.html">RSPV DataTable</a>
-						</li>
-						<li>
-							<a href="responsive-table.html">Responsive Table</a>
-						</li>
-						<li>
-							<a href="editable-table.html">Editable Table</a>
-						</li>
-						<li>
-							<a href="foo-table.html">Foo Table</a>
-						</li>
-						<li>
-							<a href="jsgrid-table.html">Jsgrid Table</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#icon_dr"><div class="pull-left"><i class="zmdi zmdi-iridescent mr-20"></i><span class="right-nav-text">Icons</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="icon_dr" class="collapse collapse-level-1">
-						<li>
-							<a href="fontawesome.html">Fontawesome</a>
-						</li>
-						<li>
-							<a href="themify.html">Themify</a>
-						</li>
-						<li>
-							<a href="linea-icon.html">Linea</a>
-						</li>
-						<li>
-							<a href="simple-line-icons.html">Simple Line</a>
-						</li>
-						<li>
-							<a href="pe-icon-7.html">Pe-icon-7</a>
-						</li>
-						<li>
-							<a href="glyphicons.html">Glyphicons</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#maps_dr"><div class="pull-left"><i class="zmdi zmdi-map mr-20"></i><span class="right-nav-text">maps</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="maps_dr" class="collapse collapse-level-1">
-						<li>
-							<a href="vector-map.html">Vector Map</a>
-						</li>
-						<li>
-							<a href="google-map.html">Google Map</a>
-						</li>
-					</ul>
-				</li>
-				<li><hr class="light-grey-hr mb-10"/></li>
-				<li class="navigation-header">
-					<span>featured</span> 
-					<i class="zmdi zmdi-more"></i>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#pages_dr"><div class="pull-left"><i class="zmdi zmdi-google-pages mr-20"></i><span class="right-nav-text">Special Pages</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="pages_dr" class="collapse collapse-level-1 two-col-list">
-						<li>
-							<a href="blank.html">Blank Page</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#auth_dr">Auth pages<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="auth_dr" class="collapse collapse-level-2">
-								<li>
-									<a href="login.html">Login</a>
-								</li>
-								<li>
-									<a href="signup.html">Register</a>
-								</li>
-								<li>
-									<a href="forgot-password.html">Recover Password</a>
-								</li>
-								<li>
-									<a href="reset-password.html">reset Password</a>
-								</li>
-								<li>
-									<a href="locked.html">Lock Screen</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#invoice_dr">Invoice<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="invoice_dr" class="collapse collapse-level-2">
-								<li>
-									<a href="invoice.html">Invoice</a>
-								</li>
-								<li>
-									<a href="invoice-archive.html">Invoice Archive</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#error_dr">error pages<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="error_dr" class="collapse collapse-level-2">
-								<li>
-									<a href="404.html">Error 404</a>
-								</li>
-								<li>
-									<a href="500.html">Error 500</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="gallery.html">Gallery</a>
-						</li>
-						<li>
-							<a href="timeline.html">Timeline</a>
-						</li>
-						<li>
-							<a href="faq.html">FAQ</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="documentation.html"><div class="pull-left"><i class="zmdi zmdi-book mr-20"></i><span class="right-nav-text">documentation</span></div><div class="clearfix"></div></a>
-				</li>
-				<li>
-					<a href="javascript:void(0);" data-toggle="collapse" data-target="#dropdown_dr_lv1"><div class="pull-left"><i class="zmdi zmdi-filter-list mr-20"></i><span class="right-nav-text">multilevel</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="dropdown_dr_lv1" class="collapse collapse-level-1">
-						<li>
-							<a href="#">Item level 1</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);" data-toggle="collapse" data-target="#dropdown_dr_lv2">Dropdown level 2<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-							<ul id="dropdown_dr_lv2" class="collapse collapse-level-2">
-								<li>
-									<a href="#">Item level 2</a>
-								</li>
-								<li>
-									<a href="#">Item level 2</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Notifications</span></div><div class="clearfix"></div></a>
+				</li>					
+				
 			</ul>
 		</div>
 		<!-- /Left Sidebar Menu -->
@@ -803,7 +446,7 @@
 														<div class="chat-body">
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Clay Masse</span>
 																		<span class="time block truncate txt-grey">No one saves us but ourselves.</span>
@@ -814,7 +457,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user1.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user1.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Evie Ono</span>
 																		<span class="time block truncate txt-grey">Unity is strength</span>
@@ -825,7 +468,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user2.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user2.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Madalyn Rascon</span>
 																		<span class="time block truncate txt-grey">Respect yourself if you would have others respect you.</span>
@@ -836,7 +479,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user3.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user3.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Mitsuko Heid</span>
 																		<span class="time block truncate txt-grey">I’m thankful.</span>
@@ -847,7 +490,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Ezequiel Merideth</span>
 																		<span class="time block truncate txt-grey">Patience is bitter.</span>
@@ -858,7 +501,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user1.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user1.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Jonnie Metoyer</span>
 																		<span class="time block truncate txt-grey">Genius is eternal patience.</span>
@@ -869,7 +512,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user2.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user2.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Angelic Lauver</span>
 																		<span class="time block truncate txt-grey">Every burden is a blessing.</span>
@@ -880,7 +523,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user3.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user3.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Priscila Shy</span>
 																		<span class="time block truncate txt-grey">Wise to resolve, and patient to perform.</span>
@@ -891,7 +534,7 @@
 															</a>
 															<a href="javascript:void(0)">
 																<div class="chat-data">
-																	<img class="user-img img-circle"  src="../img/user4.png" alt="user"/>
+																	<img class="user-img img-circle"  src="admin_assets/img/user4.png" alt="user"/>
 																	<div class="user-data">
 																		<span class="name block capitalize-font">Linda Stack</span>
 																		<span class="time block truncate txt-grey">Our patience will achieve more than our force.</span>
@@ -924,7 +567,7 @@
 														<ul class="nicescroll-bar pt-20">
 															<li class="friend">
 																<div class="friend-msg-wrap">
-																	<img class="user-img img-circle block pull-left"  src="../img/user.png" alt="user"/>
+																	<img class="user-img img-circle block pull-left"  src="admin_assets/img/user.png" alt="user"/>
 																	<div class="msg pull-left">
 																		<p>Hello Jason, how are you, it's been a long time since we last met?</p>
 																		<div class="msg-per-detail text-right">
@@ -956,7 +599,7 @@
 															</li>
 															<li class="friend">
 																<div class="friend-msg-wrap">
-																	<img class="user-img img-circle block pull-left"  src="../img/user.png" alt="user"/>
+																	<img class="user-img img-circle block pull-left"  src="admin_assets/img/user.png" alt="user"/>
 																	<div class="msg pull-left"> 
 																		<p>Not too bad.</p>
 																		<div class="msg-per-detail  text-right">
@@ -1009,7 +652,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item unread-message">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Clay Masse</span>
@@ -1023,7 +666,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user1.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user1.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Evie Ono</span>
@@ -1037,7 +680,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user2.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user2.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Madalyn Rascon</span>
@@ -1051,7 +694,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item unread-message">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user3.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user3.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Ezequiel Merideth</span>
@@ -1065,7 +708,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item unread-message">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user4.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user4.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Jonnie Metoyer</span>
@@ -1079,7 +722,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Priscila Shy</span>
@@ -1093,7 +736,7 @@
 											<a href="javascript:void(0)">
 												<div class="sl-item">
 													<div class="sl-avatar avatar avatar-sm avatar-circle">
-														<img class="img-responsive img-circle" src="../img/user1.png" alt="avatar"/>
+														<img class="img-responsive img-circle" src="admin_assets/img/user1.png" alt="avatar"/>
 													</div>
 													<div class="sl-content">
 														<span class="inline-block capitalize-font   pull-left message-per">Linda Stack</span>
