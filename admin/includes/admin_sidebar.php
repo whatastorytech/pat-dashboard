@@ -374,10 +374,13 @@
 					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Users</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 						<li>
-							<a class="active-page" href="index.html">Paid Users</a>
+							<a class="active-page" href="users.php">Total Users</a>
 						</li>
 						<li>
-							<a href="index2.html">Unpaid Users</a>
+							<a class="active-page" href="paid_users.php">Paid Users</a>
+						</li>
+						<li>
+							<a href="unpaid_users.php">Unpaid Users</a>
 						</li>
 	
 					</ul>
@@ -386,10 +389,13 @@
 					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_plant"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Trees</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
 					<ul id="dashboard_plant" class="collapse collapse-level-1">
 						<li>
-							<a class="active-page" href="index.html">Planted</a>
+							<a class="active-page" href="trees.php">Total Trees</a>
 						</li>
 						<li>
-							<a href="index2.html">Unplanted</a>
+							<a class="active-page" href="planted_trees.php">Planted trees</a>
+						</li>
+						<li>
+							<a href="unplanted_trees.php">Unplanted trees </a>
 						</li>
 	
 					</ul>
@@ -400,6 +406,9 @@
 				</li>
 				<li>
 					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Location's</span></div><div class="clearfix"></div></a>
+				</li>
+				<li>
+					<a href="trees_category.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Trees Category's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
 					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Notifications</span></div><div class="clearfix"></div></a>

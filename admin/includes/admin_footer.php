@@ -22,6 +22,9 @@
     
 	<!-- Data table JavaScript -->
 	<script src="admin_assets/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="admin_assets/dist/js/responsive-datatable-data.js"></script>
 	
 	<!-- Slimscroll JavaScript -->
 	<script src="admin_assets/dist/js/jquery.slimscroll.js"></script>

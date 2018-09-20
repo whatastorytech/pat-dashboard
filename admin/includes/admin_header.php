@@ -13,7 +13,9 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	
 	<!-- Data table CSS -->
-	<link href="admin_assets/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	 <link href="admin_assets/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/> 
+	<link href="admin_assets/vendors/bower_components/datatables.net-responsive/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	<!-- Data table CSS -->
 	
 	<!-- Toast CSS -->
 	<link href="admin_assets/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
