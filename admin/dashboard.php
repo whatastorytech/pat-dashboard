@@ -61,7 +61,7 @@ include('includes/admin_sidebar.php');?>
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 txt-light data-wrap-left">
 													<span class="block counter"><span class="counter-anim">10</span></span>
-													<span class="weight-500 uppercase-font block">  locations</span>
+													<span class="weight-500 uppercase-font block">locations</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 txt-light data-wrap-right">
 													<i class=" icon-book-open data-right-rep-icon"></i>
@@ -98,55 +98,203 @@ include('includes/admin_sidebar.php');?>
 				<!-- /Row -->
 				<!-- Row -->
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                       <!--  <div class="panel panel-default card-view panel-refresh">
-							<div class="refresh-container">
-								<div class="la-anim-1"></div>
-							</div>
+	             <div class="col-md-6">
+					
+					<div class="col-lg-12">
+						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Gender Split</h6>
+									<h6 class="panel-title txt-dark">Tree Updated for This months</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="flot-container" style="height:200px">
+										<div id="flot_bar_chart" class="demo-placeholder"></div>
+									</div>
+								</div>
+							</div>	
+						</div>	
+					</div>
+					<div class="col-lg-12">
+						<div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">pie Chart</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="flot-container" style="height:250px">
+										<div id="flot_pie_chart" class="demo-placeholder"></div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div class="col-lg-12">
+						<div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">line Chart</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<canvas id="chart_1" height="100"></canvas>	
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+				</div>	
+
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Tree Updated for This months</h6>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="pull-left inline-block refresh mr-15">
-										<i class="zmdi zmdi-replay"></i>
+									<a href="#" class="pull-left inline-block full-screen mr-15">
+										<i class="zmdi zmdi-fullscreen"></i>
 									</a>
 									<div class="pull-left inline-block dropdown">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" role="button"><i class="zmdi zmdi-more-vert"></i></a>
 										<ul class="dropdown-menu bullet dropdown-menu-right"  role="menu">
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-reply" aria-hidden="true"></i>option 1</a></li>
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-share" aria-hidden="true"></i>option 2</a></li>
-											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-trash" aria-hidden="true"></i>option 3</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-reply" aria-hidden="true"></i>Update</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-share" aria-hidden="true"></i>Edit</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-trash" aria-hidden="true"></i>Remove</a></li>
 										</ul>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
-								<div class="panel-body">
-									<div id="e_chart_5" class="" style="height:260px;"></div>
-									<hr class="light-grey-hr row mt-10 mb-15"/>
-									<div class="label-chatrs">
-										<div class="">
-											<span class="clabels clabels-lg inline-block bg-blue mr-10 pull-left"></span>
-											<span class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span class="block font-16 weight-500 mb-5"><span class="counter-anim">30</span>%</span><span class="block txt-grey">Male</span></span>
-											<i class="big-rpsn-icon zmdi zmdi-male-alt pull-right txt-primary"></i>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									<hr class="light-grey-hr row mt-10 mb-15"/>
-									<div class="label-chatrs">
-										<div class="">
-											<span class="clabels clabels-lg inline-block bg-pink mr-10 pull-left"></span>
-											<span class="clabels-text font-12 inline-block txt-dark capitalize-font pull-left"><span class="block font-16 weight-500 mb-5"><span class="counter-anim">70</span>%</span><span class="block txt-grey">Female</span></span>
-											<i class="big-rpsn-icon zmdi zmdi-female pull-right txt-info"></i>
-											<div class="clearfix"></div>
+								<div class="panel-body row pa-0">
+									<div class="table-wrap">
+										<div class="table-responsive">
+										  <table class="table table-hover mb-0">
+											<thead>
+											  <tr>
+												<th>Plantation</th>
+												<th>Update date</th>
+												<th>Gardner</th>
+												<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											  <tr>
+												<td>CMVM Digitisation of paper records</td>
+												<td>1st june 2018</td>
+												<td>Arun Shauri</td>
+												<td><a href="javascript:void(0)" class="pull-left btn btn-primary btn-xs mr-15">verify</a></td>										
+											  </tr>
+											  <tr>
+												<td>CMVM Digitisation of paper records</td>
+												<td>1st june 2018</td>
+												<td>Arun Shauri</td>
+												<td><a href="javascript:void(0)" class="pull-left btn btn-primary btn-xs mr-15">verify</a></td>										
+											  </tr>
+											  <tr>
+												<td>CMVM Digitisation of paper records</td>
+												<td>1st june 2018</td>
+												<td>Arun Shauri</td>
+												<td><a href="javascript:void(0)" class="pull-left btn btn-primary btn-xs mr-15">verify</a></td>										
+											  </tr>
+											  <tr>
+												<td>CMVM Digitisation of paper records</td>
+												<td>1st june 2018</td>
+												<td>Arun Shauri</td>
+												<td><a href="javascript:void(0)" class="pull-left btn btn-primary btn-xs mr-15">verify</a></td>									
+											  </tr>
+											</tbody>
+										  </table>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 					</div>
+					<div class="col-lg-6">
+						<div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Due Amount this month</h6>
+								</div>
+								<div class="pull-right">
+									<a href="#" class="pull-left inline-block full-screen mr-15">
+										<i class="zmdi zmdi-fullscreen"></i>
+									</a>
+									<div class="pull-left inline-block dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" role="button"><i class="zmdi zmdi-more-vert"></i></a>
+										<ul class="dropdown-menu bullet dropdown-menu-right"  role="menu">
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-reply" aria-hidden="true"></i>Update</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-share" aria-hidden="true"></i>Edit</a></li>
+											<li role="presentation"><a href="javascript:void(0)" role="menuitem"><i class="icon wb-trash" aria-hidden="true"></i>Remove</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body row pa-0">
+									<div class="table-wrap">
+										<div class="table-responsive">
+										  <table class="table table-hover mb-0">
+											<thead>
+											  <tr>
+											
+														<th>Name</th>
+														<th>Email</th>
+														<th>Phone</th>
+														<th>Registered on </th>
+												</tr>
+											</thead>
+											<tbody>
+											  <tr>
+												<td>Demo Dsouja</td>
+												<td>demo@gmail.com</td>
+												<td>0321654789</td>	
+												<td>1st june 2018</td>										
+											  </tr>
+											   <tr>
+												<td>Demo Dsouja</td>
+												<td>demo@gmail.com</td>
+												<td>0321654789</td>	
+												<td>1st june 2018</td>										
+											  </tr>
+											   <tr>
+												<td>Demo Dsouja</td>
+												<td>demo@gmail.com</td>
+												<td>0321654789</td>	
+												<td>1st june 2018</td>										
+											  </tr>
+											  <tr>
+												<td>Demo Dsouja</td>
+												<td>demo@gmail.com</td>
+												<td>0321654789</td>	
+												<td>1st june 2018</td>										
+											  </tr>
+											</tbody>
+										  </table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+					
+                      
+				</div>
 				
 					<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<!-- 	<div class="panel panel-default card-view panel-refresh">

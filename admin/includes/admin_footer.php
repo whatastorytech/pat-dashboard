@@ -60,10 +60,26 @@
     <script src="admin_assets/vendors/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="admin_assets/vendors/vectormap/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="admin_assets/dist/js/vectormap-data.js"></script>
+	<!-- ChartJS JavaScript -->
+	<script src="admin_assets/vendors/chart.js/Chart.min.js"></script>
+	<script src="admin_assets/dist/js/chartjs-data.js"></script>
+
 	
 	<!-- Init JavaScript -->
 	<script src="admin_assets/dist/js/init.js"></script>
 	<script src="admin_assets/dist/js/dashboard-data.js"></script>
+	<!-- Flot Charts JavaScript -->
+	<script src="admin_assets/vendors/bower_components/Flot/excanvas.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.pie.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.resize.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.time.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.stack.js"></script>
+	<script src="admin_assets/vendors/bower_components/Flot/jquery.flot.crosshair.js"></script>
+	<script src="admin_assets/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
+	<script src="admin_assets/vendors/echarts-liquidfill.min.js"></script>
+	<script src="admin_assets/dist/js/flot-data.js"></script>
 
 
 	</body>
