@@ -8,58 +8,57 @@ $(function() {
 			element: 'morris_area_chart',
 			data: [{
 				period: '2010 Q1',
-				iphone: 2666,
-				ipad: null,
-				itouch: 2647
+				tress: 2666,
+				planted: null,
 			}, {
 				period: '2010 Q2',
-				iphone: 2778,
-				ipad: 2294,
-				itouch: 2441
+				tress: 2778,
+				planted: 2294,
+				unplanted: 2441
 			}, {
 				period: '2010 Q3',	
-				iphone: 4912,
-				ipad: 1969,
-				itouch: 2501
+				trees: 4912,
+				planted: 1969,
+				unplanted: 2501
 			}, {
 				period: '2010 Q4',
-				iphone: 3767,
-				ipad: 3597,
-				itouch: 5689
+				trees: 3767,
+				planted: 3597,
+			    unplanted: 5689
 			}, {
 				period: '2011 Q1',
-				iphone: 6810,
-				ipad: 1914,
-				itouch: 2293
+				trees: 6810,
+				planted: 1914,
+				unplanted: 2293
 			}, {
 				period: '2011 Q2',
-				iphone: 5670,
-				ipad: 4293,
-				itouch: 1881
+				trees: 5670,
+				planted: 4293,
+				unplanted: 1881
 			}, {
 				period: '2011 Q3',
-				iphone: 4820,
-				ipad: 3795,
-				itouch: 1588
+				trees: 4820,
+				planted: 3795,
+				unplanted: 1588
 			}, {
 				period: '2011 Q4',
-				iphone: 15073,
-				ipad: 5967,
-				itouch: 5175
+				trees: 15073,
+				planted: 5967,
+				unplanted: 5175
 			}, {
 				period: '2012 Q1',
-				iphone: 10687,
-				ipad: 4460,
-				itouch: 2028
+				trees: 10687,
+				planted: 4460,
+				unplanted: 2028
 			}, {
 				period: '2012 Q2',
-				iphone: 8432,
-				ipad: 5713,
-				itouch: 1791
+				trees: 8432,
+				planted: 5713,
+				unplanted: 1791
 			}],
 			xkey: 'period',
-			ykeys: ['iphone', 'ipad', 'itouch'],
-			labels: ['iPhone', 'iPad', 'iPod Touch'],
+			ykeys: ['trees', 'planted', 'unplanted'],
+			labels: ['trees', 'planted', 'unplanted'],
 			pointSize: 0,
 			lineWidth:0,
 			fillOpacity: 1,
@@ -80,13 +79,13 @@ $(function() {
 		Morris.Donut({
 			element: 'morris_donut_chart',
 			data: [{
-				label: "Download Sales",
+				label: "Apple",
 				value: 12
 			}, {
-				label: "In-Store Sales",
+				label: "Mango",
 				value: 30
 			}, {
-				label: "Mail-Order Sales",
+				label: "Pinapple",
 				value: 20
 			}],
 			colors: ['rgba(139,195,74,1)', 'rgba(227, 201, 75,1)', 'rgba(247, 52, 20,1)'],
@@ -223,25 +222,25 @@ $(function() {
 		Morris.Bar({
 			element: 'morris_bar_chart',
 			data: [{
-				device: 'iPhone',
+				trees: 'Mango',
 				geekbench: 136
 			}, {
-				device: 'iPhone 3G',
+				trees: 'Apple',
 				geekbench: 137
 			}, {
-				device: 'iPhone 3GS',
+				trees: 'Banana',
 				geekbench: 275
 			}, {
-				device: 'iPhone 4',
+				trees: 'Pinapple',
 				geekbench: 380
 			}, {
-				device: 'iPhone 4S',
+				trees: 'bamboo',
 				geekbench: 655
 			}, {
-				device: 'iPhone 5',
+				trees: 'cedar',
 				geekbench: 1571
 			}],
-			xkey: 'device',
+			xkey: 'trees',
 			ykeys: ['geekbench'],
 			labels: ['Geekbench'],
 			barRatio: 0.4,

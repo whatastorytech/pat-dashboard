@@ -9,7 +9,7 @@ $( document ).ready(function() {
 			labels: ["January", "February", "March", "April", "May", "June", "July"],
 			datasets: [
 			{
-				label: "fir",
+				label: "planted",
 				backgroundColor: "rgba(139,195,74,1)",
 				borderColor: "rgba(139,195,74,1)",
 				pointBorderColor: "rgba(139,195,74,1)",
@@ -17,7 +17,7 @@ $( document ).ready(function() {
 				data: [0, 59, 80, 58, 20, 55, 40]
 			},
 			{
-				label: "sec",
+				label: "trees",
 				backgroundColor: "rgba(227, 201, 75,1)",
 				borderColor: "rgba(227, 201, 75,1)",
 				pointBorderColor: "rgba(227, 201, 75,1)",

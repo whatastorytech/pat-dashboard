@@ -62,7 +62,7 @@
 	<script src="admin_assets/dist/js/vectormap-data.js"></script>
 	<!-- ChartJS JavaScript -->
 	<script src="admin_assets/vendors/chart.js/Chart.min.js"></script>
-	<script src="admin_assets/dist/js/chartjs-data.js"></script>
+	 <script src="admin_assets/dist/js/chartjs-data.js"></script>
 
 	
 	<!-- Init JavaScript -->
@@ -79,7 +79,11 @@
 	<script src="admin_assets/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 	<script src="admin_assets/vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
 	<script src="admin_assets/vendors/echarts-liquidfill.min.js"></script>
-	<script src="admin_assets/dist/js/flot-data.js"></script>
+    <script src="admin_assets/dist/js/flot-data.js"></script> 
+    <!-- Morris Charts JavaScript -->
+    <script src="admin_assets/vendors/bower_components/raphael/raphael.min.js"></script>
+    <script src="admin_assets/vendors/bower_components/morris.js/morris.min.js"></script>
+    <script src="admin_assets/dist/js/morris-data.js"></script>
 
 
 	</body>

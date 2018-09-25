@@ -104,35 +104,31 @@ include('includes/admin_sidebar.php');?>
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Tree Updated for This months</h6>
+									<h6 class="panel-title txt-dark">Name of Trees & No. of Trees Planted Chart</h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<div class="flot-container" style="height:200px">
-										<div id="flot_bar_chart" class="demo-placeholder"></div>
-									</div>
+									<div id="morris_bar_chart" class="morris-chart"></div>
 								</div>
-							</div>	
-						</div>	
+							</div>
+						</div>
 					</div>
 					<div class="col-lg-12">
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">pie Chart</h6>
+									<h6 class="panel-title txt-dark">Total Amount Generated  chart</h6>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body">
-									<div class="flot-container" style="height:250px">
-										<div id="flot_pie_chart" class="demo-placeholder"></div>
-									</div>
+									<div id="morris_donut_chart" class="morris-chart donut-chart"></div>
 								</div>
 							</div>
-						</div>	
+					</div>
 					</div>
 					<div class="col-lg-12">
 						<div class="panel panel-default card-view">

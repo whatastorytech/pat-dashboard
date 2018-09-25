@@ -27,6 +27,8 @@
 	
 	<!-- vector map CSS -->
 	<link href="admin_assets/vendors/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css"/>
+	<!-- Morris Charts CSS -->
+    <link href="admin_assets/vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
 	<!-- Custom CSS -->
 	<link href="admin_assets/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
