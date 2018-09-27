@@ -14,19 +14,20 @@ include('includes/admin_sidebar.php');?>
 						<div class="panel panel-default card-view pa-0 bg-gradient">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
-									<div class="sm-data-box">
+									<a href="users.php"><div class="sm-data-box">
 										<div class="container-fluid">
 											<div class="row">
-												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+										        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
 													<span class="txt-light block counter"><span class="counter-anim">123</span></span>
 													<span class="weight-500 uppercase-font block font-13 txt-light">users</span>
-												</div>
+												</div></a>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
 													<i class="icon-people  data-right-rep-icon txt-light"></i>
 												</div>
 											</div>	
 										</div>
 									</div>
+								</a>
 								</div>
 							</div>
 						</div>
@@ -37,7 +38,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="panel-body pa-0">
 									<div class="sm-data-box">
 										<div class="container-fluid">
-											<div class="row">
+											<a href="trees.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
 													<span class="txt-light block counter"><span class="counter-anim">2100</span></span>
 													<span class="weight-500 uppercase-font block txt-light">Trees Planted</span>
@@ -58,7 +59,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="panel-body pa-0">
 									<div class="sm-data-box">
 										<div class="container-fluid">
-											<div class="row">
+											<a href="plantations.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 txt-light data-wrap-left">
 													<span class="block counter"><span class="counter-anim">10</span></span>
 													<span class="weight-500 uppercase-font block">locations</span>
@@ -66,7 +67,7 @@ include('includes/admin_sidebar.php');?>
 												<div class="col-xs-6 text-center  pl-0 pr-0 txt-light data-wrap-right">
 													<i class=" icon-book-open data-right-rep-icon"></i>
 												</div>
-											</div>	
+											</div></a>	
 										</div>
 									</div>
 								</div>
@@ -79,7 +80,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="panel-body pa-0">
 									<div class="sm-data-box">
 										<div class="container-fluid">
-											<div class="row">
+											<a href="gardners.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
 													<span class="txt-light block counter"><span class="counter-anim">46</span>%</span>
 													<span class="weight-500 uppercase-font block txt-light">gardners</span>
@@ -87,7 +88,7 @@ include('includes/admin_sidebar.php');?>
 												<div class="col-xs-6 text-center  pl-0 pr-0 pt-25  data-wrap-right">
 													<div id="sparkline_4" class="sp-small-chart" ></div>
 												</div>
-											</div>	
+											</div>	</a>
 										</div>
 									</div>
 								</div>

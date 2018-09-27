@@ -19,6 +19,9 @@ include('includes/admin_sidebar.php');?>
 					  </ol>
 					</div>
 					<!-- /Breadcrumb -->
+
+
+
 				</div>
 				<!-- /Title -->
 				
@@ -41,41 +44,43 @@ include('includes/admin_sidebar.php');?>
 													 <table id="example" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
+														<th></th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
-														<th>Registered on </th>
-														<th>Status</th>
-														<th>Action</th>
+														<th>Planted Trees</th>
+														<th>Payment Status</th>
 													</tr>
 												</thead>												
 												<tbody>
 													<tr>
+														<td><input type="checkbox"></td>
 														<td>Tiger Nixon</td>
-														<td>System Architect</td>
+														<td>Im@gmail.com</td>
 														<td>1234567890</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-success">paid</td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td>15</td>
+														<td>Till 18  March</td>
+														
 													</tr>
 													<tr>
-														<td>Tiger Nixon</td>
-														<td>System Architect</td>
+														<td><input type="checkbox"></td>
+														<td>Lion Nixon</td>
+														<td>demo@gmail.com</td>
 														<td>1234567890</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-success">paid</td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td>20</td>
+														<td>Till 30  March</td>
+														
 													</tr>													
 												</tbody>
 											
 												<tfoot>
 													<tr>
+														<th></th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
-														<th>Registered on</th>
-														<th>Status</th>
-														<th>Action</th>
+														<th>Planted Trees</th>
+														<th>Payment Status</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -89,41 +94,43 @@ include('includes/admin_sidebar.php');?>
 														 <table id="example" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
+														<th></th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
-														<th>Registered on </th>
-														<th>Status</th>
-														<th>Action</th>
+														<th>Planted Trees</th>
+														<th>Payment Status</th>
 													</tr>
 												</thead>												
 												<tbody>
 													<tr>
+														<td><input type="checkbox"></td>
 														<td>Tiger Nixon</td>
 														<td>System Architect</td>
 														<td>1234567890</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-danger">unpaid</td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td>15</td>
+														<td>Till 18  March</td>
+														
 													</tr>
 													<tr>
+														<td><input type="checkbox"></td>
 														<td>Tiger Nixon</td>
 														<td>System Architect</td>
 														<td>1234567890</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-danger">unpaid</td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td>20</td>
+														<td>Till 30  March</td>
+														
 													</tr>													
 												</tbody>
 											
 												<tfoot>
 													<tr>
+														<th></th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
-														<th>Registered on</th>
-														<th>Status</th>
-														<th>Action</th>
+														<th>Planted Trees</th>
+														<th>Payment Status</th>
 													</tr>
 												</tfoot>
 											</table>

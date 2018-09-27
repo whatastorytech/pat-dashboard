@@ -29,7 +29,9 @@ include('includes/admin_sidebar.php');?>
 							<div class="panel-heading">
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Plantations</h6>
+                                 <p>32 plantation</p>
 								</div>
+								<a href="javascript:void(0)" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -57,11 +59,11 @@ include('includes/admin_sidebar.php');?>
 														<td>15 update</td>
 													</tr>
 												    <tr>
-														<td>Full Garden</td>
-														<td>Pune</td>
+														<td>Half Garden</td>
+														<td>Mumbai</td>
 														<td>20</td>
 														<td>Mango</td>
-														<td>Dsouza</td>
+														<td>Gonsalvis</td>
 														<td>15 update</td>
 													</tr>												
 												</tbody>

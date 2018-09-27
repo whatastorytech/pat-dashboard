@@ -30,6 +30,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Gardner's</h6>
 								</div>
+								<a href="javascript:void(0)" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -53,10 +54,10 @@ include('includes/admin_sidebar.php');?>
 														<td>13 verification pending</td>
 													</tr>
 													<tr>
-														<td>Tiger Nixon</td>
-														<td>Full garden, Pune</td>
+														<td>Lion Nixon</td>
+														<td>Half garden,Mumbai</td>
 														<td>1234567890</td>
-														<td>13 verification pending</td>
+														<td>10 verification pending</td>
 													</tr>												
 												</tbody>
 											
