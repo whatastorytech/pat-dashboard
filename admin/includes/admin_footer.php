@@ -84,6 +84,15 @@
     <script src="admin_assets/vendors/bower_components/raphael/raphael.min.js"></script>
     <script src="admin_assets/vendors/bower_components/morris.js/morris.min.js"></script>
     <script src="admin_assets/dist/js/morris-data.js"></script>
+    <script src="admin_assets/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/jszip/dist/jszip.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/pdfmake/build/pdfmake.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/pdfmake/build/vfs_fonts.js"></script>
+	
+	<script src="admin_assets/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="admin_assets/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script src="admin_assets/dist/js/export-table-data.js"></script>
 
 
 	</body>
