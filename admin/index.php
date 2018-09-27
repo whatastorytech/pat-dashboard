@@ -1,3 +1,48 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+if($_SESSION['login']!=''){
+$_SESSION['login']='';
+}
+if(isset($_POST['login']))
+{
+  //code for captach verification
+if ($_POST["vercode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')  {
+        echo "<script>alert('Incorrect verification code');</script>" ;
+    } 
+        else {
+$email=$_POST['emailid'];
+$password=md5($_POST['password']);
+$sql ="SELECT EmailId,Password,StudentId,Status FROM tblstudents WHERE EmailId=:email and Password=:password";
+$query= $dbh -> prepare($sql);
+$query-> bindParam(':email', $email, PDO::PARAM_STR);
+$query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+if($query->rowCount() > 0)
+{
+ foreach ($results as $result) {
+ $_SESSION['stdid']=$result->StudentId;
+if($result->Status==1)
+{
+$_SESSION['login']=$_POST['emailid'];
+echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
+} else {
+echo "<script>alert('Your Account Has been blocked .Please contact admin');</script>";
+
+}
+}
+
+} 
+
+else{
+echo "<script>alert('Invalid Details');</script>";
+}
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -68,6 +113,7 @@
 													<div class="clearfix"></div>
 													<input type="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter pwd">
 												</div>
+												<input type="text" class="form-control1"  name="vercode" maxlength="5" autocomplete="off" required  style="height:25px;" />&nbsp;<img src="captcha.php">
 												
 												<div class="form-group">
 													<div class="checkbox checkbox-primary pr-10 pull-left">
