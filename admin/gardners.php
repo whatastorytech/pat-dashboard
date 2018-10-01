@@ -30,7 +30,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Gardner's</h6>
 								</div>
-								<a href="javascript:void(0)" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+								<a href="add_gardner.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">

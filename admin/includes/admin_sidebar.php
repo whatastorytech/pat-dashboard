@@ -359,7 +359,7 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="#"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
+									<a href="logout.php"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
 								</li>
 							</ul>
 							</div>
@@ -408,7 +408,7 @@
 					<a href="plantations.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Plantation's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
-					<a href="widgets.html"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Location's</span></div><div class="clearfix"></div></a>
+					<a href="locations.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Location's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
 					<a href="trees_category.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Trees Category's</span></div><div class="clearfix"></div></a>

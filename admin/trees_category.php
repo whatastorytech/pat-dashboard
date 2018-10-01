@@ -1,7 +1,60 @@
 <?php
+error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
-include('includes/admin_sidebar.php');?>
+include('includes/admin_sidebar.php');
+$sql ="SELECT tree_category_name,tree_category_desc,Status FROM tree_category ORDER BY  tree_category_id desc";
+$query=$dbh->prepare($sql);
+$query-> execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+?>
+<div class="row">
+<?php if($_SESSION['error']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-danger" >
+ <strong>Error :</strong> 
+ <?php echo htmlentities($_SESSION['error']);?>
+<?php echo htmlentities($_SESSION['error']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['msg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['msg']);?>
+<?php echo htmlentities($_SESSION['msg']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['updatemsg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['updatemsg']);?>
+<?php echo htmlentities($_SESSION['updatemsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+
+   <?php if($_SESSION['delmsg']!="")
+    {?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['delmsg']);?>
+<?php echo htmlentities($_SESSION['delmsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+</div>
+
+?>
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid">				
@@ -29,6 +82,7 @@ include('includes/admin_sidebar.php');?>
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Trees category</h6>
 								</div>
+									<a href="add_trees_category.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -38,6 +92,7 @@ include('includes/admin_sidebar.php');?>
 											<table id="myTable1" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
+														<th>#</th>
 														<th>Name</th>
 														<th>Registered on </th>
 														<th>Status</th>
@@ -45,22 +100,29 @@ include('includes/admin_sidebar.php');?>
 													</tr>
 												</thead>												
 												<tbody>
+												<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($results as $result)
+													{               ?>   
 													<tr>
-														<td>Tiger Nixon</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-danger">Active</td>
+														 <td class="center"><?php echo htmlentities($cnt);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_category_desc);?></td>
+																	 <td class="center"><?php if($result->Status==1) {?>
+			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
+			                                            <?php } else {?>
+			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
+			                                            <?php } ?></td>
 														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
-													<tr>
-														<td>Tiger Nixon</td>
-														<td>1st Septmber 2018</td>
-														<td><span class="label label-success">Inactive</td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
-													</tr>													
+													 <?php $cnt=$cnt+1;}} ?>    													
 												</tbody>
 											
 												<tfoot>
 													<tr>
+														<th>#</th>
 														<th>Name</th>
 														<th>Registered on</th>
 														<th>Status</th>
