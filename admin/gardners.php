@@ -1,8 +1,62 @@
 <?php
+session_start();
+error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
-include('includes/admin_sidebar.php');?>
-        <!-- Main Content -->
+include('includes/admin_sidebar.php');
+$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+$query=$dbh->prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+?>
+<div class="row">
+<?php if($_SESSION['error']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-danger" >
+ <strong>Error :</strong> 
+ <?php echo htmlentities($_SESSION['error']);?>
+<?php echo htmlentities($_SESSION['error']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['msg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['msg']);?>
+<?php echo htmlentities($_SESSION['msg']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['updatemsg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['updatemsg']);?>
+<?php echo htmlentities($_SESSION['updatemsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+
+<?php if($_SESSION['delmsg']!="")
+ {?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['delmsg']);?>
+<?php echo htmlentities($_SESSION['delmsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+</div>
+
+?>
 		<div class="page-wrapper">
             <div class="container-fluid">				
 				<!-- Title -->
@@ -41,30 +95,39 @@ include('includes/admin_sidebar.php');?>
 												<thead>
 													<tr>
 														<th>Gardner Name</th>
-														<th>Plantation</th>
+														<th>Garden</th>
 														<th>Phone number</th>
-														 <th>Updates</th>
+														<th>Updates</th>
 													</tr>
 												</thead>												
 												<tbody>
+													<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($results as $result)
+													{               ?>   
 													<tr>
-														<td>Tiger Nixon</td>
-														<td>Full garden, Pune</td>
-														<td>1234567890</td>
-														<td>13 verification pending</td>
+														 <td class="center"><?php echo htmlentities($cnt);?></td>
+														<td class="center"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></td>
+															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
+															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
+													
+								
+														<td class="center"><?php if($result->garden_status==1) {?>
+			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
+			                                            <?php } else {?>
+			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
+			                                            <?php } ?></td>
+														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
-													<tr>
-														<td>Lion Nixon</td>
-														<td>Half garden,Mumbai</td>
-														<td>1234567890</td>
-														<td>10 verification pending</td>
-													</tr>												
+													 <?php $cnt=$cnt+1;}} ?>												
 												</tbody>
 											
 												<tfoot>
 													<tr>
 														<th>Gardner Name</th>
-														<th>Plantation</th>
+														<th>Garden</th>
 														<th>Phone number</th>
 														 <th>Updates</th>
 													</tr>

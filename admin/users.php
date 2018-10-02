@@ -1,7 +1,61 @@
 <?php
+session_start();
+error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
-include('includes/admin_sidebar.php');?>
+include('includes/admin_sidebar.php');
+$sql ="SELECT * FROM users ORDER BY  user_id desc";
+$query=$dbh->prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+?>
+<div class="row">
+<?php if($_SESSION['error']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-danger" >
+ <strong>Error :</strong> 
+ <?php echo htmlentities($_SESSION['error']);?>
+<?php echo htmlentities($_SESSION['error']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['msg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['msg']);?>
+<?php echo htmlentities($_SESSION['msg']="");?>
+</div>
+</div>
+<?php } ?>
+<?php if($_SESSION['updatemsg']!="")
+{?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['updatemsg']);?>
+<?php echo htmlentities($_SESSION['updatemsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+
+<?php if($_SESSION['delmsg']!="")
+ {?>
+<div class="col-md-6">
+<div class="alert alert-success" >
+ <strong>Success :</strong> 
+ <?php echo htmlentities($_SESSION['delmsg']);?>
+<?php echo htmlentities($_SESSION['delmsg']="");?>
+</div>
+</div>
+<?php } ?>
+
+</div>
+
+?>
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid">				
@@ -35,7 +89,7 @@ include('includes/admin_sidebar.php');?>
 									<div  class="tab-struct custom-tab-1">
 										<ul role="tablist" class="nav nav-tabs nav-tabs-responsive" id="myTabs_8">
 											<li class="active" role="presentation"><a  data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false"><span>Paid users</span></a></li>
-											<li  role="presentation" class="next"><a aria-expanded="true"  data-toggle="tab" role="tab" id="follo_tab_8" href="#follo_8"><span>Free users<span class="inline-block">(246)</span></span></a></li>										
+											<li  role="presentation" class="next"><a aria-expanded="true"  data-toggle="tab" role="tab" id="follo_tab_8" href="#follo_8"><span>Free users<span class="inline-block">&nbsp;(<?php echo $query->rowCount();?>)</span></span></a></li>										
 										</ul>
 										<div class="tab-content" id="myTabContent_8">
 											<div  id="profile_8" class="tab-pane fade active in" role="tabpanel">
@@ -44,43 +98,44 @@ include('includes/admin_sidebar.php');?>
 													 <table id="example" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
-														<th></th>
+														<th>#</th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
 														<th>Planted Trees</th>
 														<th>Payment Status</th>
+														<th>Action</th>
 													</tr>
 												</thead>												
 												<tbody>
+												<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($results as $result)
+													{?>   
 													<tr>
-														<td><input type="checkbox"></td>
-														<td>Tiger Nixon</td>
-														<td>Im@gmail.com</td>
-														<td>1234567890</td>
-														<td>15</td>
-														<td>Till 18  March</td>
-														
+														 <td class="center"><?php echo htmlentities($cnt);?></td>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->user_email);?></td>
+														<td class="center"><?php echo htmlentities($result->user_pnumber);?></td>
+														<td>22</td>
+														<td>till  18   march</td>
+														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
-													<tr>
-														<td><input type="checkbox"></td>
-														<td>Lion Nixon</td>
-														<td>demo@gmail.com</td>
-														<td>1234567890</td>
-														<td>20</td>
-														<td>Till 30  March</td>
-														
-													</tr>													
+													 <?php $cnt=$cnt+1;}} ?>    
+																										
 												</tbody>
 											
 												<tfoot>
 													<tr>
-														<th></th>
+														<th>#</th>
 														<th>Name</th>
 														<th>Email</th>
 														<th>Phone</th>
 														<th>Planted Trees</th>
 														<th>Payment Status</th>
+														<th>Action</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -103,24 +158,22 @@ include('includes/admin_sidebar.php');?>
 													</tr>
 												</thead>												
 												<tbody>
+													<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($results as $result)
+													{?>   
 													<tr>
-														<td><input type="checkbox"></td>
-														<td>Tiger Nixon</td>
-														<td>System Architect</td>
-														<td>1234567890</td>
-														<td>15</td>
-														<td>Till 18  March</td>
-														
+														 <td class="center"><?php echo htmlentities($cnt);?></td>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->user_email);?></td>
+														<td class="center"><?php echo htmlentities($result->user_pnumber);?></td>
+														<td>22</td>
+														<td>till  18   march</td>
+														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
-													<tr>
-														<td><input type="checkbox"></td>
-														<td>Tiger Nixon</td>
-														<td>System Architect</td>
-														<td>1234567890</td>
-														<td>20</td>
-														<td>Till 30  March</td>
-														
-													</tr>													
+													 <?php $cnt=$cnt+1;}} ?>  												
 												</tbody>
 											
 												<tfoot>
