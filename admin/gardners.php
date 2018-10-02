@@ -4,8 +4,28 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
+<<<<<<< HEAD
 $sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
         LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+=======
+<<<<<<< HEAD
+$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+=======
+<<<<<<< HEAD
+$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+=======
+<<<<<<< HEAD
+$sql ="SELECT * FROM gardner  LEFT JOIN 
+          garden ON gardner.garden_id = garden.garden_id ORDER BY garden.garden_id desc";
+=======
+$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+>>>>>>> 1f5f483e373d4990fdcc2a47cfc9fff211a48684
+>>>>>>> 48dc9843f423dffc5e4bf296119edff653a9487f
+>>>>>>> 764904d957e0900e3c00295ec590f066f84911b0
+>>>>>>> 3712538bd70cf86bd0afc1a288665503ad8f8c69
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -97,12 +117,37 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 														<th>Gardner Name</th>
 														<th>Garden</th>
 														<th>Phone number</th>
+<<<<<<< HEAD
 
 														<th>status</th>
 														<th>action</th>
 
 
 
+=======
+<<<<<<< HEAD
+
+														<th>status</th>
+														<th>action</th>
+
+
+														<th>status</th>
+														<th>action</th>
+
+=======
+<<<<<<< HEAD
+														<th>status</th>
+														<th>action</th>
+
+=======
+<<<<<<< HEAD
+														<th>status</th>
+														<th>action</th>
+=======
+>>>>>>> 1f5f483e373d4990fdcc2a47cfc9fff211a48684
+>>>>>>> 48dc9843f423dffc5e4bf296119edff653a9487f
+>>>>>>> 764904d957e0900e3c00295ec590f066f84911b0
+>>>>>>> 3712538bd70cf86bd0afc1a288665503ad8f8c69
 														<th>Updates</th>
 													</tr>
 												</thead>												
@@ -119,12 +164,38 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
 															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
 													
-
+<<<<<<< HEAD
+=======
+								
+<<<<<<< HEAD
 
 
 														<td class="center"><?php if($result->gardner_status==1) {?>
 
+														<td class="center"><?php if($result->gardner_status==1) {?>
 
+														<td class="center"><?php if($result->garden_status==1) {?>
+>>>>>>> 3712538bd70cf86bd0afc1a288665503ad8f8c69
+
+=======
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+
+														<td class="center"><?php if($result->gardner_status==1) {?>
+
+
+=======
+														<td class="center"><?php if($result->gardner_status==1) {?>
+=======
+<<<<<<< HEAD
+														<td class="center"><?php if($result->gardner_status==1) {?>
+=======
+														<td class="center"><?php if($result->garden_status==1) {?>
+>>>>>>> 1f5f483e373d4990fdcc2a47cfc9fff211a48684
+>>>>>>> 48dc9843f423dffc5e4bf296119edff653a9487f
+>>>>>>> 764904d957e0900e3c00295ec590f066f84911b0
+>>>>>>> 3712538bd70cf86bd0afc1a288665503ad8f8c69
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
