@@ -4,8 +4,8 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
-        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+$sql ="SELECT * FROM gardner  LEFT JOIN 
+          garden ON gardner.garden_id = garden.garden_id ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -94,9 +94,12 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 											<table id="myTable1" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
+														<th>#</th>
 														<th>Gardner Name</th>
 														<th>Garden</th>
 														<th>Phone number</th>
+														<th>status</th>
+														<th>action</th>
 														<th>Updates</th>
 													</tr>
 												</thead>												
@@ -114,7 +117,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
 													
 								
-														<td class="center"><?php if($result->garden_status==1) {?>
+														<td class="center"><?php if($result->gardner_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
@@ -126,10 +129,13 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 											
 												<tfoot>
 													<tr>
+														<th>#</th>
 														<th>Gardner Name</th>
 														<th>Garden</th>
 														<th>Phone number</th>
-														 <th>Updates</th>
+														<th>status</th>
+														<th>action</th>
+														<th>Updates</th>
 													</tr>
 												</tfoot>
 											</table>
