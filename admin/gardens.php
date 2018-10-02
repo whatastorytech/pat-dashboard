@@ -56,18 +56,21 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 
 </div>
 
+?>
+
+        <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid">				
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-					  <h5 class="txt-dark">Gardner's</h5>
+					  <h5 class="txt-dark">Gardens</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 					  <ol class="breadcrumb">
 						<li><a href="index.html">Dashboard</a></li>
-						<li><a href="#"><span>Gardner's</span></a></li>
+						<li><a href="#"><span>Gardens</span></a></li>
 						<!-- <li class="active"><span>RSPV DataTable</span></li> -->
 					  </ol>
 					</div>
@@ -81,9 +84,9 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Gardner's</h6>
+									<h6 class="panel-title txt-dark">Gardens</h6>
 								</div>
-								<a href="add_gardner.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+								<a href="add_garden.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -94,17 +97,12 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Gardner Name</th>
-														<th>Garden</th>
-														<th>Phone number</th>
-
-														<th>status</th>
-														<th>action</th>
-
-
-														<th>status</th>
-														<th>action</th>
-
+														<th>Garden Name</th>
+														<th>Garden Address</th>
+														<th>Location</th>
+														<th>Gardener</th>
+														<th>Status</th>
+														<th>Action</th>
 														<th>Updates</th>
 													</tr>
 												</thead>												
@@ -117,36 +115,31 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></td>
-															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
-															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
+														<td class="center"><?php echo htmlentities($result->garden_name);?></td>
+															<td class="center"><?php echo htmlentities($result->garden_address);?></td>
+															<td class="center"><?php echo htmlentities($result->location_name);?></td>
+														<td class="center"><?php echo htmlentities($result->gardner_fname);?>&nbsp;<?php echo htmlentities($result->gardner_lname);?></td>
 													
 								
-
-
-														<td class="center"><?php if($result->gardner_status==1) {?>
-
-														<td class="center"><?php if($result->gardner_status==1) {?>
-
 														<td class="center"><?php if($result->garden_status==1) {?>
-
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td>
 														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
-													 <?php $cnt=$cnt+1;}} ?>												
+													 <?php $cnt=$cnt+1;}} ?>
+												    											
 												</tbody>
 											
 												<tfoot>
 													<tr>
 														<th>#</th>
-														<th>Gardner Name</th>
-														<th>Garden</th>
-														<th>Phone number</th>
-														<th>status</th>
-														<th>action</th>
+														<th>Garden Name</th>
+														<th>Location</th>
+														<th>Gardener</th>
+														<th>Status</th>
+														<th>Action</th>
 														<th>Updates</th>
 													</tr>
 												</tfoot>
