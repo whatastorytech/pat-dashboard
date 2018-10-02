@@ -405,6 +405,9 @@
 					<a href="gardners.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Gardner's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
+					<a href="gardens.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Garden's</span></div><div class="clearfix"></div></a>
+				</li>
+				<li>
 					<a href="plantations.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Plantation's</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>

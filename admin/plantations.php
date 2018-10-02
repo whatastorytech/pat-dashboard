@@ -1,4 +1,6 @@
 <?php
+session_start();
+error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');?>
@@ -31,7 +33,7 @@ include('includes/admin_sidebar.php');?>
 									<h6 class="panel-title txt-dark">Plantations</h6>
                                  <p>32 plantation</p>
 								</div>
-								<a href="javascript:void(0)" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+								<a href="add_garden.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -58,14 +60,7 @@ include('includes/admin_sidebar.php');?>
 														<td>Dsouza</td>
 														<td>15 update</td>
 													</tr>
-												    <tr>
-														<td>Half Garden</td>
-														<td>Mumbai</td>
-														<td>20</td>
-														<td>Mango</td>
-														<td>Gonsalvis</td>
-														<td>15 update</td>
-													</tr>												
+												    											
 												</tbody>
 											
 												<tfoot>
