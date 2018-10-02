@@ -4,8 +4,8 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-$sql ="SELECT * FROM gardner  LEFT JOIN 
-          garden ON gardner.garden_id = garden.garden_id ORDER BY garden.garden_id desc";
+$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -56,7 +56,6 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 
 </div>
 
-?>
 		<div class="page-wrapper">
             <div class="container-fluid">				
 				<!-- Title -->
@@ -100,6 +99,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 														<th>Phone number</th>
 														<th>status</th>
 														<th>action</th>
+
 														<th>Updates</th>
 													</tr>
 												</thead>												
@@ -117,6 +117,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
 													
 								
+
 														<td class="center"><?php if($result->gardner_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
