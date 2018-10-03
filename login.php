@@ -1,8 +1,47 @@
-<!DOCTYPE html>
-<?php 
+<?php
 session_start();
+error_reporting(0);
 include('includes/config.php');
-error_reporting(0);?>
+if($_SESSION['login']!=''){
+$_SESSION['login']='';
+}
+if(isset($_POST['login']))
+{
+
+$email=$_POST['user_email'];
+$password=md5($_POST['user_password']);
+$sql ="SELECT user_email,user_password,user_id,user_status FROM users WHERE user_email=:email and user_password=:password";
+$query=$dbh->prepare($sql);
+$query-> bindParam(':email', $email, PDO::PARAM_STR);
+$query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+
+if($query->rowCount() > 0)
+{
+
+ foreach ($results as $result) {
+ $_SESSION['user_id']=$result->user_id;
+if($result->user_status==1)
+{
+$_SESSION['login']=$_POST['user_email'];
+echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+} else {
+echo "<script>alert('Your Account Has been blocked .Please contact admin');</script>";
+
+}
+}
+
+} 
+
+else{
+echo "<script>alert('Invalid Details');</script>";
+}
+}
+?>
+
+<!DOCTYPE html>
 <head>
 	<style>
 
@@ -765,38 +804,7 @@ input.checkbox:checked:after {
   }
 }
 </style>
-<title>PAT SignUp Form</title>
-<?php 
-if(isset($_POST['signup']))
-{
-$user_fname=$_POST['user_fname'];
-$user_lname=$_POST['user_lname'];
-$user_email=$_POST['user_email'];
-$user_password=md5($_POST['user_password']);
-$user_pnumber=$_POST['user_pnumber']; 
-$status=1;
-$sql="INSERT INTO  users (user_fname,user_lname,user_email,user_pnumber,user_password,user_status) VALUES(:user_fname,:user_lname,:user_email,:user_pnumber,:user_password,:status)";
-$query = $dbh->prepare($sql);
-$query->bindParam(':user_fname',$user_fname,PDO::PARAM_STR);
-$query->bindParam(':user_lname',$user_lname,PDO::PARAM_STR);
-$query->bindParam(':user_email',$user_email,PDO::PARAM_STR);
-$query->bindParam(':user_password',$user_password,PDO::PARAM_STR);
-$query->bindParam(':user_pnumber',$user_pnumber,PDO::PARAM_STR);
-$query->bindParam(':status',$status,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-echo '<script>alert("Your Registration successfull and your User id is  "+"'.$lastInsertId.'")</script>';
-}
-else 
-{
-echo "<script>alert('Something went wrong. Please try again');</script>";
-}
-}
-
-
-?>
+<title>PAT Login From</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -810,15 +818,12 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <body>
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
-		<h1>PAT SignUp Form</h1>
+		<h1>PAT Login Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="#" method="post">
-					<input class="text" type="text" name="user_fname" placeholder="User First Name" required="">
-          <input class="text email" type="text" name="user_lname" placeholder="User Last Name" required="">
 					<input class="text email" type="email" name="user_email" placeholder="Email" required="">
-					<input class="text email " type="password" name="user_password" placeholder="Password" required="">
-          <input class="text email" type="text" name="user_pnumber" placeholder="Mobile number" required="">
+					<input class="text" type="password" name="user_password" placeholder="Password" required="">
 					<div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -826,14 +831,14 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 						</label>
 						<div class="clear"> </div>
 					</div>
-					<input type="submit" value="SIGNUP" name="signup">
+					<input type="submit" value="LOGIN"  name="login">
 				</form>
-				<p>Don't have an Account? <a href="login.php"> Login Now!</a></p>
+				<p>Don't have an Account? <a href="signup.php"> Signup Now!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
 		<div class="colorlibcopy-agile">
-			<p>© 2018 PAT Signup Form. All rights reserved | Design by <a href="" target="_blank">Colorlib</a></p>
+			<p>© 2018 PAT Signup Form. All rights reserved | Design by <a href="" target="_blank">PAT</a></p>
 		</div>
 		<!-- //copyright -->
 		<ul class="colorlib-bubbles">

@@ -48,7 +48,7 @@ $_SESSION['error']="Something went wrong. Please try again";
 }
 ?>?>
 
-                    <div class="page-wrapper">
+            <div class="page-wrapper">
 				<div class="container-fluid">
 					
 					<!-- Title -->

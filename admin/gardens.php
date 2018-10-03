@@ -4,6 +4,10 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
+if(!isset($_SESSION['login']))
+{ 
+echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+}
 $sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
         LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);

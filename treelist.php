@@ -2,7 +2,11 @@
 error_reporting(0);
 include('includes/config.php');
 include('includes/header.php');
-include('includes/sidebar.php');?>
+include('includes/sidebar.php');
+if(!isset($_SESSION['login']))
+{ 
+echo "<script type='text/javascript'> document.location ='login.php'; </script>";
+}?>
 			<div class="contents-wrapper tree-list">
 				<div class="main-contents">
 					<div class="tree-category-header">
