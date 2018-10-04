@@ -1,20 +1,36 @@
 <?php 
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/header.php');
 include('includes/sidebar.php');
 if(!isset($_SESSION['login']))
 { 
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
-}?>
+}
+$status = 1;
+$tree_id = intval($_GET['tree_id']);
+$number_of_trees = intval($_GET['number']);
+$sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location_id = location.location_id
+        LEFT JOIN  tree_category ON planted_trees.tree_category_id = tree_category.tree_category_id where planted_trees.plant_id = :plant_id AND planted_trees.plant_tree_status = :tree_status ORDER BY planted_trees.plant_id desc";
+     
+$query = $dbh -> prepare($sql);
+$query->bindParam(':plant_id',$tree_id,PDO::PARAM_STR);
+$query->bindParam(':tree_status',$status,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+?>
 			<div class="contents-wrapper">
 				<div class="main-contents">
 					<div class="section check-out">
-
+						<?php 
+                if($query->rowCount() > 0)
+				    {
+						foreach($results as $result)
+							{   ?> 
 						<h1 class="sec-title">Plant a Tree</h1>
-						<p class="sec-info">You have selected Apple Tree to plant in Bangalore</p>
-						<a href="index.html" class="link">Change your Tree or Location</a>
+						<p class="sec-info">You have selected Apple Tree to plant in <?php echo $result->location_name;?></p>
+						<a href="#" class="link">Change your Tree or Location</a>
 
 						<div class="check-out-card">
 							<div class="has-shadow">
@@ -22,25 +38,29 @@ echo "<script type='text/javascript'> document.location ='login.php'; </script>"
 									<img src="img/trees/apple.svg">
 								</div>
 								<div class="content">
-									<h2 class="title">Apple Tree in Mumbai</h2>
+									<h2 class="title"><?php echo $result->tree_category_name;?> Tree in <?php echo $result->location_name;?></h2>
 									<div class="fee">
 										<div class="info">
 											<h3>Watering Fee</h3>
-											<p>2 x Apple Tree for 12 months</p>
+											<p><?php echo $number_of_trees;?>x <?php echo $result->tree_category_name;?> Tree for 12 months</p>
 											<p>Total Billing amount for 2 trees for a Year</p>
 										</div>
+										<?php 
+										  $amount = $number_of_trees * 999;
+
+										?>
 										<div class="rate">
-											<h3>₹ 1998</h3>
-											<h4>2 x ₹999</h4>
+											<h3>₹ <?php echo $amount;?></h3>
+											<h4><?php echo $number_of_trees;?> x ₹999</h4>
 										</div>
 									</div>
 									<div class="bill">
-										<h2>1 Apple Tree will be named <b>Abhishek</b></h2>
+										<h2><?php echo $result->tree_category_name;?> Tree will be named <b><?php echo $result->tree_name;?></b></h2>
 									</div>
 								</div>
 							</div>
 						</div>
-
+<?php }}?>
 						<div class="line"></div>
 
 						<div class="payment">

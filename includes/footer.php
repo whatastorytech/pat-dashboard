@@ -15,6 +15,28 @@
 			});
 
 		</script>
+		<script>
+			 document.getElementById('minus').onclick = function() {
+			  event.preventDefault();
+		       var count = $('#fee').val();
+		       if(count != 1 )
+		       {
+		       	 --count;
+		       	 var amount = count*999;
+		       	 $('#rate').val(amount);
+		       }
+		       $('#fee').val(count);
+			}
+			 document.getElementById('plus').onclick = function() {
+			 	 event.preventDefault();
+		       var count = $('#fee').val();		       
+		       	 ++count;
+		       	 var amount = count*999;
+		       	 $('#rate').val(amount);
+		         $('#fee').val(count);
+			}
+		
+		</script>
 
 	</body>
 </html>
