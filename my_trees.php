@@ -1,8 +1,21 @@
 <?php
+session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/header.php');
-include('includes/sidebar.php');?>
+include('includes/sidebar.php');
+if(!isset($_SESSION['login']))
+{ 
+echo "<script type='text/javascript'> document.location ='login.php'; </script>";
+}
+
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,planted_trees.added_at,location.location_name FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id ORDER BY planted_trees.added_at desc";
+
+$query=$dbh->prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+?>
+
 			<div class="contents-wrapper">
 				<div class="main-contents">
 					<div class="tab-contents mytrees">
@@ -13,67 +26,28 @@ include('includes/sidebar.php');?>
 							</div>
 						</div>
 						<div class="tab">
+							<?php if($query->rowCount() > 0)
+				    {
+						foreach($results as $result)
+							{   ?> 
+							<div class="tree-block">
+								<h2><?php echo $result->tree_category_name;?></h2>
+								<div class="tree-img">
+									<img src="img/trees/mango.svg">
+								</div>
+								<p class="howmany">Planted 10 Trees</p>
+								<p class="date">Last Planted on : <?php echo $result->added_at;?> | <?php echo $result->location_name;?></p>
+								<a href="treelist.php" class="showall">Show all trees</a>
+							</div>
+
+						<?php }}?>	
+
 							
-							<div class="tree-block">
-								<h2>Mango</h2>
-								<div class="tree-img">
-									<img src="img/trees/mango.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
 
-							<div class="tree-block">
-								<h2>Apple</h2>
-								<div class="tree-img">
-									<img src="img/trees/apple.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
+							
 
-							<div class="tree-block">
-								<h2>Apricot</h2>
-								<div class="tree-img">
-									<img src="img/trees/appricot.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
-
-							<div class="tree-block">
-								<h2>Mango</h2>
-								<div class="tree-img">
-									<img src="img/trees/mango.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
-
-							<div class="tree-block">
-								<h2>Apple</h2>
-								<div class="tree-img">
-									<img src="img/trees/apple.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
-
-							<div class="tree-block">
-								<h2>Apricot</h2>
-								<div class="tree-img">
-									<img src="img/trees/appricot.svg">
-								</div>
-								<p class="howmany">Planted 10 Trees</p>
-								<p class="date">Last Planted on : 30-12-2017 | Mumbai</p>
-								<a href="treelist.php" class="showall">Show all trees</a>
-							</div>
-
+							
+							
 						</div>
 					</div>
 					<div class="mystats section">
