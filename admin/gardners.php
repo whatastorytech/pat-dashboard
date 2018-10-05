@@ -115,7 +115,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></td>
+														<td class="center"><a href="gardner_profile.php?gardner=<?php echo $result->gardner_id;?>"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></a></td>
 															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
 															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
 													

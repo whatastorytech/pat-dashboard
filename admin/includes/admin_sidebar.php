@@ -386,19 +386,7 @@
 					</ul>
 				</li>
 				<li>
-					<a class="active" href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_plant"><div class="pull-left"><i class="zmdi zmdi-landscape mr-20"></i><span class="right-nav-text">Trees</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-					<ul id="dashboard_plant" class="collapse collapse-level-1">
-						<li>
-							<a class="active-page" href="trees.php">Total Trees</a>
-						</li>
-						<li>
-							<a class="active-page" href="planted_trees.php">Planted trees</a>
-						</li>
-						<li>
-							<a href="unplanted_trees.php">Unplanted trees </a>
-						</li>
-	
-					</ul>
+					<a href="planted_trees.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Trees</span></div><div class="clearfix"></div></a>
 				</li>
 				
 				<li>

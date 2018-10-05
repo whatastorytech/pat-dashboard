@@ -4,7 +4,7 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-$sql ="SELECT tree_id,tree_name,tree_status,added_at,tree_age,tree_category_name FROM trees  LEFT JOIN tree_category ON  trees.tree_category_id = tree_category.tree_category_id ORDER BY  tree_id desc";
+$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  ORDER BY plant_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -131,7 +131,7 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Trees</h6>
 								</div>
-									<a href="add_tree.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+									<!-- <a href="add_tree.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a> -->
 								<div class="clearfix"></div>
 							</div>
 							<div class="panel-wrapper collapse in">
@@ -142,10 +142,13 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Name</th>
-														<th>category</th>
-														<th>Tree Age </th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
 														<th>Status</th>
+														<th>Updates</th>
 														<th>Action</th>
 													</tr>
 												</thead>												
@@ -158,31 +161,40 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->tree_name);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
 														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
+														<td class="center"><?php echo htmlentities($result->location_name);?></td>
 														<?php 
-                                                        $from = new DateTime($result->tree_age);
+                                                        $from = new DateTime($result->added_at);
 														$to   = new DateTime('today');
 
 														?>
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
-													    <td class="center"><?php if($result->location_status==1) {?>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&npsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+														<td>---</td>
+													   <!--  <td class="center"><?php if($result->location_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
-			                                            <?php } ?></td>
+			                                            <?php } ?></td> -->
 														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
 											
 												<tfoot>
-													    <th>#</th>
-													    <th>Name</th>
-														<th>category</th>
-														<th>Tree Age </th>
+													<tr>
+														<th>#</th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
 														<th>Status</th>
+														<th>Updates</th>
 														<th>Action</th>
+													</tr>
 												</tfoot>
 											</table>
 										</div>

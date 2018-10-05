@@ -1,12 +1,24 @@
 <?php
+session_start();
 error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-$sql ="SELECT tree_category_name,tree_category_desc,Status FROM tree_category ORDER BY  tree_category_id desc";
+
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees ,tree_category_name,tree_category_desc,Status,SUM(planted_trees.number_of_trees) as count FROM tree_category  LEFT JOIN planted_trees ON  tree_category.tree_category_id = planted_trees.tree_category_id GROUP BY  tree_category.tree_category_id  ORDER BY  tree_category.tree_category_id  desc";
 $query=$dbh->prepare($sql);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+$tree_category_id=8;
+$status = 1;
+$sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location_id = location.location_id
+        LEFT JOIN  tree_category ON planted_trees.tree_category_id = tree_category.tree_category_id where planted_trees.tree_category_id = :tree_category_id ";
+     
+$query = $dbh -> prepare($sql);
+$query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
+$query->execute();
+$planted_trees=$query->fetchAll(PDO::FETCH_OBJ);
 ?>
 <div class="row">
 <?php if($_SESSION['error']!="")
@@ -76,7 +88,40 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 				<!-- /Title -->				
 				<!-- Row -->
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-6">
+						<div class="row">
+							<?php 	$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($results as $result)
+													{               ?>
+								<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 category">
+									<div class="panel panel-default card-view pa-0 bg-gradient">
+										<div class="panel-wrapper collapse in">
+											<div class="panel-body pa-0">
+												<a href="#"><div class="sm-data-box" id="category">
+													<div class="container-fluid">
+														<div class="row">
+													        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+																<span class="txt-light block counter"><span class="counter-anim"><?php echo $result->trees;?></span></span>
+																<span class="weight-500 uppercase-font block font-13 txt-light"><?php echo $result->tree_category_name;?></span>
+															</div></a>
+															<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
+																<i class="icon-people  data-right-rep-icon txt-light"></i>
+															</div>
+														</div>	
+													</div>
+												</div>
+											</a>
+											</div>
+										</div>
+									</div>
+								</div>
+<?php }}?>
+
+				        </div>
+					</div>
+					<div class="col-sm-6">
 						<div class="panel panel-default card-view">
 							<div class="panel-heading">
 								<div class="pull-left">
@@ -93,40 +138,46 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>Name</th>
-														<th>Registered on </th>
+														<th>Tree Code</th>
+														<th>Age</th>
 														<th>Status</th>
-														<th>Action</th>
+														<th>Updates</th>
 													</tr>
 												</thead>												
 												<tbody>
-												<?php 	
+													<?php 	
 													$cnt=1;
 													if($query->rowCount() > 0)
 													{
-													foreach($results as $result)
+													foreach($planted_trees as $result)
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
-														<td class="center"><?php echo htmlentities($result->tree_category_desc);?></td>
-																	 <td class="center"><?php if($result->Status==1) {?>
+														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
+														<?php 
+                                                        $from = new DateTime($result->added_at);
+														$to   = new DateTime('today');
+
+														?>
+														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
+													
+														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+													   <!--  <td class="center"><?php if($result->location_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
-			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+			                                            <?php } ?></td> -->
 													</tr>
-													 <?php $cnt=$cnt+1;}} ?>    													
+													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
 											
 												<tfoot>
 													<tr>
 														<th>#</th>
-														<th>Name</th>
-														<th>Registered on</th>
+														<th>Tree Code</th>
+														<th>Age</th>
 														<th>Status</th>
-														<th>Action</th>
+														<th>Updates</th>
 													</tr>
 												</tfoot>
 											</table>

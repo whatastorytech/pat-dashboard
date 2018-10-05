@@ -37,6 +37,25 @@
 			}
 		
 		</script>
+		<script>
+			 document.getElementById('minus').onclick = function() {
+			  event.preventDefault();
+		       var count = $('#fee').val();
+		       if(count != 1 )
+		       {
+		       	 --count;
+		       	 var amount = count*999;
+		       	 $('#rate').val(amount);
+		       }
+		       $('#fee').val(count);
+			}
+			document.getElementById('category').onclick = function() {
+			 	 event.preventDefault();
+			 	 alert('imran');
+		      
+			}
+		
+		</script>
 
 	</body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/header.php');
 include('includes/sidebar.php');
@@ -9,8 +9,7 @@ if(!isset($_SESSION['login']))
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
 }
 $user_id = $_SESSION['user_id'];
-$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,planted_trees.added_at,location.location_name FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id  ORDER BY planted_trees.added_at desc";
-
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,SUM(planted_trees.number_of_trees) as count,planted_trees.added_at,location.location_name,tree_category.tree_category_name  FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id GROUP BY planted_trees.tree_category_id ORDER BY planted_trees.added_at desc";
 $query=$dbh->prepare($sql);
 $query -> bindParam(':user_id',$user_id, PDO::PARAM_STR);
 $query->execute();
@@ -23,7 +22,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 						<div class="title-block">
 							<h2>My Trees</h2>
 							<div class="link">
-								<a href="plant_tree.php" class="bordered-btn">Plant a Tree</a>
+								<a href="index.php" class="bordered-btn">Plant a Tree</a>
 							</div>
 						</div>
 						<div class="tab">
@@ -36,7 +35,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 								<div class="tree-img">
 									<img src="img/trees/mango.svg">
 								</div>
-								<p class="howmany">Planted 10 Trees</p>
+								<p class="howmany">Planted <?php echo $result->count;?> Trees</p>
 								<p class="date">Last Planted on : <?php echo $result->added_at;?> | <?php echo $result->location_name;?></p>
 								<a href="treelist.php" class="showall">Show all trees</a>
 							</div>

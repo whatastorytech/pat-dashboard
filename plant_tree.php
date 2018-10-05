@@ -54,9 +54,8 @@ $number_of_trees = $_POST['fee'];
 $tree_name = $_POST['tree_name'];
 $added_at = date('Y-m-d H:i:s');
 $user_id = $_SESSION['user_id'];
-for($i=1; $i <=  $number_of_trees; $i++)
-{
-$sql="INSERT INTO  planted_trees (location_id,tree_name,tree_category_id,user_id,tree_payment,added_at) VALUES(:location_id,:tree_name,:tree_category_id,:user_id,:tree_payment,:added_at)";
+$tree_code = 'PAT'.rand(1,1000);
+$sql="INSERT INTO  planted_trees (location_id,tree_name,tree_category_id,user_id,tree_payment,added_at,number_of_trees,tree_code) VALUES(:location_id,:tree_name,:tree_category_id,:user_id,:tree_payment,:added_at,:number_of_trees,:tree_code)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':location_id',$location_id,PDO::PARAM_STR);
 $query->bindParam(':tree_name',$tree_name,PDO::PARAM_STR);
@@ -64,9 +63,10 @@ $query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
 $query->bindParam(':user_id',$user_id,PDO::PARAM_STR);
 $query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
 $query->bindParam(':tree_payment',$rate,PDO::PARAM_STR);
+$query->bindParam(':number_of_trees',$number_of_trees,PDO::PARAM_STR);
+$query->bindParam(':tree_code',$tree_code,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-}
 if($lastInsertId)
 {
 
