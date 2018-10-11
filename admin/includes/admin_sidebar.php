@@ -386,7 +386,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="planted_trees.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Trees</span></div><div class="clearfix"></div></a>
+					<a href="trees.php"><div class="pull-left"><i class="zmdi zmdi-flag mr-20"></i><span class="right-nav-text">Trees</span></div><div class="clearfix"></div></a>
 				</li>
 				
 				<li>

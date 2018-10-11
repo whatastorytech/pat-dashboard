@@ -4,7 +4,9 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  ORDER BY plant_id desc";
+
+$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  ORDER BY plant_id desc";
+
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -25,7 +27,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 <div class="col-md-6">
 <div class="alert alert-success" >
  <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['msg']);?>
+<?php echo htmlentities($_SESSION['msg']);?>
 <?php echo htmlentities($_SESSION['msg']="");?>
 </div>
 </div>
@@ -165,12 +167,12 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
 														<td class="center"><?php echo htmlentities($result->location_name);?></td>
 														<?php 
-                                                        $from = new DateTime($result->added_at);
+                                                        $from = new DateTime($result->planted_added_at);
 														$to   = new DateTime('today');
 
 														?>
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
-														<td class="center"><?php echo htmlentities($result->user_fname);?>&npsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
 														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
 														<td>---</td>
 													   <!--  <td class="center"><?php if($result->location_status==1) {?>

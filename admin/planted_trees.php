@@ -1,4 +1,6 @@
 <?php
+session_start();
+error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');

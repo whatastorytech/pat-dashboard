@@ -9,7 +9,7 @@ if(!isset($_SESSION['login']))
 echo "<script type='text/javascript'> document.location ='index.php'; </script>";
 }
 $sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
-        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id GROUP BY garden.garden_id ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -57,7 +57,6 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 </div>
 </div>
 <?php } ?>
-
 </div>
 
 ?>
@@ -119,7 +118,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->garden_name);?></td>
+														<td class="center"><a href="garden_info.php?garden_id=<?php echo $result->garden_id;?>"><?php echo htmlentities($result->garden_name);?></a></td>
 															<td class="center"><?php echo htmlentities($result->garden_address);?></td>
 															<td class="center"><?php echo htmlentities($result->location_name);?></td>
 														<td class="center"><?php echo htmlentities($result->gardner_fname);?>&nbsp;<?php echo htmlentities($result->gardner_lname);?></td>
