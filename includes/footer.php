@@ -1,6 +1,6 @@
-<<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/plugins.js"></script>
-		<script src="assets/js/custom.js"></script>
+<script src="<?php echo BASE_URL;?>assets/js/jquery.min.js"></script>
+		<script src="<?php echo BASE_URL;?>assets/js/plugins.js"></script>
+		<script src="<?php echo BASE_URL;?>assets/js/custom.js"></script>
 		
 		<script type="text/javascript">
 			

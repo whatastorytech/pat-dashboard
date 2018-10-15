@@ -4,12 +4,34 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
+if(!isset($_SESSION['login']))
+{  
+header('location:index.php');
+}
+else
+{ 
+if(isset($_GET['del']))
+{
+$location_id=$_GET['del'];
+$sql = "delete from location  WHERE location_id=:id";
+$query = $dbh->prepare($sql);
+$query -> bindParam(':id',$location_id, PDO::PARAM_STR);
+$query -> execute();
+$_SESSION['delmsg']="Category deleted scuccessfully ";
+header('location:locations.php');
+
+}
+}
 $sql ="SELECT location_id,location_name,location_status FROM location ORDER BY  location_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 ?>
-<div class="row">
+
+        <!-- Main Content -->
+		<div class="page-wrapper">
+            <div class="container-fluid">
+             <div class="row">
 <?php if($_SESSION['error']!="")
 {?>
 <div class="col-md-6">
@@ -53,17 +75,13 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 </div>
 <?php } ?>
 
-</div>
-
-?>
-        <!-- Main Content -->
-		<div class="page-wrapper">
-            <div class="container-fluid">				
+</div>				
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 					  <h5 class="txt-dark">Trees Location</h5>
 					</div>
+
 					<!-- Breadcrumb -->
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 					  <ol class="breadcrumb">
@@ -114,7 +132,8 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td class="text-nowrap"><a href="edit_location.php?location_id=<?php echo $result->location_id;?>" class="mr-25" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="locations.php?del=<?php echo htmlentities($result->location_id);?>" onclick="return confirm('Are you sure you want to delete?');"" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?>    													
 												</tbody>

@@ -5,12 +5,12 @@ include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
 
-$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees ,tree_category_name,tree_category_desc,Status,SUM(planted_trees.number_of_trees) as count FROM tree_category  LEFT JOIN planted_trees ON  tree_category.tree_category_id = planted_trees.tree_category_id GROUP BY  tree_category.tree_category_id  ORDER BY  tree_category.tree_category_id  desc";
+$sql ="SELECT * FROM tree_category ORDER BY  tree_category_id desc";
 $query=$dbh->prepare($sql);
-$query-> execute();
+$query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
-$tree_category_id=8;
+/*$tree_category_id=8;
 $status = 1;
 $sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location_id = location.location_id
         LEFT JOIN  tree_category ON planted_trees.tree_category_id = tree_category.tree_category_id where planted_trees.tree_category_id = :tree_category_id ";
@@ -18,7 +18,7 @@ $sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location
 $query = $dbh -> prepare($sql);
 $query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
 $query->execute();
-$planted_trees=$query->fetchAll(PDO::FETCH_OBJ);
+$planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
 ?>
 <div class="row">
 <?php if($_SESSION['error']!="")
@@ -107,7 +107,7 @@ $planted_trees=$query->fetchAll(PDO::FETCH_OBJ);
 																<span class="weight-500 uppercase-font block font-13 txt-light"><?php echo $result->tree_category_name;?></span>
 															</div></a>
 															<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-																<i class="icon-people  data-right-rep-icon txt-light"></i>
+																<img src="../uploads/<?php echo $result->category_image;?>" />
 															</div>
 														</div>	
 													</div>

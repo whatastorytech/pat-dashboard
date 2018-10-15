@@ -1,7 +1,7 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+
+include('../includes/config.php');
+include('../includes/connect.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
 include('includes/config.php');
@@ -32,6 +32,7 @@ $_SESSION['error']="Something went wrong. Please try again";
 header('location:manage-categories.php');
 }
 
+}
 }
 ?>
 <!DOCTYPE html>

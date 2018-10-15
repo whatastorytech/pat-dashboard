@@ -1,18 +1,24 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Dashboard.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display Statistics  information  about Project
+**********************************************************************/
+// include required files
+include('../includes/connect.php');
+include('../includes/config.php');
+include('../includes/functions.php');
+
 
 if(!isset($_SESSION['login']))
 { 
-echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+header('location:index.php');
 }
 
-?>		
-		
 
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
+?>
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid pt-25">
@@ -528,7 +534,8 @@ echo "<script type='text/javascript'> document.location ='index.php'; </script>"
 					</div> -->
 				</div>
 				<!-- /Row -->
+
 			</div>
 			
-<?php
-include('includes/admin_footer.php');?>			
+				<?php
+include('../includes/admin_footer.php');?>			

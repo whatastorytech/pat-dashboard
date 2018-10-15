@@ -1,6 +1,6 @@
  <?php
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
@@ -11,26 +11,67 @@ header('location:index.php');
 
 if(isset($_POST['create']))
 {
-	
-$category=$_POST['category'];
-$status=$_POST['category_desc'];
-$sql="INSERT INTO  tree_category (tree_category_name,tree_category_desc) VALUES(:category,:cat_desc)";
-$query = $dbh->prepare($sql);
-$query->bindParam(':category',$category,PDO::PARAM_STR);
-$query->bindParam(':cat_desc',$status,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
+ 
 
-  $_SESSION['msg']="Category Listed successfully";
-  echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";
+  if(isset($_FILES['cat_image'])){
+
+  	  
+      $errors= array();
+      $file_name = $_FILES['cat_image']['name'];
+      $file_size =$_FILES['cat_image']['size'];
+      $file_tmp =$_FILES['cat_image']['tmp_name'];
+      $file_type=$_FILES['cat_image']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['cat_image']['name'])));
+      
+      $expensions= array("jpeg","jpg","png","svg");
+      
+      if(in_array($file_ext,$expensions)=== false)
+      {
+      	 $errors [] = 1;
+         $_SESSION['error']="extension not allowed, please choose a JPEG or PNG file.";
+         echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";
+
+      }
+      
+      if($file_size > 2097152)
+      {
+          $errors [] = 2;
+         $_SESSION['error']="File size must be excately 2 MB";
+         echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";
+      }
+      
+      if(empty($errors)==true)
+      {  
+      	 $file_name = time().'.'.$file_ext;
+         $da = move_uploaded_file($file_tmp,"../uploads/".$file_name);
+         if($da)
+         {
+         	$category=$_POST['category'];
+			$status=$_POST['category_desc'];
+			$sql="INSERT INTO  tree_category (tree_category_name,tree_category_desc,category_image) VALUES(:category,:cat_desc,:category_image)";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(':category',$category,PDO::PARAM_STR);
+			$query->bindParam(':cat_desc',$status,PDO::PARAM_STR);
+			$query->bindParam(':category_image',$file_name,PDO::PARAM_STR);
+			$query->execute();
+			$lastInsertId = $dbh->lastInsertId();
+			if($lastInsertId)
+			{ 
+                $_SESSION['msg']="Category Listed successfully";
+                header('location:tree_category.php');
+            }
+
+      }
+      else
+      {
+         $_SESSION['error']="Something went wrong. Please try again";
+          header('location:tree_category.php');
+      }
+   }
+
+  
 }
-else 
-{
-$_SESSION['error']="Something went wrong. Please try again";
-echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";
-}
+
 
 }
 ?>
@@ -72,7 +113,7 @@ echo "<script type='text/javascript'> document.location ='trees_category.php'; <
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="form-wrap">
-													<form   method="POST" action="">
+												<form   method="POST" action="add_trees_category.php" enctype="multipart/form-data">
 														<div class="form-group">
 															<label class="control-label mb-10" for="exampleInputuname_1">Category Name</label>
 															<div class="input-group">
@@ -87,6 +128,14 @@ echo "<script type='text/javascript'> document.location ='trees_category.php'; <
 																<textarea class="form-control" id="exampleInputuname_1" placeholder="tree Category discription" name="category_desc"></textarea>
 															</div>
 														</div>
+														<div class="form-group">
+															<label class="control-label mb-10" for="exampleInputEmail_1">Image</label>
+															<div class="input-group">
+																<div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+																<input class="form-control"  type="file" exampleInputuname_1" placeholder="Category Image" name="cat_image">
+															</div>
+														</div>
+												</div>
 														<button type="submit"  name="create" class="btn btn-success mr-10">Submit</button>
 														<button type="submit" class="btn btn-default">Cancel</button>
 													</form>

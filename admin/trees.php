@@ -4,12 +4,24 @@ error_reporting(0);
 include('includes/config.php');
 include('includes/admin_header.php');
 include('includes/admin_sidebar.php');
-
-$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  ORDER BY plant_id desc";
+$planted= 'planted';
+$adopted = 'adopted';
+$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :planted  ORDER BY plant_id desc";
 
 $query=$dbh->prepare($sql);
+$query->bindParam(':planted',$planted,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+
+
+
+$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :adopted  ORDER BY plant_id desc";
+
+$query=$dbh->prepare($sql);
+$query->bindParam(':adopted',$adopted,PDO::PARAM_STR);
+$query->execute();
+$adopted=$query->fetchAll(PDO::FETCH_OBJ);
 ?>
 <div class="row">
 <?php if($_SESSION['error']!="")
@@ -58,89 +70,47 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 </div>
 
 ?>
-<?php
-date_default_timezone_set('Asia/Calcutta');
 
-function findage($dob)
-{
-    $localtime = getdate();
-    $today = $localtime['mday']."-".$localtime['mon']."-".$localtime['year'];
-    $dob_a = explode("-", $dob);
-    $today_a = explode("-", $today);
-    $dob_d = $dob_a[0];$dob_m = $dob_a[1];$dob_y = $dob_a[2];
-    $today_d = $today_a[0];$today_m = $today_a[1];$today_y = $today_a[2];
-    $years = $today_y - $dob_y;
-    $months = $today_m - $dob_m;
-    if ($today_m.$today_d < $dob_m.$dob_d) 
-    {
-        $years--;
-        $months = 12 + $today_m - $dob_m;
-    }
-
-    if ($today_d < $dob_d) 
-    {
-        $months--;
-    }
-
-    $firstMonths=array(1,3,5,7,8,10,12);
-    $secondMonths=array(4,6,9,11);
-    $thirdMonths=array(2);
-
-    if($today_m - $dob_m == 1) 
-    {
-        if(in_array($dob_m, $firstMonths)) 
-        {
-            array_push($firstMonths, 0);
-        }
-        elseif(in_array($dob_m, $secondMonths)) 
-        {
-            array_push($secondMonths, 0);
-        }elseif(in_array($dob_m, $thirdMonths)) 
-        {
-            array_push($thirdMonths, 0);
-        }
-    }
-    echo "<br><br> Age is $years years $months months.";
-}
-
-findage("21-04-1969"); //put date in the dd-mm-yyyy format
-?>
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid">				
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-					  <h5 class="txt-dark">Trees</h5>
+					  <h5 class="txt-dark">Users</h5>
 					</div>
 					<!-- Breadcrumb -->
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 					  <ol class="breadcrumb">
 						<li><a href="index.html">Dashboard</a></li>
-						<li><a href="#"><span>trees</span></a></li>
+						<li><a href="#"><span>users</span></a></li>
 						<!-- <li class="active"><span>RSPV DataTable</span></li> -->
 					  </ol>
 					</div>
 					<!-- /Breadcrumb -->
+
+
+
 				</div>
 				<!-- /Title -->
 				
 				<!-- Row -->
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="panel panel-default card-view">
-							<div class="panel-heading">
-								<div class="pull-left">
-									<h6 class="panel-title txt-dark">Trees</h6>
-								</div>
-									<!-- <a href="add_tree.php" class="pull-right btn btn-primary btn-xs mr-15">Add New</a> -->
-								<div class="clearfix"></div>
-							</div>
+						    <div class="col-lg-12 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
-								<div class="panel-body">
-									<div class="table-wrap">
-										<div class="">
-											<table id="myTable1" class="table table-hover display  pb-30" >
+								<div  class="panel-body pb-0">
+									<div  class="tab-struct custom-tab-1">
+										<ul role="tablist" class="nav nav-tabs nav-tabs-responsive" id="myTabs_8">
+											<li class="active" role="presentation"><a  data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false"><span>Planted Trees</span></a></li>
+											<li  role="presentation" class="next"><a aria-expanded="true"  data-toggle="tab" role="tab" id="follo_tab_8" href="#follo_8"><span>Adopted Trees<span class="inline-block">&nbsp;(<?php echo $query->rowCount();?>)</span></span></a></li>										
+										</ul>
+										<div class="tab-content" id="myTabContent_8">
+											<div  id="profile_8" class="tab-pane fade active in" role="tabpanel">
+												<div class="col-md-12">
+													<div class="pt-20">
+													 <table id="myTable1" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
 														<th>#</th>
@@ -167,7 +137,7 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
 														<td class="center"><?php echo htmlentities($result->location_name);?></td>
 														<?php 
-                                                        $from = new DateTime($result->planted_added_at);
+                                                        $from = new DateTime($result->tree_planted_at);
 														$to   = new DateTime('today');
 
 														?>
@@ -199,8 +169,79 @@ findage("21-04-1969"); //put date in the dd-mm-yyyy format
 													</tr>
 												</tfoot>
 											</table>
+													</div>
+												</div>
+											</div>
+											
+											<div  id="follo_8" class="tab-pane fade" role="tabpanel">
+												<div class="row">
+													<div class="col-lg-12">
+														<table id="myTable1" class="table table-hover display  pb-30" >
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
+														<th>Status</th>
+														<th>Updates</th>
+														<th>Action</th>
+													</tr>
+												</thead>												
+												<tbody>
+													<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{
+													foreach($adopted as $result)
+													{               ?>   
+													<tr>
+														 <td class="center"><?php echo htmlentities($cnt);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
+														<td class="center"><?php echo htmlentities($result->location_name);?></td>
+														<?php 
+                                                        $from = new DateTime($result->tree_planted_at);
+														$to   = new DateTime('today');
+
+														?>
+														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+														<td>---</td>
+													   <!--  <td class="center"><?php if($result->location_status==1) {?>
+			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
+			                                            <?php } else {?>
+			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
+			                                            <?php } ?></td> -->
+														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+													</tr>
+													 <?php $cnt=$cnt+1;}} ?> 												
+												</tbody>
+											
+												<tfoot>
+													<tr>
+														<th>#</th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
+														<th>Status</th>
+														<th>Updates</th>
+														<th>Action</th>
+													</tr>
+												</tfoot>
+											</table>
+													</div>
+												</div>
+											</div>
+											
 										</div>
-									</div>
+						</div>
+						
 								</div>
 							</div>
 						</div>	

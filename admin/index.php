@@ -1,23 +1,47 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if($_SESSION['login']!=''){
+/*********************************************************************
+*	File	:	Index.php
+*	Created	:	By  What a Story
+*	Prupose	:	To  Login in Admin Panel 
+**********************************************************************/
+// include required files
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
+#	Variables
+$arrErrors	=	array();
+$user_id	=	0;
+
+if( !isset($_SESSION['login']))
+{
 $_SESSION['login']='';
 }
 if(isset($_POST['login']))
 {
-  //code for captach verification
-if ($_POST["vercode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')  {
-        echo "<script>alert('Incorrect verification code');</script>" ;
-    } 
-        else {
-$email=$_POST['emailid'];
-$password=md5($_POST['password']);
+
+    // Get all values
+    $email=$_POST['emailid'];
+    $password=$_POST['password'];
+
+
+    //Validation
+	if($email == '')
+	{
+		$arrErrors['emailid'] = 'Please enter Email';
+	}
+	if($password == '')
+	{
+		$arrErrors['password'] = 'Please provide password';
+	}
+	
+	if(empty($arrErrors))
+	{
+
 $sql ="SELECT AdminEmail,Password,AdminId,Status FROM admin WHERE AdminEmail=:email and Password=:password";
 $query=$dbh->prepare($sql);
 $query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> bindParam(':password', md5($password), PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
@@ -43,6 +67,11 @@ else{
 echo "<script>alert('Invalid Details');</script>";
 }
 }
+else
+{
+	//Show Error
+}
+
 }
 ?>
 <!DOCTYPE html>
@@ -60,13 +89,20 @@ echo "<script>alert('Invalid Details');</script>";
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		
 		<!-- vector map CSS -->
-		<link href="admin_assets/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		
 		
 		
 		<!-- Custom CSS -->
-		<link href="admin_assets/dist/css/style.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo BASE_URL ;?>assets/as_assets/dist/css/style.css" rel="stylesheet" type="text/css">
+    <style>
+    .error
+    {
+    	color:red;
+    	font-size: 16px;
+    }
+	</style>
 	</head>
 	<body>
 		<!--Preloader-->
@@ -104,28 +140,19 @@ echo "<script>alert('Invalid Details');</script>";
 											<h6 class="text-center nonecase-font txt-grey">Enter your details below</h6>
 										</div>	
 										<div class="form-wrap">
-											<form   role="form" method="post">
+											<form   role="form" method="post" id="login-form" action="">
 												<div class="form-group">
 													<label class="control-label mb-10" for="exampleInputEmail_2">Email address</label>
-													<input type="email" class="form-control" required="" id="exampleInputEmail_2" placeholder="Enter email" name="emailid"">
+													<input type="email" class="form-control" id="exampleInputEmail_2" placeholder="Enter email" name="emailid"  value="<?php echo isset($email)? $email : '';?>" >
+    		                                    <label id="email-error" class="error" for="email"><?php echo get_error('emailid');?></label>
 												</div>
 												<div class="form-group">
 													<label class="pull-left control-label mb-10" for="exampleInputpwd_2">Password</label>
-													<!-- <a class="capitalize-font txt-primary block mb-10 pull-right font-12" href="forgot-password.html">forgot password ?</a> -->
 													<div class="clearfix"></div>
-													<input type="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter pwd" name="password">
+													<input type="password" class="form-control"  placeholder="Enter pwd" name="password"
+													value="<?php echo isset($password)? $password : '';?>" > 
+			<label id="password-error" class="error" for="password"><?php echo get_error('password');?></label>
 												</div>
-												<div class="form-group">
-													<label class="control-label mb-10" for="exampleInputEmail_2">Verificaion code</label>
-													<input type="text" class="form-control1 form-control"  name="vercode" maxlength="5" autocomplete="off" required  style="height:25px;width:60%;"/><img src="captcha.php">
-												</div>
-												<!-- <div class="form-group">
-													<div class="checkbox checkbox-primary pr-10 pull-left">
-														<input id="checkbox_2" required="" type="checkbox">
-														<label for="checkbox_2"> Keep me logged in</label>
-													</div>
-													<div class="clearfix"></div>
-												</div> -->
 												<div class="form-group text-center">
 													<button type="submit" name="login" class="btn btn-primary  btn-rounded">sign in</button>
 												</div>
@@ -143,21 +170,65 @@ echo "<script>alert('Invalid Details');</script>";
 			<!-- /Main Content -->
 		
 		</div>
-		<!-- /#wrapper -->
-		
-		<!-- JavaScript -->
 		
 		<!-- jQuery -->
-		<script src="admin_assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Validation -->
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/dist/js/jquery.validate.min.js "></script>
+        <script src="<?php echo BASE_URL ;?>as_assets/dist/js/additional-methods.min.js"></script>
+
 		
 		<!-- Bootstrap Core JavaScript -->
-		<script src="admin_assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="admin_assets/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 		
 		<!-- Slimscroll JavaScript -->
-		<script src="admin_assets/dist/js/jquery.slimscroll.js"></script>
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/dist/js/jquery.slimscroll.js"></script>
 		
 		<!-- Init JavaScript -->
-		<script src="admin_assets/dist/js/init.js"></script>
+		<script src="<?php echo BASE_URL ;?>assets/as_assets/dist/js/init.js"></script>
+	  <script>
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #register-form element
+    $("#login-form").validate({
+    
+        // Specify the validation rules
+        rules: {
+            
+            emailid: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+            },
+            agree: "required",
+			
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            emailid: "Please enter Email",
+            
+            password: {
+                required: "Please provide a password",
+             /*   minlength: "Your password must be at least 5 characters long"*/
+            },
+			
+			agree: "Please accept our policy"
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+  
+  </script>
+   
 	</body>
 </html>

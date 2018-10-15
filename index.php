@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(E_ALL);
 include('includes/config.php');
+include('includes/connect.php');
 include('includes/header.php');
 include('includes/sidebar.php');
 if(!isset($_SESSION['login']))
@@ -17,9 +16,7 @@ $sql = "SELECT location_id,location_name from  location where location_status=:s
 $query = $dbh -> prepare($sql);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query->execute();
-$location=$query->fetchAll(PDO::FETCH_OBJ);
-
-		 
+$location=$query->fetchAll(PDO::FETCH_OBJ);		 
 ?>
 	
 			<div class="contents-wrapper">
@@ -54,12 +51,12 @@ $location=$query->fetchAll(PDO::FETCH_OBJ);
 														<div class="plist">
 															<?php 
 															foreach($location as $resul)
-										{ ?>
+										                 { ?>
 															<div class="place-item">
 																<h3><?php echo $resul->location_name;?></h3>
 																<a href="plant_tree.php?location=<?php echo $resul->location_id;?>&tree=<?php echo  $result->tree_category_id;?> ">Plant here ></a>
 															</div>
-															<?php }?>
+														<?php }?>
 														</div>
 													</div>
 												</div>												
@@ -72,22 +69,8 @@ $location=$query->fetchAll(PDO::FETCH_OBJ);
 										</div>
 									</div>
 
-								<?php
-
-
-							}}?>
-
-								
-
-									
-								
-									
-
-								
-
-								
-
-								</div>
+								<?php }   } ?>
+                                </div>
 							</div>
 						</div>
 					</div>

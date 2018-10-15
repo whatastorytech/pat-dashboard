@@ -1,18 +1,31 @@
 <?php
 session_start();
-error_reporting(E_ALL);
+error_reporting(0);
 include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
 if(!isset($_SESSION['login']))
 {  
 header('location:index.php');
 }
-else{ 
+else
+{ 
 
 if(isset($_POST['create']))
 {
-$location=$_POST['location_name'];
+$location_name=$_POST['location_name'];
+$sql ="SELECT * FROM location  WHERE location_name=:location_name ORDER BY  location_id desc";
+$query=$dbh->prepare($sql);
+$query->bindParam(':location_name',$location_name,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+if($query->rowCount() > 0)
+{
+
+$_SESSION['error']="The Location you have chosen already exists!";
+header('location:locations.php');
+} else 
+{
+
 $sql="INSERT INTO  location (location_name) VALUES(:location)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':location',$location,PDO::PARAM_STR);
@@ -21,16 +34,20 @@ $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
 $_SESSION['msg']="Location  Listed successfully";
-  echo "<script type='text/javascript'> document.location ='locations.php'; </script>";
+header('location:locations.php');
+
 }
 else 
 {
 $_SESSION['error']="Something went wrong. Please try again";
-  echo "<script type='text/javascript'> document.location ='locations.php'; </script>";
+header('location:locations.php');
 }
 
 }
 }
+}
+include('includes/admin_header.php');
+include('includes/admin_sidebar.php');
 ?>
   <div class="page-wrapper">
                 <div class="container-fluid">
@@ -69,12 +86,12 @@ $_SESSION['error']="Something went wrong. Please try again";
                                         <div class="row">
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="form-wrap">
-                                                    <form   method="POST" action="">
+                                                    <form   method="POST" action="" id="add_location">
                                                         <div class="form-group">
                                                             <label class="control-label mb-10" for="exampleInputuname_1">Location Name</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-addon"><i class="icon-user"></i></div>
-                                                                <input type="text" class="form-control" id="exampleInputuname_1" placeholder="Tree Location" name="location_name" required>
+                                                                <input type="text" class="form-control" id="exampleInputuname_1" placeholder="Tree Location" name="location_name" >
                                                             </div>
                                                         </div>
                                                         <button type="submit"  name="create" class="btn btn-success mr-10">Submit</button>
@@ -95,3 +112,20 @@ $_SESSION['error']="Something went wrong. Please try again";
                 
 <?php 
 include('includes/admin_footer.php');?>
+<script>
+  //javascript validation for change password
+  $("#add_location").validate({
+      rules: {
+        location_name: {
+          required: true,
+      }
+  },
+    messages: {
+        
+        group_name: {
+          required: "Please Enter a Location Name",
+        },
+      }
+    });
+  
+  </script>
