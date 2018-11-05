@@ -1,9 +1,17 @@
 <?php        
-session_start();
-error_reporting(E_ALL);
-include('includes/config.php');
+/*********************************************************************
+*   File    :   add_tre.php
+*   Created :   By  What a Story
+*   Prupose :   To Display  Listing   and   basic information of Gardners
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 

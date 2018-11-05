@@ -1,11 +1,17 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Locations.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Location   and   Information  about Location
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 else
@@ -26,56 +32,58 @@ $sql ="SELECT location_id,location_name,location_status FROM location ORDER BY  
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
 
         <!-- Main Content -->
 		<div class="page-wrapper">
             <div class="container-fluid">
-             <div class="row">
-<?php if($_SESSION['error']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-danger" >
- <strong>Error :</strong> 
- <?php echo htmlentities($_SESSION['error']);?>
-<?php echo htmlentities($_SESSION['error']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['msg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['msg']);?>
-<?php echo htmlentities($_SESSION['msg']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['updatemsg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['updatemsg']);?>
-<?php echo htmlentities($_SESSION['updatemsg']="");?>
-</div>
-</div>
-<?php } ?>
+                    <div class="row">
+						<?php if($_SESSION['error']!="")
+						{?>
+						<div class="col-md-6">
+						<div class="alert alert-danger" >
+						 <strong>Error :</strong> 
+						 <?php echo htmlentities($_SESSION['error']);?>
+						<?php echo htmlentities($_SESSION['error']="");?>
+						</div>
+						</div>
+						<?php } ?>
+						<?php if($_SESSION['msg']!="")
+						{?>
+						<div class="col-md-6">
+						<div class="alert alert-success" >
+						 <strong>Success :</strong> 
+						 <?php echo htmlentities($_SESSION['msg']);?>
+						<?php echo htmlentities($_SESSION['msg']="");?>
+						</div>
+						</div>
+						<?php } ?>
+						<?php if($_SESSION['updatemsg']!="")
+						{?>
+						<div class="col-md-6">
+						<div class="alert alert-success" >
+						 <strong>Success :</strong> 
+						 <?php echo htmlentities($_SESSION['updatemsg']);?>
+						<?php echo htmlentities($_SESSION['updatemsg']="");?>
+						</div>
+						</div>
+						<?php } ?>
 
 
-<?php if($_SESSION['delmsg']!="")
- {?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['delmsg']);?>
-<?php echo htmlentities($_SESSION['delmsg']="");?>
-</div>
-</div>
-<?php } ?>
+						<?php if($_SESSION['delmsg']!="")
+						 {?>
+						<div class="col-md-6">
+						<div class="alert alert-success" >
+						 <strong>Success :</strong> 
+						 <?php echo htmlentities($_SESSION['delmsg']);?>
+						<?php echo htmlentities($_SESSION['delmsg']="");?>
+						</div>
+						</div>
+						<?php } ?>
 
-</div>				
+                </div>				
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -158,4 +166,4 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 			
 			</div>
 <?php
-include('includes/admin_footer.php');?>	
+include('../includes/admin_footer.php');?>	

@@ -1,13 +1,20 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Gardners.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Plantations
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
 { 
-echo "<script type='text/javascript'> document.location ='login.php'; </script>";
+header('location:index.php');
 }
+
 $status = 1;
 $tree_id = intval($_GET['tree_id']);
 $number_of_trees = intval($_GET['number']);
@@ -19,6 +26,8 @@ $query->bindParam(':plant_id',$tree_id,PDO::PARAM_STR);
 $query->bindParam(':tree_status',$status,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
         <!-- Main Content -->
 		<div class="page-wrapper">
@@ -98,4 +107,4 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 			</div>	
 	
 <?php
-include('includes/admin_footer.php');?>	
+include('../includes/admin_footer.php');?>	

@@ -5,8 +5,9 @@
 *	Prupose	:	To Display Statistics  information  about Project
 **********************************************************************/
 // include required files
-include('../includes/connect.php');
+
 include('../includes/config.php');
+include('../includes/connect.php');
 include('../includes/functions.php');
 
 
@@ -73,7 +74,7 @@ include('../includes/admin_sidebar.php');
 								<div class="panel-body pa-0">
 									<div class="sm-data-box">
 										<div class="container-fluid">
-											<a href="plantations.php"><div class="row">
+											<a href="locations.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 txt-light data-wrap-left">
 													<span class="block counter"><span class="counter-anim">10</span></span>
 													<span class="weight-500 uppercase-font block">locations</span>

@@ -1,14 +1,22 @@
  <?php
-session_start();
-error_reporting(E_ALL);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	add_trees_category.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Category
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 
+#	Variables
+$arrErrors	=	array();
 if(isset($_POST['create']))
 {
  
@@ -43,11 +51,26 @@ if(isset($_POST['create']))
       if(empty($errors)==true)
       {  
       	 $file_name = time().'.'.$file_ext;
-         $da = move_uploaded_file($file_tmp,"../uploads/".$file_name);
+         $da = move_uploaded_file($file_tmp,"../uploads/tree_category_picture/".$file_name);
          if($da)
          {
          	$category=$_POST['category'];
 			$status=$_POST['category_desc'];
+			$location_name=$_POST['location_name'];
+			$sql ="SELECT * FROM location  WHERE location_name=:location_name ORDER BY  location_id desc";
+			$query=$dbh->prepare($sql);
+			$query->bindParam(':location_name',$location_name,PDO::PARAM_STR);
+			$query->execute();
+			$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+			if($query->rowCount() > 0)
+			{
+
+			$_SESSION['error']="The Location you have chosen already exists!";
+			header('location:locations.php');
+			}
+			 else 
+			{
 			$sql="INSERT INTO  tree_category (tree_category_name,tree_category_desc,category_image) VALUES(:category,:cat_desc,:category_image)";
 			$query = $dbh->prepare($sql);
 			$query->bindParam(':category',$category,PDO::PARAM_STR);
@@ -67,6 +90,7 @@ if(isset($_POST['create']))
          $_SESSION['error']="Something went wrong. Please try again";
           header('location:tree_category.php');
       }
+  }
    }
 
   
@@ -74,6 +98,8 @@ if(isset($_POST['create']))
 
 
 }
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
 
     <div class="page-wrapper">
@@ -153,4 +179,4 @@ if(isset($_POST['create']))
 				
 				
 <?php 
-include('includes/admin_footer.php');?>
+include('../includes/admin_footer.php');?>

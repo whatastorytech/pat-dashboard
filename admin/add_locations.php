@@ -1,9 +1,17 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
+/*********************************************************************
+*   File    :   add_locations.php
+*   Created :   By  What a Story
+*   Prupose :   To Display Add Location
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 else
@@ -28,26 +36,28 @@ header('location:locations.php');
 
 $sql="INSERT INTO  location (location_name) VALUES(:location)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':location',$location,PDO::PARAM_STR);
+$query->bindParam(':location',$location_name,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$_SESSION['msg']="Location  Listed successfully";
-header('location:locations.php');
+if($lastInsertId)    
+{       
+    
+        $_SESSION['msg']="Location  Listed successfully";
+        header('location:locations.php');
 
 }
 else 
 {
-$_SESSION['error']="Something went wrong. Please try again";
-header('location:locations.php');
+
+        $_SESSION['error']="Something went wrong. Please try again";
+        header('location:locations.php');
 }
 
 }
 }
 }
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
   <div class="page-wrapper">
                 <div class="container-fluid">
@@ -93,6 +103,7 @@ include('includes/admin_sidebar.php');
                                                                 <div class="input-group-addon"><i class="icon-user"></i></div>
                                                                 <input type="text" class="form-control" id="exampleInputuname_1" placeholder="Tree Location" name="location_name" >
                                                             </div>
+                                                             <label id="email-error" class="error" for="email"><?php echo get_error('emailid');?></label>
                                                         </div>
                                                         <button type="submit"  name="create" class="btn btn-success mr-10">Submit</button>
                                                         <button type="submit" class="btn btn-default">Cancel</button>
@@ -111,7 +122,7 @@ include('includes/admin_sidebar.php');
                 
                 
 <?php 
-include('includes/admin_footer.php');?>
+include('../includes/admin_footer.php');?>
 <script>
   //javascript validation for change password
   $("#add_location").validate({

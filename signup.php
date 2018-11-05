@@ -16,13 +16,44 @@ $agree = '';
 
 
 if(isset($_POST['signup']))
-{
-   // Get all values
-    $user_fname=$_POST['user_fname'];
-    $user_lname=$_POST['user_lname'];
-    $user_email=$_POST['user_email'];
-    $user_password=$_POST['user_password'];
-    $user_pnumber=$_POST['user_pnumber'];
+{  
+
+
+     if(isset($_FILES['user_image'])){
+
+      
+      $errors= array();
+      $file_name = $_FILES['user_image']['name'];
+      $file_size =$_FILES['user_image']['size'];
+      $file_tmp =$_FILES['user_image']['tmp_name'];
+      $file_type=$_FILES['user_image']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['user_image']['name'])));
+      
+      $expensions= array("jpeg","jpg","png","svg");
+      
+      if(in_array($file_ext,$expensions)=== false)
+      {
+          $errors [] = 1;
+          echo "<script>alert('extension not allowed, please choose a JPEG ,SVG or PNG file.!');</script>";
+        /* $_SESSION['error']="";
+         echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";*/
+
+      }
+      
+      if($file_size > 2097152)
+      {
+          $errors [] = 2;
+         $_SESSION['error']="File size must be excately 2 MB";
+         echo "<script>alert('File size must be excately 2 MB');</script>";
+         /*echo "<script type='text/javascript'> document.location ='trees_category.php'; </script>";*/
+      }
+      
+           // Get all values
+          $user_fname=$_POST['user_fname'];
+          $user_lname=$_POST['user_lname'];
+          $user_email=$_POST['user_email'];
+          $user_password=$_POST['user_password'];
+          $user_pnumber=$_POST['user_pnumber'];
     
     if(isset($_POST['agree']))
     {
@@ -56,32 +87,62 @@ if(isset($_POST['signup']))
   {
     $arrErrors['agree'] = 'Please Check Terms and Condition';
   }
+
+  $user_email=$_POST['user_email'];
+  $sql ="SELECT * FROM users  WHERE user_email =:user_email ORDER BY  user_id desc";
+  $query=$dbh->prepare($sql);
+  $query->bindParam(':user_email',$user_email,PDO::PARAM_STR);
+  $query->execute();
+  $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+  if($query->rowCount() > 0)
+  {  
+    
+    echo "<script>alert('The  Email you have chosen already exists!');</script>";
+   /* $_SESSION['error']="The  Email you have chosen already exists!";
+    header('location:signup.php');*/
+
+  }
   
-  if(empty($arrErrors))
-  {
+  else if(empty($arrErrors) && empty($errors)==true)
+  { 
 
+         $file_name = time().'.'.$file_ext;
+         $da = move_uploaded_file($file_tmp,"uploads/user_profile_picture/".$file_name);
+         if($da)
+         {
 
-$sql="INSERT INTO  users (user_fname,user_lname,user_email,user_pnumber,user_password,user_status) VALUES(:user_fname,:user_lname,:user_email,:user_pnumber,:user_password,:status)";
+  $password = md5($user_password);
+  $sql="INSERT INTO  users (user_fname,user_lname,user_email,user_pnumber,user_password,user_status,user_image) VALUES(:user_fname,:user_lname,:user_email,:user_pnumber,:user_password,:status,:user_image)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':user_fname',$user_fname,PDO::PARAM_STR);
 $query->bindParam(':user_lname',$user_lname,PDO::PARAM_STR);
 $query->bindParam(':user_email',$user_email,PDO::PARAM_STR);
-$query->bindParam(':user_password',md5($user_password,PDO::PARAM_STR));
+$query->bindParam(':user_password',$password,PDO::PARAM_STR);
 $query->bindParam(':user_pnumber',$user_pnumber,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->bindParam(':user_image',$file_name,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
 echo '<script>alert("Your Registration successfull and your User id is  "+"'.$lastInsertId.'")</script>';
+/* $_SESSION['error']="The  Email you have chosen already exists!";
+  header('location:signup.php');*/
 }
 else 
 {
 echo "<script>alert('Something went wrong. Please try again');</script>";
 }
 }
+else
+{
+  echo "<script>alert('Something went wrong. Please try again');</script>";
 }
 
+}
+}
+}
 
 ?>
 <!DOCTYPE html>
@@ -89,13 +150,8 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<!-- <link href="<?php echo BASE_URL ;?>assets/css/style.css" rel="stylesheet" type="text/css" media="all" /> -->
 <link href="<?php echo BASE_URL ;?>assets/css/login.css" rel="stylesheet" type="text/css" media="all" />
-<!-- //Custom Theme files -->
-<!-- web font -->
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- //web font -->
  <style>
     .error
     {
@@ -108,26 +164,29 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
 		<h1>PAT SignUp Form</h1>
+     <div class="row">
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="#" method="post" id="user_signup_form">
-					<input class="text email" type="text" name="user_fname" placeholder="User First Name" value="<?php echo isset($user_fname)? $user_fname : '';?>" > 
+				<form action="#" method="post" id="user_signup_form" enctype="multipart/form-data">
+					<input class="pass" type="text" name="user_fname" placeholder="User First Name" value="<?php echo isset($user_fname)? $user_fname : '';?>" > 
           <label id="email-error" class="error" for="email"><?php echo get_error('user_fname');?></label>
 
-          <input class="text email" type="text" name="user_lname" placeholder="User Last Name" value="<?php echo isset($user_lname)? $user_lname : '';?>" > 
+          <input class="pass" type="text" name="user_lname" placeholder="User Last Name" value="<?php echo isset($user_lname)? $user_lname : '';?>" > 
           <label id="email-error" class="error" for="email"><?php echo get_error('user_lname');?></label>
 
-					<input class="text email" type="email" name="user_email" placeholder="Email"  value="<?php echo isset($user_email)? $user_email : '';?>" > 
+					<input class="pass" type="email" name="user_email" placeholder="Email"  value="<?php echo isset($user_email)? $user_email : '';?>" > 
           <label id="email-error" class="error" for="email"><?php echo get_error('user_email');?></label>
 
-					<input class="text email " type="password" name="user_password" placeholder="Password" value="<?php echo isset($user_password)? $user_password : '';?>" > 
+					<input class="pass " type="password" name="user_password" placeholder="Password" value="<?php echo isset($user_password)? $user_password : '';?>" > 
           <label id="email-error" class="error" for="email"><?php echo get_error('user_password');?></label>
 
-          <input class="text email" type="text" name="user_pnumber" placeholder="Mobile number" value="<?php echo isset($user_pnumber)? $user_pnumber : '';?>" > 
-          <label id="email-error" class="error" for="email"><?php echo get_error('user_pnumber');?></label> 
+          <input class="pass" type="text" name="user_pnumber" placeholder="Mobile number" value="<?php echo isset($user_pnumber)? $user_pnumber : '';?>" > 
+          <label id="email-error" class="error" for="email"><?php echo get_error('user_pnumber');?></label>
+          <input class="pass" type="file" name="user_image" placeholder="Upload Picture" value="<?php echo isset($category_image)? $category_image : '';?>" > 
+          <label id="email-error" class="error" for="email"><?php echo get_error('user_image');?></label> 
 					<div class="wthree-text">
 						<label class="anim">
-							<input type="checkbox" class="checkbox text email" name="agree">
+							<input type="checkbox" class="checkbox pass" name="agree">
 							<span>I Agree To The Terms & Conditions</span>
 						</label>
 						<div class="clear"> </div>
@@ -200,8 +259,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
             user_email: "Please Enter Valid Email",
             user_fname: "Please Enter First Name",
             user_lname: "Please Enter Last Name",
-            user_pnumber: "Please enter Phone Number",
-            
+            user_pnumber: "Please enter Phone Number",            
             user_password: {
                 required: "Please provide a password",
              /*   minlength: "Your password must be at least 5 characters long"*/

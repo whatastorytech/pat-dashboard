@@ -114,8 +114,8 @@ else
 		<div class="wrapper box-layout pa-0">
 			<header class="sp-header">
 				<div class="sp-logo-wrap pull-left">
-					<a href="index.html">
-						<img class="brand-img mr-10" src="../img/logo.png" alt="brand"/>
+					<a href="<?php echo BASE_URL;?>admin/index.php">
+						<img class="brand-img mr-10" src="../img/logo@2x.png" alt="brand"/>
 						<span class="brand-text">Plant a tree</span>
 					</a>
 				</div>

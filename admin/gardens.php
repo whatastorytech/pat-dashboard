@@ -1,69 +1,79 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Gardners.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Gardners
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
 { 
-echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+header('location:index.php');
 }
+
 $sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
-        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id GROUP BY garden.garden_id ORDER BY garden.garden_id desc";
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
-<div class="row">
-<?php if($_SESSION['error']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-danger" >
- <strong>Error :</strong> 
- <?php echo htmlentities($_SESSION['error']);?>
-<?php echo htmlentities($_SESSION['error']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['msg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['msg']);?>
-<?php echo htmlentities($_SESSION['msg']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['updatemsg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['updatemsg']);?>
-<?php echo htmlentities($_SESSION['updatemsg']="");?>
-</div>
-</div>
-<?php } ?>
 
 
-<?php if($_SESSION['delmsg']!="")
- {?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['delmsg']);?>
-<?php echo htmlentities($_SESSION['delmsg']="");?>
-</div>
-</div>
-<?php } ?>
-</div>
-
-?>
 
         <!-- Main Content -->
 		<div class="page-wrapper">
-            <div class="container-fluid">				
+            <div class="container-fluid">	
+            <div class="row">
+							<?php if($_SESSION['error']!="")
+							{?>
+							<div class="col-md-6">
+							<div class="alert alert-danger" >
+							 <strong>Error :</strong> 
+							 <?php echo htmlentities($_SESSION['error']);?>
+							<?php echo htmlentities($_SESSION['error']="");?>
+							</div>
+							</div>
+							<?php } ?>
+							<?php if($_SESSION['msg']!="")
+							{?>
+							<div class="col-md-6">
+							<div class="alert alert-success" >
+							 <strong>Success :</strong> 
+							 <?php echo htmlentities($_SESSION['msg']);?>
+							<?php echo htmlentities($_SESSION['msg']="");?>
+							</div>
+							</div>
+							<?php } ?>
+							<?php if($_SESSION['updatemsg']!="")
+							{?>
+							<div class="col-md-6">
+							<div class="alert alert-success" >
+							 <strong>Success :</strong> 
+							 <?php echo htmlentities($_SESSION['updatemsg']);?>
+							<?php echo htmlentities($_SESSION['updatemsg']="");?>
+							</div>
+							</div>
+							<?php } ?>
+
+
+							<?php if($_SESSION['delmsg']!="")
+							 {?>
+							<div class="col-md-6">
+							<div class="alert alert-success" >
+							 <strong>Success :</strong> 
+							 <?php echo htmlentities($_SESSION['delmsg']);?>
+							<?php echo htmlentities($_SESSION['delmsg']="");?>
+							</div>
+							</div>
+							<?php } ?>
+							</div>
+			
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -159,4 +169,4 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 			</div>	
 	
 <?php
-include('includes/admin_footer.php');?>	
+include('../includes/admin_footer.php');?>	

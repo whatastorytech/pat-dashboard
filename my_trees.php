@@ -1,7 +1,6 @@
 <?php
-session_start();
-error_reporting(E_ALL);
 include('includes/config.php');
+include('includes/connect.php');
 include('includes/header.php');
 include('includes/sidebar.php');
 if(!isset($_SESSION['login']))
@@ -9,7 +8,7 @@ if(!isset($_SESSION['login']))
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
 }
 $user_id = $_SESSION['user_id'];
-$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,SUM(planted_trees.number_of_trees) as count,planted_trees.added_at,location.location_name,tree_category.tree_category_name  FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id GROUP BY planted_trees.tree_category_id ORDER BY planted_trees.added_at desc";
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,SUM(planted_trees.number_of_trees) as count,planted_trees.added_at,location.location_name,tree_category.tree_category_name,tree_category.category_image  FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id GROUP BY planted_trees.tree_category_id ORDER BY planted_trees.added_at desc";
 $query=$dbh->prepare($sql);
 $query -> bindParam(':user_id',$user_id, PDO::PARAM_STR);
 $query->execute();
@@ -33,29 +32,32 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 							<div class="tree-block">
 								<h2><?php echo $result->tree_category_name;?></h2>
 								<div class="tree-img">
-									<img src="img/trees/mango.svg">
+									<img src="<?php echo BASE_URL;?>uploads/tree_category_picture/<?php echo $result->category_image;?>">
 								</div>
 								<p class="howmany">Planted <?php echo $result->count;?> Trees</p>
 								<p class="date">Last Planted on : <?php echo $result->added_at;?> | <?php echo $result->location_name;?></p>
 								<a href="treelist.php" class="showall">Show all trees</a>
 							</div>
 
-						<?php }}?>	
-
-							
-
-							
-
-							
+						
 							
 						</div>
 					</div>
 					<div class="mystats section">
 						<h1 class="sec-title">Your Contribution</h1>
-						<p class="stat-count">You have planted 254 trees</p>
+						<p class="stat-count">You have planted <?php echo $result->count;?> trees</p>
 						<p class="stat-info">1.02 ton Oxygen has been generated<br>0.95 ton Carbon reduced</p>
 						<a class="stat-details">View Details</a>
 					</div>
+					<?php }} else {?>	
+
+							 <div style="margin:auto;">
+						    <h3>Don't have a Planted Trees yet</h3>
+					        </div>
+                           
+							
+
+							<?php }?>
 					<div class="toppers section">
 						<h1 class="sec-title">Our Top Planters</h1>
 						<div class="group planters-cards-list">

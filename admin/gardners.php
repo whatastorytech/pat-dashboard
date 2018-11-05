@@ -1,16 +1,34 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
-$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
-        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ORDER BY garden.garden_id desc";
+/*********************************************************************
+*	File	:	Gardners.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Gardners
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
+
+if(!isset($_SESSION['login']))
+{ 
+header('location:index.php');
+}
+$sql ="SELECT * FROM gardner 
+        LEFT JOIN   garden ON gardner.garden_id = garden.garden_id  LEFT JOIN location ON  garden.location_id = location.location_id ORDER BY gardner.gardner_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
-<div class="row">
+
+
+		<div class="page-wrapper">
+            <div class="container-fluid">
+                 <div class="row">
 <?php if($_SESSION['error']!="")
 {?>
 <div class="col-md-6">
@@ -54,10 +72,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 </div>
 <?php } ?>
 
-</div>
-
-		<div class="page-wrapper">
-            <div class="container-fluid">				
+</div>				
 				<!-- Title -->
 				<div class="row heading-bg">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -116,7 +131,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
 														<td class="center"><a href="gardner_profile.php?gardner=<?php echo $result->gardner_id;?>"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></a></td>
-															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
+															<td class="center"><?php echo htmlentities($result->garden_name);?>&nbsp;(<?php echo htmlentities($result->location_name);?>)</td>
 															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
 													
 
@@ -158,4 +173,4 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 			</div>	
 	
 <?php
-include('includes/admin_footer.php');?>	
+include('../includes/admin_footer.php');?>	

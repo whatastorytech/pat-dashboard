@@ -1,9 +1,19 @@
 <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Trees_category.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Tree Category
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
+if(!isset($_SESSION['login']))
+{ 
+header('location:index.php');
+}
 
 $sql ="SELECT * FROM tree_category ORDER BY  tree_category_id desc";
 $query=$dbh->prepare($sql);
@@ -19,8 +29,13 @@ $query = $dbh -> prepare($sql);
 $query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
 $query->execute();
 $planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
-<div class="row">
+
+        <!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="row">
 <?php if($_SESSION['error']!="")
 {?>
 <div class="col-md-6">
@@ -66,9 +81,6 @@ $planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
 
 </div>
 
-?>
-        <!-- Main Content -->
-		<div class="page-wrapper">
             <div class="container-fluid">				
 				<!-- Title -->
 				<div class="row heading-bg">
@@ -107,7 +119,7 @@ $planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
 																<span class="weight-500 uppercase-font block font-13 txt-light"><?php echo $result->tree_category_name;?></span>
 															</div></a>
 															<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
-																<img src="../uploads/<?php echo $result->category_image;?>" />
+																<img src="../uploads/tree_category_picture/<?php echo $result->category_image;?>" />
 															</div>
 														</div>	
 													</div>
@@ -192,4 +204,4 @@ $planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
 			
 			</div>
 <?php
-include('includes/admin_footer.php');?>	
+include('../includes/admin_footer.php');?>	

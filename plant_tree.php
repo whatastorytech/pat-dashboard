@@ -1,17 +1,20 @@
 <?php 
-session_start();
-error_reporting(E_ALL);
+/*********************************************************************
+* File  : Plant a tree.php
+* Created : By  What a Story
+* Prupose : For  User can select the Garden from choosen City
+**********************************************************************/
+// include required files
 include('includes/config.php');
-include('includes/header.php');
-include('includes/sidebar.php');
-if(!isset($_SESSION['login']))
-{ 
-echo "<script type='text/javascript'> document.location ='login.php'; </script>";
-}
+include('includes/connect.php');
+		if(!isset($_SESSION['login']))
+		{ 
+		echo "<script type='text/javascript'> document.location ='login.php'; </script>";
+		}
 $status=1;
-$location_id = intval($_GET['location']);
-$tree_category_id = intval($_GET['tree']);
-$sql ="SELECT tree_category_name,tree_category_desc,Status,tree_category_id FROM tree_category where tree_category_id = :tree_category_id AND Status = :status ORDER BY tree_category_id desc";
+$location_id = $_GET['location'];
+$tree_category_id = $_GET['tree'];
+$sql ="SELECT tree_category_name,tree_category_desc,Status,tree_category_id,category_image FROM tree_category where tree_category_id = :tree_category_id AND Status = :status ORDER BY tree_category_id desc";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
@@ -23,6 +26,12 @@ $query = $dbh->prepare($sql);
 $query->bindParam(':location_id',$location_id,PDO::PARAM_STR);
 $query->execute();
 $location=$query->fetchAll(PDO::FETCH_OBJ);
+$status=1;
+$sql = "SELECT garden_id,garden_name from garden where location_id = :location_id";
+$query = $dbh->prepare($sql);
+$query->bindParam(':location_id',$location_id,PDO::PARAM_STR);
+$query->execute();
+$gardens=$query->fetchAll(PDO::FETCH_OBJ);
 $status=1;
 $sql = "SELECT location_name,location_id,location_desc,why_we_plant_here
 FROM location 
@@ -67,19 +76,21 @@ $query->bindParam(':number_of_trees',$number_of_trees,PDO::PARAM_STR);
 $query->bindParam(':tree_code',$tree_code,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
+		if($lastInsertId)
+		{
 
-  $_SESSION['msg']="Planted successfully";
-  echo "<script type='text/javascript'> document.location ='tree_payment.php?tree_id=$lastInsertId&number=$number_of_trees'; </script>";
-}
-else 
-{
-echo "<script>alert('Something went wrong. Please try again');</script>";
+		  $_SESSION['msg']="Planted successfully";
+		  echo "<script type='text/javascript'> document.location ='tree_payment.php?tree_id=$lastInsertId&number=$number_of_trees'; </script>";
+		}
+		else 
+		{
+		echo "<script>alert('Something went wrong. Please try again');</script>";
+
+		}
 
 }
-
-}
+include('includes/header.php');
+include('includes/sidebar.php');
 ?>
 			<div class="contents-wrapper">
 				<div class="main-contents">
@@ -88,21 +99,42 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 						<h1 class="sec-title">Plant a Tree</h1>
                     <?php foreach($location as $loc){?>
 						<p class="sec-info">You have selected Apple Tree to plant in <?php echo $loc->location_name;?></p>
-					<?php }?>
+					
 						<a href="index.php" class="link">Change your Tree or Location</a>
+						<div class="line"></div>
+						<a  class="link">Select the Garden name from <?php echo $loc->location_name;?></a>
+                        <?php }?>
+                    <?php  foreach($gardens as $garden)
+			    {?>
+                        <div class="group">
+								<div class="select radios">
+								
+							
+									<label>
+										<input type="radio" name="garden" value="<?php echo $garden->garden_id;?>" checked="checked"><?php echo $garden->garden_name;?>
+										<span></span>
+									</label>
+							</div>
+								
+						</div>
+
+                <?php }?>		
+						
 						<div class="check-out-card">
 							<div class="">
 								<div class="image">
-									<img src="img/trees/mango.svg">
+									 <?php foreach($results as $res){?>
+
+									<img src="<?php echo BASE_URL;?>uploads/tree_category_picture/<?php echo $res->category_image;?>">
 								</div>
 								<div class="content">
-									  <?php foreach($results as $res){?>
+		
 									<h2 class="title"><?php echo $res->tree_category_name;?></h2>
-									<?php }?>
+									
 									<div class="info">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										<p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+										<p><?php echo $res->tree_category_desc;?></p>
 									</div>	
+									<?php }?>
 									<div class="promise">
 										<h4>Our Promise to you</h4>
 										<p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -168,9 +200,9 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 							<div class="group">
 								<label>Address</label>
 								<div class="input">
-									<input type="text" name="address1" id="address">
-									<input type="text" name="address2" id="address">
-									<input type="text" name="address3" id="address">
+									<input type="text" name="address1" id="address" placeholder="Street and city">
+									<input type="text" name="address2" id="address"  placeholder="State">
+									<input type="text" name="address3" id="address" placeholder="Country">
 								</div>
 								
 							</div>

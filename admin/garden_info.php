@@ -1,11 +1,17 @@
  <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Gardners.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Gardners
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 $user_id = $_SESSION['user_id'];
@@ -18,11 +24,14 @@ $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
 
+
 $sql ="SELECT plant_id,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.garden_id = :garden_id ORDER BY plant_id desc";
-$query=$dbh->prepare($sql);
-$query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
-$query->execute();
-$plant_tree=$query->fetchAll(PDO::FETCH_OBJ);
+$query2=$dbh->prepare($sql);
+$query2->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
+$query2->execute();
+$plant_tree=$query2->fetchAll(PDO::FETCH_OBJ);
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
 
             <div class="page-wrapper">
@@ -59,7 +68,7 @@ $plant_tree=$query->fetchAll(PDO::FETCH_OBJ);
 									 <div class="pull-left">
 										<h6 class="panel-title txt-dark"><?php echo $result->garden_name;?></h6>
 									</div> 
-									<a href="add_tree_in_garden.php?garden_name=<?php echo $result->garden_name;?>&garden_id=<?php echo $result->garden_id;?>" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+									<a href="add_tree_in_garden.php?garden_id=<?php echo $result->garden_id;?>" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
 									<div class="clearfix"></div>
 								</div>
 								<div class="panel-wrapper collapse in">
@@ -228,7 +237,7 @@ $plant_tree=$query->fetchAll(PDO::FETCH_OBJ);
 												<tbody>
 													<?php 	
 													$cnt=1;
-													if($query->rowCount() > 0)
+													if($query2->rowCount() > 0)
 													{
 													foreach($plant_tree as $result)
 													{               ?>   
@@ -293,4 +302,4 @@ $plant_tree=$query->fetchAll(PDO::FETCH_OBJ);
 				
 				
 <?php 
-include('includes/admin_footer.php');?>
+include('../includes/admin_footer.php');?>

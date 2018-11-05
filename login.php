@@ -22,7 +22,7 @@ if(isset($_POST['login']))
 
  // Get all values
     $email=$_POST['user_email'];
-    $password=$_POST['user_password'];
+    $user_password=$_POST['user_password'];
     $agree = $_POST['agree'];
 
 
@@ -31,7 +31,7 @@ if(isset($_POST['login']))
   {
     $arrErrors['user_email'] = 'Please enter Email';
   }
-  if($password == '')
+  if($user_password == '')
   {
     $arrErrors['user_password'] = 'Please provide password';
   }
@@ -42,11 +42,11 @@ if(isset($_POST['login']))
   
   if(empty($arrErrors))
   {
-      $password = md5($password);
-      $sql ="SELECT user_email,user_password,user_id,user_status FROM users WHERE user_email=:email and user_password=:password";
+      $password = md5($user_password);
+      $sql ="SELECT user_email,user_password,user_id,user_status,user_image,user_fname,user_lname FROM users WHERE user_email=:email and user_password=:password";
       $query=$dbh->prepare($sql);
       $query-> bindParam(':email', $email, PDO::PARAM_STR);
-      $query-> bindParam(':password'$password, PDO::PARAM_STR);
+      $query-> bindParam(':password',$password, PDO::PARAM_STR);
       $query-> execute();
       $results=$query->fetchAll(PDO::FETCH_OBJ);
 
@@ -57,6 +57,8 @@ if($query->rowCount() > 0)
  foreach ($results as $result)
   {
        $_SESSION['user_id']=$result->user_id;
+       $_SESSION['user_name']=$result->user_fname.'&nbsp;'.$result->user_lname;
+       $_SESSION['user_image']=$result->user_image;
       if($result->user_status==1)
         {
           $_SESSION['login']=$_POST['user_email'];
@@ -116,7 +118,7 @@ else
           value="<?php echo isset($user_email)? $user_email : '';?>" > 
           <label id="email-error" class="error" for="email"><?php echo get_error('user_email');?></label>
 					<input class="pass" type="password" name="user_password" placeholder="Password" 
-          value="<?php echo isset($password)? $password : '';?>"  > 
+          value="<?php echo isset($user_password)? $user_password : '';?>"  > 
       <label id="password-error" class="error" for="password"><?php echo get_error('user_password');?></label>
 					<div class="wthree-text">
 						<label class="anim">

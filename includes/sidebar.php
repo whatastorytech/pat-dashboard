@@ -4,15 +4,15 @@
 				<div class="sidebar-section header-section">
 					<div class="logo">
 						<span><a href="index.php">urearth.org</a></span>
-						<h2><a href="index.php"><img src="img/logo.png" alt="UrEarth"></a></h2>
+						<h2><a href="index.php"><img src="<?php echo BASE_URL ;?>img/logo@2x.png" alt="UrEarth"></a></h2>
 					</div>
 				</div>
 				<div class="sidebar-section notifyme">
 					<div class="user-info">
 						<a class="user-avatar">
-							<img src="img/user.png" alt="Jane Doe">
+							<img src="<?php echo BASE_URL ;?>uploads/user_profile_picture/<?php echo $_SESSION['user_image'];?>" alt="Jane Doe">
 						</a>
-						<h3>Hi, Jane</h3>
+						<h3>Hi, <?php echo $_SESSION['user_name'];?></h3>
 						<span class="notifies">N</span>
 					</div>
 					<div class="notifies-container">
@@ -60,9 +60,9 @@
 					<ul class="menu list">
 						<li><a href="my_trees.php" class="active">My Trees</a></li>
 						<li><a href="gift_atree.php">Gift a free</a></li>
-						<li><a href="plant_tree.php">Plant a Tree</a></li>
-						<li><a href="camp.php">Start A Campaign</a></li>
-						<li><a href="cause.php">Cause</a></li>
+						<li><a href="index.php">Plant a Tree</a></li>
+						<li><a href="#">Start A Campaign</a></li>
+						<li><a href="#">Cause</a></li>
 					</ul>	
 				</div>
 			</div>

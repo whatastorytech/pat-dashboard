@@ -1,11 +1,17 @@
  <?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Add_tree_in_garden.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  Listing   and   basic information of Gardners
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
 
@@ -37,7 +43,9 @@ echo "<script type='text/javascript'> document.location ='gardens.php'; </script
 }
 
 }
-?>?>
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
+?>
               <div class="page-wrapper">
 				<div class="container-fluid">					
 					<!-- Title -->
@@ -72,10 +80,21 @@ echo "<script type='text/javascript'> document.location ='gardens.php'; </script
 												<div class="form-wrap">
 													<form method="POST" action="add_tre.php">
 														<div class="form-group">
+															 <?php 
+																$status=1;
+																$garden_id = $_GET['garden_id'];
+																$sql = "SELECT garden_name  from garden where garden_id=:garden_id";
+																$query = $dbh ->prepare($sql);
+																$query -> bindParam(':garden_id',$garden_id, PDO::PARAM_STR);
+																$query->execute();
+																$results=$query->fetchAll(PDO::FETCH_OBJ);?>
 															<label class="control-label mb-10" for="exampleInputuname_1">Garden Name</label>
 															<div class="input-group">
 																<div class="input-group-addon"><i class="icon-user"></i></div>
-																<input type="text" class="form-control" id="exampleInputuname_1" placeholder="Garden name" name="garden_name" value="<?php echo htmlentities($_GET['garden_name']);?>" disabeld>
+																<?php foreach($results as $result)
+																{ ?>
+																<input type="text" class="form-control" id="exampleInputuname_1" placeholder="Garden name" name="garden_name" value="<?php echo htmlentities($result->garden_name);?>" disabeld>
+																<?php }?>
 															</div>
 															<input type="hidden" name="garden_id" value="<?php echo  htmlentities($_GET['garden_id']);?>" />
 														</div>
@@ -122,4 +141,4 @@ echo "<script type='text/javascript'> document.location ='gardens.php'; </script
 				
 				
 <?php 
-include('includes/admin_footer.php');?>
+include('../includes/admin_footer.php');?>

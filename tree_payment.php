@@ -1,7 +1,6 @@
 <?php 
-session_start();
-error_reporting(E_ALL);
 include('includes/config.php');
+include('includes/connect.php');
 include('includes/header.php');
 include('includes/sidebar.php');
 if(!isset($_SESSION['login']))
@@ -30,7 +29,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 							{   ?> 
 						<h1 class="sec-title">Plant a Tree</h1>
 						<p class="sec-info">You have selected Apple Tree to plant in <?php echo $result->location_name;?></p>
-						<a href="#" class="link">Change your Tree or Location</a>
+						<!-- <a href="#" class="link">Change your Tree or Location</a> -->
 
 						<div class="check-out-card">
 							<div class="has-shadow">
