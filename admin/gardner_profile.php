@@ -1,14 +1,20 @@
  <?php
-session_start();
-error_reporting(E_ALL);
-include('includes/config.php');
-include('includes/admin_header.php');
-include('includes/admin_sidebar.php');
+/*********************************************************************
+*	File	:	Gardners Profile.php
+*	Created	:	By  What a Story
+*	Prupose	:	To Display  gardners Profile
+**********************************************************************/
+// include required files
+
+include('../includes/config.php');
+include('../includes/connect.php');
+include('../includes/functions.php');
+
 if(!isset($_SESSION['login']))
-{  
+{ 
 header('location:index.php');
 }
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['admin_id'];
 $gardner_id = intval($_GET['gardner']);
 $sql ="SELECT * FROM gardner  
         LEFT JOIN   garden ON gardner.garden_id = garden.garden_id  LEFT JOIN location ON  garden.location_id = location.location_id  WHERE gardner_id = :gardner_id ORDER BY gardner.gardner_id desc";
@@ -16,9 +22,12 @@ $query=$dbh->prepare($sql);
 $query->bindParam(':gardner_id',$gardner_id,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
+
+include('../includes/admin_header.php');
+include('../includes/admin_sidebar.php');
 ?>
 
-?>?>
 
             <div class="page-wrapper">
 				<div class="container-fluid">
@@ -214,4 +223,4 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 				
 				
 <?php 
-include('includes/admin_footer.php');?>
+include('../includes/admin_footer.php');?>

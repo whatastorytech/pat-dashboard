@@ -21,7 +21,8 @@ if(isset($_POST['create']))
 {
  
 
-  if(isset($_FILES['cat_image'])){
+  if(isset($_FILES['cat_image']))
+  {
 
   	  
       $errors= array();
@@ -57,7 +58,7 @@ if(isset($_POST['create']))
          	$category=$_POST['category'];
 			$status=$_POST['category_desc'];
 			$location_name=$_POST['location_name'];
-			$sql ="SELECT * FROM location  WHERE location_name=:location_name ORDER BY  location_id desc";
+			$sql ="SELECT * FROM location  WHERE location_name=:location_name ORDER BY location_id desc";
 			$query=$dbh->prepare($sql);
 			$query->bindParam(':location_name',$location_name,PDO::PARAM_STR);
 			$query->execute();
@@ -82,22 +83,23 @@ if(isset($_POST['create']))
 			{ 
                 $_SESSION['msg']="Category Listed successfully";
                 header('location:tree_category.php');
-            }
 
-      }
-      else
-      {
-         $_SESSION['error']="Something went wrong. Please try again";
-          header('location:tree_category.php');
-      }
-  }
-   }
+            }
+		      else
+		      {
+		         $_SESSION['error']="Something went wrong. Please try again";
+		          header('location:tree_category.php');
+		      }
+            }
+        }
 
   
 }
 
 
 }
+}
+
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>

@@ -217,7 +217,7 @@ include('includes/sidebar.php');
 								</div>
 							</div>
 							<div class="group">
-								<div class="select radios">
+								<!-- <div class="select radios">
 									<label>
 										<input type="radio" name="nameorgift" checked="checked">Name Your Tree
 										<span></span>
@@ -226,7 +226,7 @@ include('includes/sidebar.php');
 										<input type="radio" name="nameorgift"> Gift Tree
 										<span></span>
 									</label>
-								</div>
+								</div> -->
 								
 								<div class="name">
 									<input type="text" name="tree_name" placeholder="Enter the Name for Your Tree">

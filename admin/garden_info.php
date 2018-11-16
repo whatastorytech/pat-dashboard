@@ -16,7 +16,7 @@ header('location:index.php');
 }
 $user_id = $_SESSION['user_id'];
 $garden_id = $_GET['garden_id'];
-$sql ="SELECT * FROM garden  
+$sql ="SELECT garden.garden_id,garden.garden_name,garden.garden_address,location.location_name,gardner.gardner_fname,gardner.gardner_lname,garden.garden_status FROM garden  
         LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id  LEFT JOIN location ON  garden.location_id = location.location_id  WHERE garden.garden_id = :garden_id ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);
 $query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
@@ -68,7 +68,7 @@ include('../includes/admin_sidebar.php');
 									 <div class="pull-left">
 										<h6 class="panel-title txt-dark"><?php echo $result->garden_name;?></h6>
 									</div> 
-									<a href="add_tree_in_garden.php?garden_id=<?php echo $result->garden_id;?>" class="pull-right btn btn-primary btn-xs mr-15">Add New</a>
+									<a href="add_tree_in_garden.php?garden_id=<?php echo $result->garden_id;?>" class="pull-right btn btn-primary btn-xs mr-15">Add New Tree</a>
 									<div class="clearfix"></div>
 								</div>
 								<div class="panel-wrapper collapse in">

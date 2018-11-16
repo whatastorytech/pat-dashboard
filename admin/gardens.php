@@ -15,11 +15,12 @@ if(!isset($_SESSION['login']))
 header('location:index.php');
 }
 
-$sql ="SELECT * FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
-        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id ";
+$sql ="SELECT garden.garden_id,garden.garden_name,garden.garden_address,location.location_name,gardner.gardner_fname,gardner.gardner_lname,garden.garden_status FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
+        LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id where garden.garden_status = '1' order By garden.garden_id DESC ";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>

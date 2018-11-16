@@ -121,7 +121,7 @@ include('../includes/admin_sidebar.php');
 															<label class="control-label mb-10" for="exampleInputuname_1">Number of Trees </label>
 															<div class="input-group">
 																<div class="input-group-addon"><i class="icon-user"></i></div>
-																<input type="text" class="form-control" id="exampleInputuname_1" placeholder="Number of Trees" name="tree_number">
+																<input type="text" class="form-control" id="exampleInputuname_1" placeholder="Number of Trees" name="tree_number" required>
 															</div>
 														</div>
 														<button type="submit" class="btn btn-success mr-10" name="create">Submit</button>

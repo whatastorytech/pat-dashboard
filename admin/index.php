@@ -50,7 +50,7 @@ if($query->rowCount() > 0)
 {
 
  foreach ($results as $result) {
- $_SESSION['adminid']=$result->AdminId;
+ $_SESSION['admin_id']=$result->AdminId;
 if($result->Status==1)
 {
 $_SESSION['login']=$_POST['emailid'];

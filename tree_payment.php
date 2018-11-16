@@ -62,7 +62,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 <?php }}?>
 						<div class="line"></div>
 
-						<div class="payment">
+						<!-- <div class="payment">
 							<h3 class="sec-title">Pay Via</h3>
 							<form class="checkout-form">
 								<label>
@@ -81,10 +81,11 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 									<input type="radio" name="payvia"> Net Banking
 									<span></span>
 								</label>
-								<div class="form-btn btn" data-popup-target="cardpopup">This is the Last Step</div>
+								
 							</form>
-						</div>
-
+						</div> -->
+                    <a><div class="form-btn btn">Make a Payment</div></a>
+                    <a><div class="form-btn btn">Cancel</div></a>
 					</div>
 				</div>
 			</div>
