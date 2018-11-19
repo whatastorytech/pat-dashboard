@@ -8,16 +8,20 @@
 
 include('includes/config.php');
 include('includes/connect.php');
+unset($_SESSION['location_id']);
+unset($_SESSION['garden_id']);
+unset($_SESSION['tree_name']);
 if(!isset($_SESSION['login']))
 { 
+
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
 }
-$sql ="SELECT tree_category_name,tree_category_desc,Status,tree_category_id,category_image FROM tree_category ORDER BY  tree_category_id desc";
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id),tree_category_name,tree_category_desc,Status,category_image FROM planted_trees LEFT JOIN  tree_category on planted_trees.tree_category_id = tree_category.tree_category_id  LEFT JOIN  location on  planted_trees.location_id = location.location_id  ORDER BY  tree_category.tree_category_id desc";
 $query=$dbh->prepare($sql);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $status=1;
-$sql ="SELECT * FROM garden  INNER JOIN location ON  garden.location_id = location.location_id GROUP BY  location.location_id";
+$sql ="SELECT DISTINCT(planted_trees.garden_id),garden.location_id,location_name,garden.garden_id,garden_name FROM planted_trees  LEFT JOIN garden on  planted_trees.garden_id = garden.garden_id INNER JOIN location on  garden.location_id = location.location_id ";
 $query=$dbh->prepare($sql);
 $query->bindParam(':status',$status, PDO::PARAM_STR);
 $query->execute();
@@ -76,7 +80,33 @@ include('includes/sidebar.php');
 										</div>
 									</div>
 
-								<?php }   } ?>
+								<?php }   } else
+								{?>
+								                                 <div class="checkout-success" id="cardpopup">
+								            <div class="success-card">
+								                <div class="image">
+								                    <img src="img/trees/success.svg">
+								                </div>
+								                <h1>Sorry</h1>
+								                <h2>No Trees Planted in Our Garden Yet!</h2>
+								                 <h2>Comming Soon!</h2>
+								            </div>
+								        </div>       
+								<script>
+								    $("document").ready(function() {
+								    setTimeout(function() {
+								        $(".checkout-success").addClass("active");
+								    },10);
+								});
+								    $(document).click(function(e) 
+								{
+								        $(".checkout-success").removeClass("active");
+								        document.location ='index.php';
+								});
+								</script>     
+
+
+								<?php }?>
                                 </div>
 							</div>
 						</div>

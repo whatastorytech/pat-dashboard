@@ -55,38 +55,22 @@ $user=$query1->fetchAll(PDO::FETCH_OBJ);
 if(isset($_POST['create']))
 {
 	
-$location_id=$_POST['location_id'];
-$tree_category_id=$_POST['tree_category_id'];
-$address=$_POST['address1'].''.$_POST['address2'].''.$_POST['address3'];
-$rate= $_POST['rate'];
-$number_of_trees = $_POST['fee'];
-$tree_name = $_POST['tree_name'];
-$added_at = date('Y-m-d H:i:s');
 $user_id = $_SESSION['user_id'];
-$tree_code = 'PAT'.rand(1,1000);
-$sql="INSERT INTO  planted_trees (location_id,tree_name,tree_category_id,user_id,tree_payment,added_at,number_of_trees,tree_code) VALUES(:location_id,:tree_name,:tree_category_id,:user_id,:tree_payment,:added_at,:number_of_trees,:tree_code)";
+$address=$_POST['address1'].''.$_POST['address2'].''.$_POST['address3'];
+$sql="update users set user_address=:user_address where user_id=:user_id";
 $query = $dbh->prepare($sql);
-$query->bindParam(':location_id',$location_id,PDO::PARAM_STR);
-$query->bindParam(':tree_name',$tree_name,PDO::PARAM_STR);
-$query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
+$query->bindParam(':user_address',$address,PDO::PARAM_STR);
 $query->bindParam(':user_id',$user_id,PDO::PARAM_STR);
-$query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
-$query->bindParam(':tree_payment',$rate,PDO::PARAM_STR);
-$query->bindParam(':number_of_trees',$number_of_trees,PDO::PARAM_STR);
-$query->bindParam(':tree_code',$tree_code,PDO::PARAM_STR);
 $query->execute();
-$lastInsertId = $dbh->lastInsertId();
-		if($lastInsertId)
-		{
 
-		  $_SESSION['msg']="Planted successfully";
-		  echo "<script type='text/javascript'> document.location ='tree_payment.php?tree_id=$lastInsertId&number=$number_of_trees'; </script>";
-		}
-		else 
-		{
-		echo "<script>alert('Something went wrong. Please try again');</script>";
+ $_SESSION['location_id']=$_POST['location_id'];
+ $_SESSION['garden_id']=$_POST['garden'];
+ $_SESSION['tree_name']=$_POST['tree_name'];
+ $number_of_trees = $_POST['fee'];
+ $tree_category_id=$_POST['tree_category_id'];
 
-		}
+ echo "<script type='text/javascript'> document.location ='tree_payment.php?tree_id=$tree_category_id&number=$number_of_trees'; </script>";
+		
 
 }
 include('includes/header.php');
@@ -105,7 +89,8 @@ include('includes/sidebar.php');
 						<a  class="link">Select the Garden name from <?php echo $loc->location_name;?></a>
                         <?php }?>
                     <?php  foreach($gardens as $garden)
-			    {?>
+			    {?>    
+			    	<form action=" "  method="POST">
                         <div class="group">
 								<div class="select radios">
 								
@@ -172,7 +157,7 @@ include('includes/sidebar.php');
 								<div class="multi-fee incdnc">
 									<span>Select Number of Trees You want to plant</span>
 									<button class="minus" id="minus">-</button>
-						<form action=" "  method="POST">
+
 									<?php 
 							if($query1->rowCount() > 0)
 								{
@@ -200,9 +185,9 @@ include('includes/sidebar.php');
 							<div class="group">
 								<label>Address</label>
 								<div class="input">
-									<input type="text" name="address1" id="address" placeholder="Street and city">
-									<input type="text" name="address2" id="address"  placeholder="State">
-									<input type="text" name="address3" id="address" placeholder="Country">
+									<input type="text" name="address1" id="address" placeholder="Street and city" required>
+									<input type="text" name="address2" id="address"  placeholder="State" required>
+									<input type="text" name="address3" id="address" placeholder="Country" required>
 								</div>
 								
 							</div>
@@ -216,26 +201,16 @@ include('includes/sidebar.php');
 									<input type="text" name="phone" value="<?php echo htmlentities($user->user_pnumber);?>" readonly>	
 								</div>
 							</div>
-							<div class="group">
-								<!-- <div class="select radios">
-									<label>
-										<input type="radio" name="nameorgift" checked="checked">Name Your Tree
-										<span></span>
-									</label>
-									<label>
-										<input type="radio" name="nameorgift"> Gift Tree
-										<span></span>
-									</label>
-								</div> -->
-								
+							<div class="group">								
 								<div class="name">
 									<input type="text" name="tree_name" placeholder="Enter the Name for Your Tree">
 								</div>
 							</div>
 							<?php }}?>
 							<div class="group txt-center">
-								<button type="submit"  class="form-btn btn" name="create">Proceed to Plant a Tree</a>
+								<input  type="submit"  class="form-btn btn" name="create" value="Proceed to Plant a Tree" />
 							</div>
+							</form>
 						</div>
 
 					</div>

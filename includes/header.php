@@ -12,4 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ;?>assets/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ;?>assets/css/style.css" />
+        <script src="<?php echo BASE_URL;?>assets/js/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js">
+        </script>
     </head>

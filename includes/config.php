@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 // DB credentials.
 define('DB_HOST','localhost');
 define('DB_USER','root');

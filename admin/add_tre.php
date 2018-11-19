@@ -57,7 +57,8 @@ $lastInsertId = $dbh->lastInsertId();
         // user data
         $filename = $PNG_TEMP_DIR.'test'.md5($lastInsertId.'|'.$errorCorrectionLevel.'|'.$matrixPointSize).'.png';
         $file = 'test'.md5($lastInsertId.'|'.$errorCorrectionLevel.'|'.$matrixPointSize).'.png';
-        QRcode::png($lastInsertId, $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
+        $custome_URL = "http://plantatree.com/qrcode_scanneddata.php?id=$lastInsertId ";
+        QRcode::png( $custome_URL, $filename, $errorCorrectionLevel, $matrixPointSize, 2); 
 
         $sql="update planted_trees set tree_qr_code = :qr_code where plant_id=:plant_id";   
         $query = $dbh->prepare($sql);

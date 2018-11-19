@@ -19,7 +19,7 @@ $query->bindParam(':category',$category,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->bindParam(':catid',$catid,PDO::PARAM_STR);
 $query->execute();
-$_SESSION['updatemsg']="Brand updated successfully";
+$_SESSION['updatemsg']="Category updated successfully";
 header('location:manage-categories.php');
 
 

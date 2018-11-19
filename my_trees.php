@@ -36,9 +36,9 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 								</div>
 								<p class="howmany">Planted <?php echo $result->count;?> Trees</p>
 								<p class="date">Last Planted on : <?php echo $result->added_at;?> | <?php echo $result->location_name;?></p>
-								<a href="treelist.php" class="showall">Show all trees</a>
+								<a href="treelist.php?tree_category=<?php echo  $result->tree_category_id;?>" class="showall">Show all trees</a>
 							</div>
-
+                        	<?php }} else {?>	
 						
 							
 						</div>
@@ -49,7 +49,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 						<p class="stat-info">1.02 ton Oxygen has been generated<br>0.95 ton Carbon reduced</p>
 						<a class="stat-details">View Details</a>
 					</div>
-					<?php }} else {?>	
+				
 
 							 <div style="margin:auto;">
 						    <h3>Don't have a Planted Trees yet</h3>

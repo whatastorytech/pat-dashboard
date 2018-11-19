@@ -6,7 +6,15 @@ include('includes/sidebar.php');
 if(!isset($_SESSION['login']))
 { 
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
-}?>
+}
+$sql ="SELECT tree_category_name,tree_category_desc,Status,tree_category_id,category_image FROM tree_category where tree_category_id = :tree_category_id AND Status = :status ORDER BY tree_category_id desc";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
+$query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+?>
 			<div class="contents-wrapper tree-list">
 				<div class="main-contents">
 					<div class="tree-category-header">
