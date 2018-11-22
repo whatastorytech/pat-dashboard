@@ -13,12 +13,7 @@ include('includes/functions.php');
 $arrErrors  = array();
 $user_id  = 0;
 
-if( !isset($_SESSION['login']))
-{  
-
-   $_SESSION['login']='';
-}
-else if(isset($_SESSION['login']))
+ if(isset($_SESSION['login']))
 {
   unset($_SESSION['login']);
   session_destroy(); // destroy session

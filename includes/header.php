@@ -15,4 +15,10 @@
         <script src="<?php echo BASE_URL;?>assets/js/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js">
         </script>
+        <style>
+        .error
+        {
+            color:red;
+        }
+    </style>
     </head>

@@ -134,7 +134,7 @@ include('includes/sidebar.php');
 						<form action=""  method="POST">
                     <button class="form-btn btn" type="submit" name="submit">Make a Payment</button>
                 </form>
-                    <a><div class="form-btn btn">Cancel</div></a>
+                    <a href="<?php echo BASE_URL;?>index.php"><div class="form-btn btn">Cancel</div></a>
 					</div>
 				</div>
 			</div>

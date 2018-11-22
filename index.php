@@ -22,6 +22,7 @@ $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $status=1;
 $sql ="SELECT DISTINCT(planted_trees.garden_id),garden.location_id,location_name,garden.garden_id,garden_name FROM planted_trees  LEFT JOIN garden on  planted_trees.garden_id = garden.garden_id INNER JOIN location on  garden.location_id = location.location_id ";
+$sql ="SELECT DISTINCT(planted_trees.garden_id),garden.location_id,location_name,garden.garden_id,garden_name FROM planted_trees  LEFT JOIN garden on  planted_trees.garden_id = garden.garden_id INNER JOIN location on  garden.location_id = location.location_id  GROUP BY location.location_id";
 $query=$dbh->prepare($sql);
 $query->bindParam(':status',$status, PDO::PARAM_STR);
 $query->execute();
