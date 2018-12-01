@@ -221,7 +221,6 @@ include('includes/sidebar.php');
 <?php 		
 include('includes/footer.php');?>
 <script type="text/javascript">
-	<script>
 			
 			 document.getElementById('minus').onclick = function() {
 			  event.preventDefault();

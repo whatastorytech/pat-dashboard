@@ -40,8 +40,9 @@ if(isset($_POST['login']))
 
 $sql ="SELECT AdminEmail,Password,AdminId,Status FROM admin WHERE AdminEmail=:email and Password=:password";
 $query=$dbh->prepare($sql);
+$password = md5($password);
 $query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', md5($password), PDO::PARAM_STR);
+$query-> bindParam(':password', $password,PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 

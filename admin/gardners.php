@@ -29,48 +29,48 @@ include('../includes/admin_sidebar.php');
 		<div class="page-wrapper">
             <div class="container-fluid">
                  <div class="row">
-<?php if($_SESSION['error']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-danger" >
- <strong>Error :</strong> 
- <?php echo htmlentities($_SESSION['error']);?>
-<?php echo htmlentities($_SESSION['error']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['msg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['msg']);?>
-<?php echo htmlentities($_SESSION['msg']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['updatemsg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['updatemsg']);?>
-<?php echo htmlentities($_SESSION['updatemsg']="");?>
-</div>
-</div>
-<?php } ?>
+					<?php if($_SESSION['error'] ||  $_SESSION['error']!="" )
+					{?>
+					<div class="col-md-6">
+					<div class="alert alert-danger" >
+					 <strong>Error :</strong> 
+					 <?php echo htmlentities($_SESSION['error']);?>
+					<?php echo htmlentities($_SESSION['error']="");?>
+					</div>
+					</div>
+					<?php } ?>
+					<?php if($_SESSION['msg']!="")
+					{?>
+					<div class="col-md-6">
+					<div class="alert alert-success" >
+					 <strong>Success :</strong> 
+					 <?php echo htmlentities($_SESSION['msg']);?>
+					<?php echo htmlentities($_SESSION['msg']="");?>
+					</div>
+					</div>
+					<?php } ?>
+					<?php if($_SESSION['updatemsg']!="")
+					{?>
+					<div class="col-md-6">
+					<div class="alert alert-success" >
+					 <strong>Success :</strong> 
+					 <?php echo htmlentities($_SESSION['updatemsg']);?>
+					<?php echo htmlentities($_SESSION['updatemsg']="");?>
+					</div>
+					</div>
+					<?php } ?>
 
 
-<?php if($_SESSION['delmsg']!="")
- {?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['delmsg']);?>
-<?php echo htmlentities($_SESSION['delmsg']="");?>
-</div>
-</div>
-<?php } ?>
+					<?php if($_SESSION['delmsg']!="")
+					 {?>
+					<div class="col-md-6">
+					<div class="alert alert-success" >
+					 <strong>Success :</strong> 
+					 <?php echo htmlentities($_SESSION['delmsg']);?>
+					<?php echo htmlentities($_SESSION['delmsg']="");?>
+					</div>
+					</div>
+					<?php } ?>
 
 </div>				
 				<!-- Title -->
@@ -144,7 +144,7 @@ include('../includes/admin_sidebar.php');
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td class="text-nowrap"><a href="<?php echo BASE_URL;?>admin/edit_gardner.php?gardner_id=<?php echo $result->gardner_id;?>" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?>												
 												</tbody>

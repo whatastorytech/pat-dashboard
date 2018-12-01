@@ -179,7 +179,7 @@ include('../includes/admin_sidebar.php');
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="form-wrap">
-													<form method="POST"  action=""  enctype="multipart/form-data">
+													<form method="POST"  action=""  enctype="multipart/form-data" id="gardner_form">
 														<div class="form-group">
 															<label class="control-label mb-10" for="exampleInputuname_1">Gardner First Name</label>
 															<div class="input-group">
@@ -265,3 +265,43 @@ include('../includes/admin_sidebar.php');
 				
 <?php 
 include('../includes/admin_footer.php');?>
+
+<script>
+  //javascript validation for change password
+  $("#gardner_form").validate({
+      rules: {
+        gardner_fname: {
+          required: true,
+      },
+       gardner_lname: {
+          required: true,
+      },
+       gardner_email: {
+          required: true,
+          email:true,
+      },
+       gardner_pnumber: {
+          required: true,
+          number:true
+    
+      },
+
+  },
+    messages: {
+        
+        gardner_fname: {
+          required: "Please Enter a  First  Name",
+        },
+        gardner_lname: {
+          required: "Please Enter a  Second  Name",
+        },
+         gardner_email: {
+          required: "Please Enter a  Valid Email",
+        },
+         gardner_pnumber: {
+          required: "Please Enter a  Phone Number",
+        },
+      }
+    });
+  
+  </script>

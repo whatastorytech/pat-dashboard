@@ -15,20 +15,20 @@ if(!isset($_SESSION['login']))
 header('location:index.php');
 }
 
-$sql ="SELECT * FROM tree_category ORDER BY  tree_category_id desc";
+$sql ="SELECT tree_category.tree_category_name,tree_category.tree_category_id,COUNT(planted_trees.tree_category_id)  as count ,tree_category.category_image FROM tree_category  LEFT JOIN  planted_trees on   tree_category.tree_category_id  =  planted_trees.tree_category_id GROUP BY tree_category.tree_category_id ORDER BY  tree_category.tree_category_id desc";
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 
-/*$tree_category_id=8;
+$tree_category_id=2;
 $status = 1;
 $sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location_id = location.location_id
         LEFT JOIN  tree_category ON planted_trees.tree_category_id = tree_category.tree_category_id where planted_trees.tree_category_id = :tree_category_id ";
      
-$query = $dbh -> prepare($sql);
-$query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
-$query->execute();
-$planted_trees=$query->fetchAll(PDO::FETCH_OBJ);*/
+$plann_query = $dbh -> prepare($sql);
+$plann_query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
+$plann_query->execute();
+$planted_trees=$plann_query->fetchAll(PDO::FETCH_OBJ);
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -111,11 +111,11 @@ include('../includes/admin_sidebar.php');
 									<div class="panel panel-default card-view pa-0 bg-gradient">
 										<div class="panel-wrapper collapse in">
 											<div class="panel-body pa-0">
-												<a href="#"><div class="sm-data-box" id="category">
+												<a href="#" data-id="<?php echo $result->tree_category_id;?>" class="cate"><div class="sm-data-box" id="category">
 													<div class="container-fluid">
 														<div class="row">
 													        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-																<span class="txt-light block counter"><span class="counter-anim"><?php echo $result->trees;?></span></span>
+																<span class="txt-light block counter"><span class="counter-anim"><?php echo $result->count;?></span></span>
 																<span class="weight-500 uppercase-font block font-13 txt-light"><?php echo $result->tree_category_name;?></span>
 															</div></a>
 															<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
@@ -174,11 +174,6 @@ include('../includes/admin_sidebar.php');
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
 													
 														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
-													   <!--  <td class="center"><?php if($result->location_status==1) {?>
-			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
-			                                            <?php } else {?>
-			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
-			                                            <?php } ?></td> -->
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
@@ -205,3 +200,32 @@ include('../includes/admin_sidebar.php');
 			</div>
 <?php
 include('../includes/admin_footer.php');?>	
+<script type="text/javascript">
+document.getElementByClassName('cate').onclick = function() {
+	alert('imran');
+			 	 event.preventDefault();
+		       var count = $('#fee').val();		       
+		       	 var count = ++count;
+		       	 $.ajax({
+				url: "check_tree.php",
+				type: "POST",
+				data:{
+                 count:count,
+				},
+				success: function(data){
+					if(data == 0)
+					{
+						alert('Please reduce the amount of tree ! There are only '  + --count+ ' trees availabel in garden');
+					}
+					else
+					{
+                          var amount = count*999;
+				       	 $('#rate').val(amount);
+				         $('#fee').val(count);
+					}
+					
+				}        
+		   });
+		      
+			}
+</script>

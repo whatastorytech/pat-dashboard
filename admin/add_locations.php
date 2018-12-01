@@ -133,7 +133,7 @@ include('../includes/admin_footer.php');?>
   },
     messages: {
         
-        group_name: {
+        location_name: {
           required: "Please Enter a Location Name",
         },
       }

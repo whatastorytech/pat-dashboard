@@ -17,23 +17,16 @@ header('location:index.php');
 }
 $planted= 'planted';
 $adopted = 'adopted';
-$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :planted  ORDER BY plant_id desc";
-
+$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at,tree_status FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :planted  ORDER BY plant_id desc";
 $query1=$dbh->prepare($sql);
 $query1->bindParam(':planted',$planted,PDO::PARAM_STR);
 $query1->execute();
 $results=$query1->fetchAll(PDO::FETCH_OBJ);
-
-
-
-
 $sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :adopted  ORDER BY plant_id desc";
-
 $query=$dbh->prepare($sql);
 $query->bindParam(':adopted',$adopted,PDO::PARAM_STR);
 $query->execute();
 $adopted=$query->fetchAll(PDO::FETCH_OBJ);
-
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -131,10 +124,8 @@ include('../includes/admin_sidebar.php');
 														<th>Tree Category</th>
 														<th>Plantation</th>
 														<th>Age</th>
-														<th>User</th>
 														<th>Status</th>
 														<th>Updates</th>
-														<th>Action</th>
 													</tr>
 												</thead>												
 												<tbody>
@@ -155,7 +146,6 @@ include('../includes/admin_sidebar.php');
 
 														?>
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
-														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
 														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
 														<td>---</td>
 													   <!--  <td class="center"><?php if($result->location_status==1) {?>
@@ -163,7 +153,7 @@ include('../includes/admin_sidebar.php');
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td> -->
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+													<!-- 	<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td> -->
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
@@ -175,10 +165,8 @@ include('../includes/admin_sidebar.php');
 														<th>Tree Category</th>
 														<th>Plantation</th>
 														<th>Age</th>
-														<th>User</th>
 														<th>Status</th>
 														<th>Updates</th>
-														<th>Action</th>
 													</tr>
 												</tfoot>
 											</table>
@@ -200,7 +188,7 @@ include('../includes/admin_sidebar.php');
 														<th>User</th>
 														<th>Status</th>
 														<th>Updates</th>
-														<th>Action</th>
+														<!-- <th>Action</th> -->
 													</tr>
 												</thead>												
 												<tbody>
@@ -229,7 +217,7 @@ include('../includes/admin_sidebar.php');
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td> -->
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<!-- <td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td> -->
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
@@ -244,7 +232,7 @@ include('../includes/admin_sidebar.php');
 														<th>User</th>
 														<th>Status</th>
 														<th>Updates</th>
-														<th>Action</th>
+														<!-- <th>Action</th> -->
 													</tr>
 												</tfoot>
 											</table>

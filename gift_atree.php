@@ -6,7 +6,7 @@ if(!isset($_SESSION['login']))
 echo "<script type='text/javascript'> document.location ='login.php'; </script>";
 }
 $user_id = $_SESSION['user_id'];
-$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,SUM(planted_trees.number_of_trees) as count,planted_trees.added_at,location.location_name,tree_category.tree_category_name,tree_category.category_image,planted_trees.tree_planted_at,planted_trees.tree_category_id FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id GROUP BY planted_trees.tree_category_id ORDER BY planted_trees.added_at desc";
+$sql ="SELECT DISTINCT(planted_trees.tree_category_id) as trees,count(planted_trees.number_of_trees) as count,planted_trees.added_at,location.location_name,tree_category.tree_category_name,tree_category.category_image,planted_trees.tree_planted_at,planted_trees.tree_category_id FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = :user_id GROUP BY planted_trees.tree_category_id ORDER BY planted_trees.added_at desc";
 $query=$dbh->prepare($sql);
 $query -> bindParam(':user_id',$user_id, PDO::PARAM_STR);
 $query->execute();
@@ -22,7 +22,7 @@ include('includes/sidebar.php');
 							<div class="group">
 								<h2>Gift a Tree</h2>
 								<div class="link">
-									<a href="index.html">View List of Gifts Sent ></a>
+									<a href="gift_trees.php">View List of Gifts Sent ></a>
 								</div>
 							</div>
 							<!-- <div class="sub-info">

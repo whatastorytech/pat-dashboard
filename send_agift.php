@@ -15,11 +15,13 @@ if(isset($_POST['name']))
 {
 	$name = $_POST['name'];
 	$email = $_POST['email'];
-	$sql="update planted_trees set gifted_to=:gifted_to,gifted_email = :gifted_email where plant_id=:tree_id";
+	$added_at = date('Y-m-d H:i:s');
+	$sql="update planted_trees set gifted_to=:gifted_to,gifted_email = :gifted_email ,gifted_at = :added_at where plant_id=:tree_id";
 	$query = $dbh->prepare($sql);
 	$query->bindParam(':gifted_to',$name,PDO::PARAM_STR);
 	$query->bindParam(':gifted_email',$email,PDO::PARAM_STR);
 	$query->bindParam(':tree_id',$tree_id,PDO::PARAM_STR);
+	$query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
 	$query->execute();
     echo "0";
 	die;
@@ -165,10 +167,12 @@ include('includes/footer.php');?>
                     var name =  $("#name").val();
                     var email = $("#email").val();    
                     $(".checkout-success").addClass("active");
-                    $("#gift_sent_to").text(name);
-                    $("#mail_to").text(email);
+                    $("#gift_sent_to").html('<h2>your gift is sent to<b>'+name+'</b></h2>');
+                    
+                    $("#mail_to").html('<p>we have sent a mail to '+email+'</p>');
+                    
  
-   
+                 
                  }
                  else
                  {

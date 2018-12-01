@@ -9,12 +9,10 @@ $status = 1;
 $tree_category_id= intval($_GET['tree_category']);
 $user_id = $_SESSION['user_id'];
 $giftted_to = Null;
-$sql ="SELECT planted_trees.tree_category_id,planted_trees.plant_id,planted_trees.number_of_trees,planted_trees.added_at,location.location_name,location.location_id,tree_category.tree_category_name,planted_trees.tree_name,planted_trees.tree_code,tree_category.category_image,planted_trees.tree_planted_at,planted_trees.tree_category_id FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id WHERE planted_trees.user_id = 23 AND planted_trees.tree_category_id= 2 AND planted_trees.gifted_to IS NULL";
-
+$sql ="SELECT planted_trees.tree_category_id,planted_trees.plant_id,planted_trees.number_of_trees,planted_trees.added_at,location.location_name,location.location_id,tree_category.tree_category_name,planted_trees.tree_name,planted_trees.tree_code,tree_category.category_image,planted_trees.tree_planted_at,planted_trees.tree_category_id FROM planted_trees  LEFT JOIN location ON  planted_trees.location_id = location.location_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id  WHERE planted_trees.user_id = :user_id  AND planted_trees.tree_category_id= :tree_category_id AND planted_trees.gifted_to IS NULL";
 $query=$dbh->prepare($sql);
 $query->bindParam(':user_id',$user_id, PDO::PARAM_STR);
 $query->bindParam(':tree_category_id',$tree_category_id, PDO::PARAM_STR);
-$query->bindParam(':giftto',$giftted_to, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $count = count($results);
@@ -61,7 +59,7 @@ include('includes/sidebar.php');
 									<!-- <p><a href="#">Bangalore ></a></p>
 									<p><a href="#">Mumbai ></a></p> -->
 									<div class="select">
-										<a href="">Select another tree</a>
+										<a href="<?php echo BASE_URL;?>index.php">Select another tree</a>
 									</div>
 									<?php }?>
 								</div>
@@ -106,7 +104,8 @@ function myFunction() {
 		            data: {
 		                search:search,
 		            },
-		            error: function() {
+		            error: function() 
+		            {
 		                
 		            },
 		            success: function(data)
@@ -129,8 +128,9 @@ function myFunction() {
 <?php 		
 include('includes/footer.php');?>
 <script>
-	$('.gift').on('click', function () {
-			 	 event.preventDefault();
+	 $('body').on('click', '.gift', function (e)
+      {  
+			 	 e.preventDefault();
 			 	 $('#text').text('You have selected one tree');
 			 	 var tree_id = $(this).data('id');
 		       var count = $('#fee').val();		       

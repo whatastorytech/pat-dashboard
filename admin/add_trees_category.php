@@ -82,13 +82,13 @@ if(isset($_POST['create']))
 			if($lastInsertId)
 			{ 
                 $_SESSION['msg']="Category Listed successfully";
-                header('location:tree_category.php');
+                header('location:trees_category.php');
 
             }
 		      else
 		      {
 		         $_SESSION['error']="Something went wrong. Please try again";
-		          header('location:tree_category.php');
+		          header('location:trees_category.php');
 		      }
             }
         }
@@ -182,3 +182,6 @@ include('../includes/admin_sidebar.php');
 				
 <?php 
 include('../includes/admin_footer.php');?>
+<script type="text/javascript">
+	
+</script>
