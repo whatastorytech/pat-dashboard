@@ -9,14 +9,26 @@
 include('../includes/config.php');
 include('../includes/connect.php');
 include('../includes/functions.php');
-
-
 if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
 }
-
-
+$sql ="SELECT *  FROM users";
+$query=$dbh->prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$sql ="SELECT *  FROM  planted_trees";
+$query=$dbh->prepare($sql);
+$query->execute();
+$trees=$query->fetchAll(PDO::FETCH_OBJ);
+$sql ="SELECT *  FROM  location";
+$query=$dbh->prepare($sql);
+$query->execute();
+$location=$query->fetchAll(PDO::FETCH_OBJ);
+$sql ="SELECT * FROM  gardner";
+$query=$dbh->prepare($sql);
+$query->execute();
+$gardner=$query->fetchAll(PDO::FETCH_OBJ);
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -33,7 +45,7 @@ include('../includes/admin_sidebar.php');
 										<div class="container-fluid">
 											<div class="row">
 										        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-light block counter"><span class="counter-anim">123</span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo count($results);?></span></span>
 													<span class="weight-500 uppercase-font block font-13 txt-light">users</span>
 												</div></a>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
@@ -55,7 +67,7 @@ include('../includes/admin_sidebar.php');
 										<div class="container-fluid">
 											<a href="trees.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-light block counter"><span class="counter-anim">2100</span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo count($trees);?></span></span>
 													<span class="weight-500 uppercase-font block txt-light">Trees Planted</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
@@ -76,7 +88,7 @@ include('../includes/admin_sidebar.php');
 										<div class="container-fluid">
 											<a href="locations.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 txt-light data-wrap-left">
-													<span class="block counter"><span class="counter-anim">10</span></span>
+													<span class="block counter"><span class="counter-anim"><?php echo count($location);?></span></span>
 													<span class="weight-500 uppercase-font block">locations</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 txt-light data-wrap-right">
@@ -97,7 +109,7 @@ include('../includes/admin_sidebar.php');
 										<div class="container-fluid">
 											<a href="gardners.php"><div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-													<span class="txt-light block counter"><span class="counter-anim">46</span>%</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo count($gardner);?></span></span>
 													<span class="weight-500 uppercase-font block txt-light">gardners</span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 pt-25  data-wrap-right">

@@ -14,7 +14,20 @@ if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
 }
+else
+{ 
+if(isset($_GET['del']))
+{
+$garden_id=$_GET['del'];
+$sql = "delete from garden  WHERE garden_id=:id";
+$query = $dbh->prepare($sql);
+$query -> bindParam(':id',$garden_id, PDO::PARAM_STR);
+$query -> execute();
+$_SESSION['delmsg']="Garden deleted scuccessfully ";
+header('location:gardens.php');
 
+}
+}
 $sql ="SELECT garden.garden_id,garden.garden_name,garden.garden_address,location.location_name,gardner.gardner_fname,gardner.gardner_lname,garden.garden_status FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
         LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id where garden.garden_status = '1' order By garden.garden_id DESC ";
 $query=$dbh->prepare($sql);
@@ -132,15 +145,14 @@ include('../includes/admin_sidebar.php');
 														<td class="center"><a href="garden_info.php?garden_id=<?php echo $result->garden_id;?>"><?php echo htmlentities($result->garden_name);?></a></td>
 															<td class="center"><?php echo htmlentities($result->garden_address);?></td>
 															<td class="center"><?php echo htmlentities($result->location_name);?></td>
-														<td class="center"><?php echo htmlentities($result->gardner_fname);?>&nbsp;<?php echo htmlentities($result->gardner_lname);?></td>
-													
+														<td class="center"><?php echo htmlentities($result->gardner_fname);?>&nbsp;<?php echo htmlentities($result->gardner_lname);?></td>						
 								
 														<td class="center"><?php if($result->garden_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td class="text-nowrap"><a href="<?php echo BASE_URL;?>admin/edit_garden.php?garden_id=<?php echo $result->garden_id;?>" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="<?php echo BASE_URL;?>admin/gardens.php?del=<?php echo $result->garden_id;?>"" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?>
 												    											

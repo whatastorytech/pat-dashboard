@@ -48,7 +48,7 @@ try {
         'buyer_phone'=>$result->user_pnumber,
         "send_email" => true, 
         "email" =>$result->user_email,
-        "redirect_url" => "http://localhost/pat-dashboard/payment.php?tree_id=".$tree_id."&number=".$number_of_trees."",
+        "redirect_url" => BASE_URL."pat-dashboard/payment.php?tree_id=".$tree_id."&number=".$number_of_trees."",
         ));
      }
   header('location:'.$response['longurl'].'');    

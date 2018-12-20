@@ -5,7 +5,6 @@
 *	Prupose	:	To Display  gardners Profile
 **********************************************************************/
 // include required files
-
 include('../includes/config.php');
 include('../includes/connect.php');
 include('../includes/functions.php');
@@ -22,8 +21,11 @@ $query=$dbh->prepare($sql);
 $query->bindParam(':gardner_id',$gardner_id,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
-
-
+$sql ="SELECT plant_id,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name,tree_planted_at,gardner_fname,gardner_lname,gardner_pnumber FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN gardner ON  planted_trees.garden_id = gardner.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE garden.garden_id = :garden_id ORDER BY plant_id desc";
+$query2=$dbh->prepare($sql);
+$query2->bindParam(':garden_id',$gardner_id,PDO::PARAM_STR);
+$query2->execute();
+$plant_tree=$query2->fetchAll(PDO::FETCH_OBJ);
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -144,58 +146,49 @@ include('../includes/admin_sidebar.php');
 												<thead>
 													<tr>
 														<th>#</th>
-														<th>ID</th>
-														<th>Date</th>
-														<th>Number of Pictures</th>
-
-														<th>resends</th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
 														<th>Status</th>
-
-
-
 														<th>Updates</th>
 													</tr>
 												</thead>												
 												<tbody>
-													<!-- <?php 	
+													<?php 	
 													$cnt=1;
-													if($query->rowCount() > 0)
+													if($query2->rowCount() > 0)
 													{
-													foreach($results as $result)
+													foreach($plant_tree as $result)
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><a href="gardner_profile.php?gardner=<?php echo $result->gardner_id;?>"><?php echo htmlentities($result->gardner_fname);?><?php echo htmlentities($result->gardner_lname);?></a></td>
-															<td class="center"><?php echo htmlentities($result->garden_name);?></td>
-															<td class="center"><?php echo htmlentities($result->gardner_pnumber);?></td>
-													
+														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
+														<td class="center"><?php echo htmlentities($result->location_name);?></td>
+														<?php 
+                                                        $from = new DateTime($result->added_at);
+														$to   = new DateTime('today');
 
-
-
-														<td class="center"><?php if($result->gardner_status==1) {?>
-
-
-			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
-			                                            <?php } else {?>
-			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
-			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														?>
+														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
+														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
+														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+														<td>---</td>
 													</tr>
-													 <?php $cnt=$cnt+1;}} ?>	 -->											
+													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
 											
 												<tfoot>
 													<tr>
 														<th>#</th>
-														<th>ID</th>
-														<th>Date</th>
-														<th>Number of Pictures</th>
-
-														<th>resends</th>
+														<th>Tree Code</th>
+														<th>Tree Category</th>
+														<th>Plantation</th>
+														<th>Age</th>
+														<th>User</th>
 														<th>Status</th>
-
-
-
 														<th>Updates</th>
 													</tr>
 												</tfoot>

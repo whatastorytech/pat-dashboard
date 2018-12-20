@@ -10,21 +10,30 @@ include('../includes/config.php');
 include('../includes/connect.php');
 include('../includes/functions.php');
 
-
 if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
 }
-$planted= 'planted';
+
+$planted=  'planted';
 $adopted = 'adopted';
-$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at,tree_status FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :planted  ORDER BY plant_id desc";
+$added_at = date('m');
+$unverify = 'unverify';
+$unseen = '0';
+$sql ="SELECT planted_trees.plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location.location_name ,tree_planted_at,tree_status,garden_name,tree_updates.pictures FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id LEFT JOIN tree_updates ON  planted_trees.plant_id = tree_updates.plant_id WHERE planted_trees.tree_status = :planted OR MONTH(tree_updates.added_at) = :added_at AND tree_updates.update_status = :unverify AND tree_updates.update_seen = :unseen ORDER BY planted_trees.plant_id desc";
 $query1=$dbh->prepare($sql);
 $query1->bindParam(':planted',$planted,PDO::PARAM_STR);
+$query1->bindParam(':added_at',$added_at,PDO::PARAM_STR);
+$query1->bindParam(':unverify',$unverify,PDO::PARAM_STR);
+$query1->bindParam(':unseen',$unseen,PDO::PARAM_STR);
 $query1->execute();
 $results=$query1->fetchAll(PDO::FETCH_OBJ);
-$sql ="SELECT plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name ,tree_planted_at FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_status = :adopted  ORDER BY plant_id desc";
+$sql ="SELECT planted_trees.plant_id,tree_name,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location.location_name ,tree_planted_at,tree_status,garden_name,tree_updates.pictures FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id LEFT JOIN tree_updates ON  planted_trees.plant_id = tree_updates.plant_id WHERE planted_trees.tree_status = :adopted OR MONTH(tree_updates.added_at) = :added_at AND tree_updates.update_status = :unverify AND tree_updates.update_seen = :unseen ORDER BY planted_trees.plant_id desc";
 $query=$dbh->prepare($sql);
 $query->bindParam(':adopted',$adopted,PDO::PARAM_STR);
+$query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
+$query->bindParam(':unverify',$unverify,PDO::PARAM_STR);
+$query->bindParam(':unseen',$unseen,PDO::PARAM_STR);
 $query->execute();
 $adopted=$query->fetchAll(PDO::FETCH_OBJ);
 include('../includes/admin_header.php');
@@ -137,7 +146,7 @@ include('../includes/admin_sidebar.php');
 													{               ?>   
 													<tr>
 														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
+													<td class="center"><a href="tree_updates.php?plant_id=<?php echo $result->plant_id;?>"><?php echo htmlentities($result->tree_code);?></a></td>
 														<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
 														<td class="center"><?php echo htmlentities($result->location_name);?></td>
 														<?php 
@@ -147,13 +156,23 @@ include('../includes/admin_sidebar.php');
 														?>
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
 														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+														<?php 
+														$count = 0 ;
+														if(isset($result->pictures))
+														{   
+
+                                                           $data =  explode(',',$result->pictures);
+														   $count = count($data);
+														}
+														
+
+														?>
+														<?php if($count != 0)
+														{?>
+                                                         <td><a href="<?php echo BASE_URL;?>admin/update_verification.php?plant_id=<?php echo $result->plant_id;?>"><?php echo $count;?>&nbsp;updates</td></a>
+														<?php } else {?>
 														<td>---</td>
-													   <!--  <td class="center"><?php if($result->location_status==1) {?>
-			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
-			                                            <?php } else {?>
-			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
-			                                            <?php } ?></td> -->
-													<!-- 	<td class="text-nowrap"><a href="#" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td> -->
+												        <?php }?>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
@@ -211,7 +230,23 @@ include('../includes/admin_sidebar.php');
 														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
 														<td class="center"><?php echo htmlentities($result->user_fname);?>&nbsp;<?php echo htmlentities($result->user_lname);?></td>
 														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+														<?php 
+														$count = 0 ;
+														if(isset($result->pictures))
+														{   
+
+                                                           $data =  explode(',',$result->pictures);
+														   $count = count($data);
+														}
+														
+
+														?>
+														<?php if($count != 0)
+														{?>
+                                                         <td><a href="<?php echo BASE_URL;?>admin/update_verification.php?plant_id="<?php echo $result->plant_id;?>"><?php echo $count;?>&nbsp;updates</td></a>
+														<?php } else {?>
 														<td>---</td>
+												        <?php }?>
 													   <!--  <td class="center"><?php if($result->location_status==1) {?>
 			                                            <a href="#" class="btn btn-success btn-xs"><span class="label label-success">Active</a>
 			                                            <?php } else {?>
@@ -241,7 +276,7 @@ include('../includes/admin_sidebar.php');
 											</div>
 											
 										</div>
-						</div>
+						            </div>
 						
 								</div>
 							</div>

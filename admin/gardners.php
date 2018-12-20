@@ -9,11 +9,23 @@
 include('../includes/config.php');
 include('../includes/connect.php');
 include('../includes/functions.php');
-
-
 if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
+}
+else
+{ 
+if(isset($_GET['del']))
+{
+$gardner_id=$_GET['del'];
+$sql = "delete from gardner  WHERE gardner_id=:id";
+$query = $dbh->prepare($sql);
+$query -> bindParam(':id',$gardner_id, PDO::PARAM_STR);
+$query -> execute();
+$_SESSION['delmsg']="Gardner deleted scuccessfully ";
+header('location:gardners.php');
+
+}
 }
 $sql ="SELECT * FROM gardner 
         LEFT JOIN   garden ON gardner.garden_id = garden.garden_id  LEFT JOIN location ON  garden.location_id = location.location_id ORDER BY gardner.gardner_id desc";
@@ -144,7 +156,7 @@ include('../includes/admin_sidebar.php');
 			                                            <?php } else {?>
 			                                            <a href="#" class="btn btn-danger btn-xs"><span class="label label-danger">Inactive</a>
 			                                            <?php } ?></td>
-														<td class="text-nowrap"><a href="<?php echo BASE_URL;?>admin/edit_gardner.php?gardner_id=<?php echo $result->gardner_id;?>" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
+														<td class="text-nowrap"><a href="<?php echo BASE_URL;?>admin/edit_gardner.php?gardner_id=<?php echo $result->gardner_id;?>" class="mr-25" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> <a href="<?php echo BASE_URL;?>admin/gardners.php?del=<?php echo $result->gardner_id;?>" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> </td>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?>												
 												</tbody>

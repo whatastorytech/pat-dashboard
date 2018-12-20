@@ -12,6 +12,8 @@
 
 				$('.image-grid').gridder();
 
+				
+
 			});
 
 		</script>

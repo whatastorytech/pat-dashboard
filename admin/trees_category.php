@@ -111,10 +111,10 @@ include('../includes/admin_sidebar.php');
 									<div class="panel panel-default card-view pa-0 bg-gradient">
 										<div class="panel-wrapper collapse in">
 											<div class="panel-body pa-0">
-												<a href="#" data-id="<?php echo $result->tree_category_id;?>" class="cate"><div class="sm-data-box" id="category">
-													<div class="container-fluid">
+							<a href="#"><div class="sm-data-box" id="category">
+													<div class="container-fluid" class="cate" data-id="<?php echo $result->tree_category_id;?>">
 														<div class="row">
-													        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
+													        <div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left cate" data-id="<?php echo $result->tree_category_id;?>">
 																<span class="txt-light block counter"><span class="counter-anim"><?php echo $result->count;?></span></span>
 																<span class="weight-500 uppercase-font block font-13 txt-light"><?php echo $result->tree_category_name;?></span>
 															</div></a>
@@ -146,17 +146,18 @@ include('../includes/admin_sidebar.php');
 								<div class="panel-body">
 									<div class="table-wrap">
 										<div class="">
-											<table id="myTable1" class="table table-hover display  pb-30" >
+											<table id="cat_tabel" class="table table-hover display  pb-30" >
 												<thead>
 													<tr>
 														<th>#</th>
 														<th>Tree Code</th>
+														<th>Tree Category</th>
 														<th>Age</th>
 														<th>Status</th>
 														<th>Updates</th>
 													</tr>
 												</thead>												
-												<tbody>
+												<tbody >
 													<?php 	
 													$cnt=1;
 													if($query->rowCount() > 0)
@@ -164,16 +165,17 @@ include('../includes/admin_sidebar.php');
 													foreach($planted_trees as $result)
 													{               ?>   
 													<tr>
-														 <td class="center"><?php echo htmlentities($cnt);?></td>
-														<td class="center"><?php echo htmlentities($result->tree_code);?></td>
-														<?php 
-                                                        $from = new DateTime($result->added_at);
-														$to   = new DateTime('today');
 
+												    <td class="center"><?php echo htmlentities($cnt);?></td>
+													<td class="center"><?php echo htmlentities($result->tree_code);?></td>
+													<td class="center"><?php echo htmlentities($result->tree_category_name);?></td>
+														<?php 
+                                                        $from = new DateTime($result->tree_planted_at);
+														$to   = new DateTime('today');
 														?>
-														<td class="center"><?php echo $from->diff($to)->d;?> days</td>
+													<td class="center"><?php echo $from->diff($to)->d;?> days</td>
 													
-														<td class="center"><?php echo htmlentities($result->tree_status);?></td>
+													<td class="center"><?php echo htmlentities($result->tree_status);?></td>
 													</tr>
 													 <?php $cnt=$cnt+1;}} ?> 												
 												</tbody>
@@ -182,6 +184,7 @@ include('../includes/admin_sidebar.php');
 													<tr>
 														<th>#</th>
 														<th>Tree Code</th>
+														<th>Tree Category</th>
 														<th>Age</th>
 														<th>Status</th>
 														<th>Updates</th>
@@ -198,34 +201,30 @@ include('../includes/admin_sidebar.php');
 				<!-- /Row -->
 			
 			</div>
-<?php
-include('../includes/admin_footer.php');?>	
-<script type="text/javascript">
-document.getElementByClassName('cate').onclick = function() {
-	alert('imran');
-			 	 event.preventDefault();
-		       var count = $('#fee').val();		       
-		       	 var count = ++count;
-		       	 $.ajax({
-				url: "check_tree.php",
+			<script>
+$('body').on('click', '.cate', function (e)
+      {
+               event.preventDefault();
+		       var cat_id = $(this).data('id');	
+		        $.ajax({
+				url: "tree_category.php",
 				type: "POST",
 				data:{
-                 count:count,
+                 cat_id:cat_id,
 				},
 				success: function(data){
-					if(data == 0)
+					if(data != '')
 					{
-						alert('Please reduce the amount of tree ! There are only '  + --count+ ' trees availabel in garden');
-					}
-					else
-					{
-                          var amount = count*999;
-				       	 $('#rate').val(amount);
-				         $('#fee').val(count);
+
+						$('#cat_tabel').empty();
+						$('#cat_tabel').html(data);
 					}
 					
+					
 				}        
-		   });
-		      
-			}
+		   });       
+      }); 
+
 </script>
+<?php
+include('../includes/admin_footer.php');?>	
