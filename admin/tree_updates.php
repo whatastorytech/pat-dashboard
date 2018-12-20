@@ -18,7 +18,7 @@ if(isset($_GET['plant_id']))
 {
   $plant_id=intval($_GET['plant_id']);
 }
-
+$garden_id = $_GET['garden_id'];
 if(isset($_POST['plant_id']))
 {
 $plant_id = $_POST['plant_id'];
@@ -107,7 +107,7 @@ if(isset($_POST['create']))
 									$query->bindParam(':update_status',$tree_updates,PDO::PARAM_STR);
 									$query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
 									$query->execute();
-			                        header('location:tree_updates.php');
+			                        header('location:tree_updates.php?garden_id='.$garden_id.'');
 						    }
 
 						    else
@@ -139,7 +139,7 @@ if(isset($_POST['create']))
 		
 }
 
-$garden_id = $_GET['garden_id'];
+
 $sql ="SELECT plant_id,tree_code,tree_status,planted_trees.added_at,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name,tree_planted_at,tree_qr_code,category_image FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.garden_id = :garden_id ORDER BY plant_id desc";
 $query=$dbh->prepare($sql);
 $query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);

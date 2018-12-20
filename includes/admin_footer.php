@@ -93,7 +93,7 @@
 	<script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
 	<script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
 	<script src="<?php echo BASE_URL ;?>assets/as_assets/dist/js/export-table-data.js"></script>
-
+    
 
 	</body>
 

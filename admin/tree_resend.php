@@ -21,7 +21,7 @@ $tree_updates = 'verify';
 $resend = 'resend';
 	           
                            
-                           $sql ="SELECT * FROM  tree_updates  WHERE plant_id=:plant_id";
+                            $sql ="SELECT * FROM  tree_updates  WHERE plant_id=:plant_id";
 							$query=$dbh->prepare($sql);
 							$query->bindParam(':plant_id',$plant_id,PDO::PARAM_STR);
 							$query->execute();
