@@ -9,7 +9,7 @@
 include('../includes/config.php');
 include('../includes/connect.php');
 include('../includes/functions.php');
-
+ini_set('max_execution_time', 1500);
 if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
@@ -22,6 +22,7 @@ $the_number_of_tree=$_POST['tree_number'];
 $tree_category_id = $_POST['tree_category_id'];
 $garden_id = $_POST['garden_id'];
 $added_at = date('Y-m-d H:i:s');
+$updat_date =  date('Y-m-d', strtotime('+1 month'));
 //set it to writable location, a place for temp generated PNG files
     $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'gardnerQR'.DIRECTORY_SEPARATOR;
     
@@ -33,12 +34,13 @@ for($i=0;$i<$the_number_of_tree;$i++)
 {
     $unique_code = 'PTA'.rand(1,1111);
 
-$sql="INSERT INTO  planted_trees (tree_category_id,tree_code,tree_planted_at,garden_id) VALUES(:tree_category_id,:tree_code,:tree_planted_at,:garden_id)";
+$sql="INSERT INTO  planted_trees (tree_category_id,tree_code,tree_planted_at,garden_id,tree_update_date) VALUES(:tree_category_id,:tree_code,:tree_planted_at,:garden_id,:tree_update_date)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':tree_category_id',$tree_category_id,PDO::PARAM_STR);
 $query->bindParam(':tree_planted_at',$added_at,PDO::PARAM_STR);
 $query->bindParam(':tree_code',$unique_code,PDO::PARAM_STR);
 $query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
+$query->bindParam(':tree_update_date',$updat_date,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 

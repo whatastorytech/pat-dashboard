@@ -19,7 +19,6 @@ $sql ="SELECT tree_category.tree_category_name,tree_category.tree_category_id,CO
 $query=$dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
-
 $tree_category_id=2;
 $status = 1;
 $sql ="SELECT * FROM planted_trees LEFT JOIN location ON  planted_trees.location_id = location.location_id

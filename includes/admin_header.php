@@ -29,7 +29,7 @@
 	<link href="<?php echo BASE_URL ;?>assets/as_assets/vendors/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css"/>
 	<!-- Morris Charts CSS -->
     <link href="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo BASE_URL ;?>assets/css/slider.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo BASE_URL ;?>assets/css/slider.css" rel="stylesheet" type="text/css"/> 
 	<!-- Custom CSS -->
 	<link href="<?php echo BASE_URL ;?>assets/as_assets/dist/css/style.css" rel="stylesheet" type="text/css">
 	 <script src="<?php echo BASE_URL ;?>assets/as_assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>

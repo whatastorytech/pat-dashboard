@@ -13,6 +13,7 @@ if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
 }
+$tree_payment_date = date('Y-m-d');
 $sql ="SELECT *  FROM users";
 $query=$dbh->prepare($sql);
 $query->execute();
@@ -29,11 +30,21 @@ $sql ="SELECT * FROM  gardner";
 $query=$dbh->prepare($sql);
 $query->execute();
 $gardner=$query->fetchAll(PDO::FETCH_OBJ);
-$sql ="SELECT DISTINCT(garden.garden_id),garden_name,location.location_id,location_name,garden_address,gardner_fname,gardner_lname FROM garden INNER JOIN planted_trees ON  garden.garden_id = planted_trees.garden_id  INNER JOIN tree_updates ON  planted_trees.plant_id = tree_updates.plant_id Inner JOIN location ON  garden.location_id = location.location_id   LEFT JOIN gardner ON  garden.garden_id = gardner.garden_id  ORDER BY garden.garden_id desc";
+$sql ="SELECT DISTINCT(garden.garden_id),garden_name,location.location_id,location_name,garden_address,gardner_fname,gardner_lname FROM garden INNER JOIN planted_trees ON garden.garden_id = planted_trees.garden_id  INNER JOIN tree_updates ON  planted_trees.plant_id = tree_updates.plant_id Inner JOIN location ON  garden.location_id = location.location_id   LEFT JOIN gardner ON  garden.garden_id = gardner.garden_id  ORDER BY garden.garden_id desc";
 $query=$dbh->prepare($sql);
 $query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
 $query->execute();
 $garden=$query->fetchAll(PDO::FETCH_OBJ);
+$sql ="SELECT garden.garden_id,garden.garden_address,location.location_name,garden.garden_name,planted_trees.tree_update_date FROM  garden  INNER JOIN planted_trees ON  garden.garden_id = planted_trees.garden_id  INNER JOIN tree_updates ON  planted_trees.plant_id = tree_updates.plant_id Inner JOIN location ON  garden.location_id = location.location_id   LEFT JOIN gardner ON  garden.garden_id = gardner.garden_id  ORDER BY garden.garden_id desc";
+$garden_query=$dbh->prepare($sql);
+$garden_query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
+$garden_query->execute();
+$garden=$garden_query->fetchAll(PDO::FETCH_OBJ);
+$sql ="SELECT  DISTINCT(planted_trees.user_id),users.user_fname,user.user_lname,users.user_email FROM  planted_trees  LEFT JOIN  users ON  planted_trees.user_id = users.user_id  WHERE planted_trees.tree_payment_date=:tree_payment_date";
+$query=$dbh->prepare($sql);
+$query->bindParam(':tree_payment_date',$tree_payment_date,PDO::PARAM_STR);
+$query->execute();
+$user=$query->fetchAll(PDO::FETCH_OBJ);
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -222,17 +233,17 @@ include('../includes/admin_sidebar.php');
 
 											<tbody>
 												 <?php 			  	
-                                        if($query->rowCount() > 0)
+                                        if($garden_query->rowCount() > 0)
 									{
 										foreach($garden as $result)
 									{?> 
 											  <tr>
 												<td><?php echo $result->garden_name;?></td>
-												<td>-------</td>
+												<td><?php echo $result->tree_update_date;?></td>
 												<td><?php echo $result->garden_address;?></td>
 												<td><a href="<?php echo BASE_URL;?>admin/tree_updates.php?garden_id=<?php echo $result->garden_id;?>" class="pull-left btn btn-primary btn-xs mr-15">verify</a></td>										
 											  </tr>
-											  <?php }}?>
+											  <?php }}?> 
 											</tbody>
 										  </table>
 										</div>

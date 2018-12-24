@@ -14,7 +14,16 @@ if(!isset($_SESSION['login']))
 { 
 header('location:index.php');
 }
-$plant_id=intval($_GET['plant_id']);
+if (isset($_GET['plant_id']))
+{
+	$plant_id=intval($_GET['plant_id']);
+}
+if (isset($_POST['plant_id']))
+{
+	$plant_id=$_POST['plant_id'];
+}
+
+
 #	Variables
 $arrErrors	=	array();
 $sql ="SELECT * FROM  tree_updates LEFT JOIN  planted_trees on  tree_updates.plant_id = planted_trees.plant_id  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id  WHERE tree_updates.plant_id=:plant_id";
@@ -22,13 +31,23 @@ $query=$dbh->prepare($sql);
 $query->bindParam(':plant_id',$plant_id,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
-$garden_id = $_GET['garden_id'];
-$sql ="SELECT planted_trees.plant_id,tree_code,tree_status,planted_trees.added_at,pictures,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name,tree_planted_at,tree_qr_code,category_image FROM planted_trees  LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  planted_trees.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id
-    LEFT JOIN  tree_updates ON  planted_trees.plant_id = tree_updates.plant_id  WHERE planted_trees.garden_id = :garden_id ORDER BY planted_trees.plant_id desc";
+if(empty($results))
+{   
+		if (isset($_GET['garden_id']))
+	{
+		$garden_id=intval($_GET['garden_id']);
+	}
+
+	$status = 'unverify';
+ $sql ="SELECT tree_code,tree_status,planted_trees.added_at,pictures,tree_category_name,user_fname,user_lname,plant_tree_status,number_of_trees,location.location_id,location_name,tree_planted_at,tree_qr_code,category_image,tree_updates.plant_id FROM  tree_updates LEFT JOIN  planted_trees ON  tree_updates.plant_id = planted_trees.plant_id LEFT JOIN tree_category ON  planted_trees.tree_category_id = tree_category.tree_category_id LEFT JOIN garden ON  tree_updates.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN users ON  planted_trees.user_id = users.user_id
+      WHERE tree_updates.garden_id = :garden_id  AND tree_updates.update_status = :status ORDER BY tree_updates.plant_id desc";
 $query=$dbh->prepare($sql);
 $query->bindParam(':garden_id',$garden_id,PDO::PARAM_STR);
+$query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+}
+
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
 ?>
@@ -48,17 +67,19 @@ include('../includes/admin_sidebar.php');
 						</div>
 						<!-- /Breadcrumb -->					
 					</div>
-					<!-- /Title -->					
+			<?php	$cnt=1;
+													if($query->rowCount() > 0)
+													{?>		<!-- /Title -->					
     <div id="container">
+    	  
       <div class="main-slider-container">
         <div class="prev crousel-navigation"></div>
-        <div class="next crousel-navigation"></div>
+        <div class="next crousel-navigation" id="next"></div>
         <div class="slider-container" id="slider_data">
+      
           <ul>
           	<?php 	
-													$cnt=1;
-													if($query->rowCount() > 0)
-													{
+													
 													foreach($results as $result)
 													{  ?>
             <li>
@@ -66,15 +87,21 @@ include('../includes/admin_sidebar.php');
               <p><img src="<?php echo BASE_URL;?>admin/gardnerQR/<?php echo $result->tree_qr_code;?>" alt="1" width="200" height="200" /></p>
               <div class="crousel-image-outer"> <img src="<?php echo BASE_URL;?>uploads/tree_updates/<?php echo $result->pictures;?>" alt="NO UPDATES" width="200" height="200" /> </div
 	  			>
-	  			<button class="verify" data-id="<?php echo $result->plant_id;?>">verify</button>
+	  		<div id="hi_<?php echo $result->plant_id;?>">
+	  			<button class="verify" data-id="<?php echo $result->plant_id;?>" >verify</button>
 	  			<button data-id="<?php echo $result->plant_id;?>" class="resend">resend</button>
+	  		</div>
             </li>
-            <?php }}?>
+             <?php }}  else{?>
+                 <h3>No Update Yet</h3>
+             <?php }?>
           </ul>
+          
         </div>
       </div>
+
     </div>
-					
+			
  				
 				
 <?php 
@@ -100,7 +127,8 @@ $('body').on('click', '.verify', function (e)
 					{
                        
 						alert('verified');
-						$(this).attr('disabled',true);
+						$('#next').click();
+						$('#hi_'+plant_id).hide();
 					}
 					
 					
@@ -125,7 +153,8 @@ $('body').on('click', '.resend', function (e)
 					{
 
 						alert('resend');
-						 $(this).hide();
+						$('#next').click();
+						$('#hi_'+plant_id).hide();
 					}
 					
 					

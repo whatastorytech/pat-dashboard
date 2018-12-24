@@ -29,10 +29,11 @@ try {
         $old_tree_status = 'planted';
         $number_of_trees = intval($_GET['number']);
         $tree_id = intval($_GET['tree_id']);
+        $tree_payment_date =   date('Y-m-d', strtotime('+1 year'));
 
 
 
-        $sql="update planted_trees  set location_id = :location_id,tree_name=:tree_name,tree_category_id=:tree_category_id,user_id=:user_id,tree_payment=:tree_payment,tree_planted_at=:added_at,number_of_trees=:number_of_trees,payment_status=:payment_status,garden_id=:garden_id,tree_status=:tree_status
+        $sql="update planted_trees  set location_id = :location_id,tree_name=:tree_name,tree_category_id=:tree_category_id,user_id=:user_id,tree_payment=:tree_payment,tree_planted_at=:added_at,number_of_trees=:number_of_trees,payment_status=:payment_status,garden_id=:garden_id,tree_status=:tree_status,tree_payment_date = :tree_payment_date
         where tree_status=:old_tree_status  LIMIT ".$number_of_trees."";
         $query = $dbh->prepare($sql);
         $query->bindParam(':location_id',$location_id,PDO::PARAM_STR);
@@ -44,6 +45,7 @@ try {
         $query->bindParam(':number_of_trees',$number_of_trees,PDO::PARAM_STR);
         $query->bindParam(':tree_payment',$rate,PDO::PARAM_STR);
         $query->bindParam(':payment_status',$credit,PDO::PARAM_STR);
+        $query->bindParam(':tree_payment_date',$tree_payment_date,PDO::PARAM_STR);
         $query->bindParam(':tree_status',$tree_status,PDO::PARAM_STR);
         $query->bindParam(':old_tree_status',$old_tree_status,PDO::PARAM_STR);
         $query->execute();
