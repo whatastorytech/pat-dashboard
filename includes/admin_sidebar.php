@@ -1,3 +1,11 @@
+<?php 
+$status = 're_resend';
+$sql ="SELECT * FROM tree_updates  LEFT JOIN garden ON  tree_updates.garden_id = garden.garden_id LEFT JOIN location ON  garden.location_id = location.location_id  LEFT JOIN gardner ON  tree_updates.garden_id = gardner.garden_id  where tree_updates.update_status = : status ORDER BY tree_updates.plant_id desc";
+$update_query=$dbh->prepare($sql);
+$update_query->bindParam(':status',$status,PDO::PARAM_STR);
+$update_query->execute();
+$updates=$update_query->fetchAll(PDO::FETCH_OBJ);
+?>
 <body>
 	<!-- <!-- Preloader -->
 	<div class="preloader-it">
@@ -5,7 +13,7 @@
 	</div> 
 	<!-- /Preloader -->
     <div class="wrapper box-layout theme-6-active pimary-color-pink">
-		<!-- Top Menu Items -->
+    		<!-- Top Menu Items -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="mobile-only-brand pull-left">
 				<div class="nav-header pull-left">
@@ -142,7 +150,7 @@
 					<!-- User Profile -->
 					<li>
 						<div class="user-profile text-center">
-							<img src="admin_assets/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/>
+							<!-- <img src="admin_assets/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/> -->
 							<div class="dropdown mt-5">
 							<a href="#" class="dropdown-toggle pr-0 bg-transparent" data-toggle="dropdown">ryan georgian <span class="caret"></span></a>
 							<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">

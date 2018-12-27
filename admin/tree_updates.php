@@ -134,17 +134,17 @@ include('../includes/admin_sidebar.php');
 										<div class="row">
 											<div class="col-sm-12 col-xs-12">
 												<div class="form-wrap">
-													 <div id="container">
+							<?php 	
+													$cnt=1;
+													if($query->rowCount() > 0)
+													{?>							 <div id="container">
       <div class="main-slider-container">
          <div class="prev crousel-navigation"></div>
         <div class="next crousel-navigation"></div>
         <div class="slider-container" id="slider_data">
           <ul>
-          	<?php 	
-													$cnt=1;
-													if($query->rowCount() > 0)
-													{
-													foreach($results as $result)
+      
+												<?php 	foreach($results as $result)
 													{  ?>
             <li>
               <h3><?php echo $result->tree_code;?></h3>
@@ -165,8 +165,9 @@ include('../includes/admin_sidebar.php');
 						<button type="submit" class="btn btn-success mr-10" name="create">Submit</button>
 			</form>									
 		  </li>
-            <?php }}?>
-          </ul>
+            <?php }?>
+          </ul
+          <?php }?>
         </div>
       </div>
     </div>		

@@ -16,23 +16,22 @@ header('location:index.php');
 }
 else
 { 
-if(isset($_GET['del']))
-{
-$garden_id=$_GET['del'];
-$sql = "delete from garden  WHERE garden_id=:id";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':id',$garden_id, PDO::PARAM_STR);
-$query -> execute();
-$_SESSION['delmsg']="Garden deleted scuccessfully ";
-header('location:gardens.php');
-
-}
+	if(isset($_GET['del']))
+	{
+		$garden_id=$_GET['del'];
+		$sql = "delete from garden  WHERE garden_id=:id";
+		$query = $dbh->prepare($sql);
+		$query -> bindParam(':id',$garden_id, PDO::PARAM_STR);
+		$query -> execute();
+		$_SESSION['delmsg']="Garden deleted scuccessfully ";
+		header('location:gardens.php');
+	}
 }
 $sql ="SELECT garden.garden_id,garden.garden_name,garden.garden_address,location.location_name,gardner.gardner_fname,gardner.gardner_lname,garden.garden_status FROM garden  LEFT JOIN location ON  garden.location_id = location.location_id
         LEFT JOIN   gardner ON garden.garden_id = gardner.garden_id where garden.garden_status = '1' order By garden.garden_id DESC ";
-$query=$dbh->prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+$garden_query=$dbh->prepare($sql);
+$garden_query->execute();
+$results=$garden_query->fetchAll(PDO::FETCH_OBJ);
 
 include('../includes/admin_header.php');
 include('../includes/admin_sidebar.php');
@@ -136,7 +135,7 @@ include('../includes/admin_sidebar.php');
 												<tbody>
 													<?php 	
 													$cnt=1;
-													if($query->rowCount() > 0)
+													if($garden_query->rowCount() > 0)
 													{
 													foreach($results as $result)
 													{               ?>   

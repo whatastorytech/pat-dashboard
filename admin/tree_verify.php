@@ -19,14 +19,16 @@ $plant_id=intval($_POST['plant_id']);
 $arrErrors	=	array();
 $tree_updates = 'unverify';
 $resend = 'resend';
-	            	$sql ="SELECT * FROM  tree_updates  WHERE plant_id=:plant_id AND tree_updates=:update_status";
+	            	$sql ="SELECT * FROM  tree_updates  WHERE plant_id=:plant_id AND update_status=:update_status";
 					$query=$dbh->prepare($sql);
 					$query->bindParam(':plant_id',$plant_id,PDO::PARAM_STR);
 					$query->bindParam(':update_status',$tree_updates,PDO::PARAM_STR);
 					$query->execute();
-					$results=$query->fetchAll(PDO::FETCH_OBJ);
+					$results=$query->fetchAll(PDO::FETCH_OBJ);  
 					if($query->rowCount() > 0)
 						{
+							
+							foreach($results as $result){
 			                    $sql ="SELECT * FROM  old_tree_updates  WHERE plant_id=:plant_id";
 								$query=$dbh->prepare($sql);
 								$query->bindParam(':plant_id',$plant_id,PDO::PARAM_STR);
@@ -39,27 +41,44 @@ $resend = 'resend';
 	                              {
 	                              	$plant_id = $data->plant_id;
 	                              	$pictures = explode(',',$data->pictures);
+	                              	$picture  = array();
+	                              	$picture[0] = $result->pictures;
+	                              	$new_pictures = array_merge($pictures,$picture);	
+	                              	$new_pictures = implode(',',$new_pictures);      
 	                              	$added_at = explode(',',$data->added_at);
+	                              	$new_added  = array();
+	                              	$new_added[0] = $result->added_at;
+	                              	$new_added = array_merge($added_at,$new_added);
+	                              	$new_added = implode(',',$new_added);
 	                              }					          
-								  $sql="update tree_updates set update_status=:update_status where plant_id=:plant_id";
+								  $sql="update old_tree_updates set pictures = :pictures,added_at=:added_at where plant_id=:plant_id";
 										$query = $dbh->prepare($sql);
+										$query->bindParam(':pictures',$new_pictures,PDO::PARAM_STR);
+										$query->bindParam(':added_at',$new_added,PDO::PARAM_STR);
 										$query->bindParam(':plant_id',$plant_id,PDO::PARAM_STR);
-										$query->bindParam(':update_status',$tree_updates,PDO::PARAM_STR);
 										$query->execute();
+
 								}	
 	                             
 							     else 
 							    {
-	                                     
+	                                 
 	                                $sql="INSERT INTO  old_tree_updates (plant_id,pictures,added_at) VALUES(:tree_id,:pictures,:added_at)";
 									$query = $dbh->prepare($sql);
-									$query->bindParam(':tree_id',$plant_id,PDO::PARAM_STR);
-									$query->bindParam(':pictures',$file_name,PDO::PARAM_STR);
-									$query->bindParam(':added_at',$added_at,PDO::PARAM_STR);
+									$query->bindParam(':tree_id',$result->plant_id,PDO::PARAM_STR);
+									$query->bindParam(':pictures',$result->pictures,PDO::PARAM_STR);
+									$query->bindParam(':added_at',$result->added_at,PDO::PARAM_STR);
 									$query->execute();
 									$lastInsertId = $dbh->lastInsertId();
 				                       
 				                }
 						} 
+
+					}
+
+					$sql = "delete from tree_updates  WHERE plant_id=:plant_id";
+					$query = $dbh->prepare($sql);
+					$query -> bindParam(':plant_id',$plant_id, PDO::PARAM_STR);
+					$query -> execute();
 						
 						
